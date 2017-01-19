@@ -3,7 +3,7 @@
  * Date: 23 nov 2007
  * Author: Jonas Lundberg
  */
-package da1031;
+package js224eh_assign1.intCollection;
 
 import java.util.Iterator;
 
