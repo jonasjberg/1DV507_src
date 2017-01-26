@@ -61,7 +61,7 @@ public class ArrayIntList extends AbstractIntCollection implements IntList
     @Override
     public void remove(int index) throws IndexOutOfBoundsException
     {
-        if (index < 0 || index > size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -74,17 +74,38 @@ public class ArrayIntList extends AbstractIntCollection implements IntList
         size--;
     }
 
+    /**
+     * Get integer at position index.
+     *
+     * @param index The position of the integer to get.
+     * @return The integer at position index.
+     * @throws IndexOutOfBoundsException
+     */
     @Override
     public int get(int index) throws IndexOutOfBoundsException
     {
-        /* TODO: implement .. */
-        return 0;
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return values[index];
     }
 
+    /**
+     * Find position of integer n, otherwise return -1.
+     *
+     * @param n The integer whose posiition is searched.
+     * @return The position of integer n.
+     */
     @Override
     public int indexOf(int n)
     {
-        /* TODO: implement .. */
-        return 0;
+        for (int i = 0; i < size(); i++) {
+            if (values[i] == n) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

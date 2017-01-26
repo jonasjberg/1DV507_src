@@ -13,7 +13,7 @@ public class CollectionMain
     {
         ArrayIntList intList = new ArrayIntList();
 
-        printActionMessage("Created a new ArrayIntList:", intList);
+        printActionMessage("Created a new ArrayIntList", intList);
 
         intList.add(1);
         intList.add(5);
@@ -28,6 +28,15 @@ public class CollectionMain
 
         intList.remove(3);
         printActionMessage("Removed the integer at position 3 in the array", intList);
+
+        System.out.println();
+        System.out.println("intList.get(2): " + intList.get(2));
+
+        System.out.println();
+        System.out.println("intList.indexOf(1337): " + intList.indexOf(1337));
+
+        System.out.println();
+        System.out.println("intList.indexOf(42): " + intList.indexOf(42));
     }
 
     private static void printActionMessage(String message,
@@ -35,6 +44,6 @@ public class CollectionMain
     {
         System.out.println();
         System.out.println(message);
-        System.out.println(intCol.toString());
+        System.out.println("Array contents:  " + intCol.toString());
     }
 }
