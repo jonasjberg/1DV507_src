@@ -13,6 +13,8 @@ public class CollectionMain
     {
         ArrayIntList intList = new ArrayIntList();
 
+        System.out.println("ArrayIntList Demonstration");
+        System.out.println("==========================");
         printActionMessage("Created a new ArrayIntList", intList);
 
         intList.add(1);
@@ -35,6 +37,66 @@ public class CollectionMain
         System.out.println("\nDemonstrates getting the index of an element");
         System.out.println("intList.indexOf(1337): " + intList.indexOf(1337));
         System.out.println("intList.indexOf(42): " + intList.indexOf(42));
+
+        System.out.println("\nWill attempt to add 0 to the element at " +
+                           "index 1337, expecting an exception to be thrown.");
+        try {
+            intList.addAt(0, 1337);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Caught exception: " + e);
+        }
+
+        System.out.println("\nWill attempt to get the element at " +
+                           "index 1337, expecting an exception to be thrown.");
+        try {
+            int n = intList.get(1337);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Caught exception: " + e);
+        }
+
+
+        System.out.println("\n");
+        System.out.println("ArrayIntStack Demonstration");
+        System.out.println("===========================");
+        ArrayIntStack intStack = new ArrayIntStack();
+        printActionMessage("Created a new ArrayIntStack", intStack);
+
+        intStack.push(1);
+        printActionMessage("Pushed 1 to the stack", intStack);
+
+        intStack.push(2);
+        printActionMessage("Pushed 2 to the stack", intStack);
+
+        int m = intStack.pop();
+        printActionMessage("Popped the stack and got: " + m, intStack);
+
+        intStack.push(3);
+        printActionMessage("Pushed 3 to the stack", intStack);
+
+        int n = intStack.peek();
+        printActionMessage("Peeked the stack and got: " + n, intStack);
+
+        int o = intStack.pop();
+        printActionMessage("Popped the stack and got: " + o, intStack);
+
+        int p = intStack.pop();
+        printActionMessage("Popped the stack and got: " + p, intStack);
+
+        System.out.println("\nWill attempt to pop the empty stack, " +
+                           "expecting an exception to be thrown.");
+        try {
+            int q = intStack.pop();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Caught exception: " + e);
+        }
+
+        System.out.println("\nWill attempt to peek the empty stack, " +
+                           "expecting an exception to be thrown.");
+        try {
+            int h = intStack.peek();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Caught exception: " + e);
+        }
     }
 
     private static void printActionMessage(String message,
