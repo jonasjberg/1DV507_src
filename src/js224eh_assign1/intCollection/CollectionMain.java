@@ -29,13 +29,11 @@ public class CollectionMain
         intList.remove(3);
         printActionMessage("Removed the integer at position 3 in the array", intList);
 
-        System.out.println();
+        System.out.println("\nDemonstrates getting the element at index n");
         System.out.println("intList.get(2): " + intList.get(2));
 
-        System.out.println();
+        System.out.println("\nDemonstrates getting the index of an element");
         System.out.println("intList.indexOf(1337): " + intList.indexOf(1337));
-
-        System.out.println();
         System.out.println("intList.indexOf(42): " + intList.indexOf(42));
     }
 
@@ -44,6 +42,8 @@ public class CollectionMain
     {
         System.out.println();
         System.out.println(message);
-        System.out.println("Array contents:  " + intCol.toString());
+        System.out.println("Elements: " + intCol.toString());
+        System.out.println("    Size: " + intCol.size());
+        System.out.println("   Empty: " + (intCol.isEmpty() ? "Yes" : "No"));
     }
 }
