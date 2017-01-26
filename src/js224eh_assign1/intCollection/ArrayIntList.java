@@ -17,11 +17,7 @@ public class ArrayIntList extends AbstractIntCollection implements IntList
     @Override
     public void add(int n)
     {
-        if (values.length < size()) {
-            resize();
-        }
-
-        values[size++] = n;
+        addAt(n, size());
     }
 
     /**
@@ -37,7 +33,7 @@ public class ArrayIntList extends AbstractIntCollection implements IntList
     public void addAt(int n, int index)
             throws IndexOutOfBoundsException
     {
-        if (index < 0 || index >= size()) {
+        if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -56,11 +52,26 @@ public class ArrayIntList extends AbstractIntCollection implements IntList
         size++;
     }
 
+    /**
+     * Remove integer at position index.
+     *
+     * @param index The index of the integer to remove.
+     * @throws IndexOutOfBoundsException
+     */
     @Override
     public void remove(int index) throws IndexOutOfBoundsException
     {
-        /* TODO: implement .. */
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
 
+        /* Shift all elements starting with the element at position "index"
+         * to the left. Essentially overwriting the removed element. */
+        for (int i = index; i < size() - 1; i++) {
+            values[i] = values[i + 1];
+        }
+
+        size--;
     }
 
     @Override
