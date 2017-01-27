@@ -164,4 +164,39 @@ public class FerryImplementation implements FerryInterface
     {
         return false;
     }
+
+    @Override
+    public String toString()
+    {
+        String FORMAT = "  %-15.15s : %s%n";
+        StringBuilder str = new StringBuilder("{\n  ");
+        str.append(this.getClass().getName()).append("\n");
+
+        // Inspired by the ToStringBuilder in "Apache Commons Lang".
+        // https://git-wip-us.apache.org/repos/asf?p=commons-lang.git
+        str.append(String.format(FORMAT, "instance ID",
+                                 Integer.toHexString(
+                                         System.identityHashCode(this))));
+
+        str.append(String.format(FORMAT, "Money earned", countMoney()));
+        str.append(String.format(FORMAT, "Passengers #", countPassengers()));
+        str.append(String.format(FORMAT, "Vehicle space used", countVehicleSpace()));
+
+        Iterator<Vehicle> iterator = iterator();
+        StringBuilder itStr = new StringBuilder();
+
+        if (!iterator.hasNext()) {
+            itStr.append("(empty)");
+        } else {
+            while (iterator.hasNext()) {
+                Vehicle v = iterator.next();
+                itStr.append("[").append(v).append("] ");
+            }
+        }
+
+        str.append(String.format(FORMAT, "Vehicles on board", itStr.toString()));
+        str.append("}");
+
+        return str.toString();
+    }
 }
