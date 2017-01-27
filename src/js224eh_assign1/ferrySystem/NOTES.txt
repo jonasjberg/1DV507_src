@@ -9,7 +9,7 @@ Exercise 2
 
 
 SPACE
-================================================================================
+--------------------------------------------------------------------------------
 
 * The ferry transports passengers and vehicles: cars, busses, lorries, bicycles
 
@@ -17,14 +17,14 @@ SPACE
 
     * A lorry needs as much space as two busses or 8 cars.
 
-      Which gives:  1*lorry = 2*bus
-                    1*lorry = 8*car
+          Which gives:  1*lorry = 2*bus
+                        1*lorry = 8*car
 
-      Solving for bus:  2*bus = 8*car  -->  bus = 4*car
-                                            ~~~~~~~~~~~
+          Solving for bus:  2*bus = 8*car  -->  bus = 4*car
+                                                ~~~~~~~~~~~
 
-      Solving for car:  2*bus = 8*car  -->  bus = 4*car  -->  car = bus/4
-                                                              ~~~~~~~~~~~
+          Solving for car:  2*bus = 8*car  -->  bus = 4*car  -->  car = bus/4
+                                                                  ~~~~~~~~~~~
 
 * A car needs as much space as 5 bicycles.
 
@@ -58,7 +58,7 @@ Use smallest size unit as the "unit length" for all sizes?
 
 
 FEES
-================================================================================
+--------------------------------------------------------------------------------
 
 * There are different fees for different vehicles
 * An extra fee might be added for passengers.
@@ -73,7 +73,7 @@ FEES
 
 
 REQUIREMENTS
-================================================================================
+--------------------------------------------------------------------------------
 
 * Each type of vehicle (car, bus, lorry, bicycle) will inherit from the class
   Vehicle.

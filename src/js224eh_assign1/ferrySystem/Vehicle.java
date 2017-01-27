@@ -24,6 +24,12 @@ public abstract class Vehicle
     // Cost per passenger riding the vehicle, differs for each type of vehicle.
     protected int perPassengerFee;
 
+    // Space required expressed as a multiple of the space occupied by a car.
+    protected int spaceRequired;
+
+    // Maximum number of passengers.
+    protected int passengerCapacity;
+
     public Vehicle()
     {
         passengers = new ArrayList<>();
@@ -36,10 +42,20 @@ public abstract class Vehicle
 
     public int payFeeForPassengers()
     {
-        if (passengers.isEmpty()) {
+        if (passengers.isEmpty() || perPassengerFee <= 0) {
             return 0;
         }
 
         return passengers.size() * perPassengerFee;
+    }
+
+    public int getSpaceRequired()
+    {
+        return spaceRequired > 0 ? spaceRequired : 0;
+    }
+
+    public int getPassengerCapacity()
+    {
+        return passengerCapacity > 0 ? passengerCapacity : 0;
     }
 }

@@ -18,15 +18,21 @@ public class FerryImplementation implements FerryInterface
 
     private ArrayList<Vehicle> vehiclesAboard;
     private ArrayList<Passenger> passengersAboard;
-    private int occupiedVehicleSpace;
-    private int passengerCount;
+    private int maxPassengerCapacity;
+    private int maxVehicleCapacity;
     private int moneyEarned;
 
-    public FerryImplementation()
+    public FerryImplementation(int maxPassengerCapacity, int maxVehicleCapacity)
     {
+        if (maxPassengerCapacity < 0 || maxVehicleCapacity < 0) {
+            throw new IllegalArgumentException("Max capacity must not be < 0");
+        }
+
+        this.maxPassengerCapacity = maxPassengerCapacity;
+        this.maxVehicleCapacity = maxVehicleCapacity;
+
         vehiclesAboard = new ArrayList<>();
         passengersAboard = new ArrayList<>();
-        occupiedVehicleSpace = 0;
     }
 
     private void chargeMoney(int amount)
@@ -36,30 +42,61 @@ public class FerryImplementation implements FerryInterface
         }
     }
 
+    /**
+     * Number of passengers on board.
+     *
+     * @return The number of passengers currently on board.
+     */
     @Override
     public int countPassengers()
     {
-        return 0;
+        return passengersAboard.size();
     }
 
+    /**
+     * Used vehicle space. One car is 1.
+     *
+     * @return The total space currently occupied by vehicles.
+     */
     @Override
     public int countVehicleSpace()
     {
-        return 0;
+        int spaceOccupied = 0;
+
+        for (Vehicle v : vehiclesAboard) {
+            spaceOccupied += v.getSpaceRequired();
+        }
+
+        return spaceOccupied;
     }
 
+    /**
+     * Earned money
+     *
+     * @return The total amount of money earned.
+     */
     @Override
     public int countMoney()
     {
         return 0;
     }
 
+    /**
+     * Vehicle iterator
+     *
+     * @return
+     */
     @Override
     public Iterator<Vehicle> iterator()
     {
         return null;
     }
 
+    /**
+     * Embark vehicle, warning if not enough space
+     *
+     * @param v The vehicle to embark.
+     */
     @Override
     public void embark(Vehicle v)
     {
@@ -78,24 +115,50 @@ public class FerryImplementation implements FerryInterface
         vehiclesAboard.add(v);
     }
 
+    /**
+     * Embark passenger, warning if not enough room
+     *
+     * @param p The passenger to embark.
+     */
     @Override
     public void embark(Passenger p)
     {
+        if (countPassengers() >= maxPassengerCapacity) {
+
+        }
+
 
     }
 
+    /**
+     * Clear (empty) ferry. The money earned remains, i.e., is not reset to zero
+     */
     @Override
     public void disembark()
     {
 
     }
 
+    /**
+     * true if we can embark vehicle v
+     *
+     * @param v The vehicle to test for fit.
+     *
+     * @return True if there is space available for vehicle v, else False.
+     */
     @Override
     public boolean hasSpaceFor(Vehicle v)
     {
         return false;
     }
 
+    /**
+     * true if we can embark passenger p
+     *
+     * @param p The passenger to test for available room.-
+     *
+     * @return True if there is room available for passenger p, else False.
+     */
     @Override
     public boolean hasRoomFor(Passenger p)
     {

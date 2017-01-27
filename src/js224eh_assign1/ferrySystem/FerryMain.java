@@ -11,6 +11,6 @@ public class FerryMain
 {
     public static void main(String[] args)
     {
-        /* TODO: Implement .. */
+        Car car1 = new Car();
     }
 }
