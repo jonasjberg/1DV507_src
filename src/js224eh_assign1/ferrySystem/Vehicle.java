@@ -15,48 +15,53 @@ public abstract class Vehicle
     // The passengers riding is this vehicle.
     protected ArrayList<Passenger> passengers;
 
-    // Is the vehicle aboard the ferry or not?
+    // Is the vehicle aboard the ferry or not? Assume not at instantiation.
     protected boolean aboardFerry;
 
-    // Cost for the vehicle alone, differs for each type of vehicle.
-    protected int vehicleFee;
-
-    // Cost per passenger riding the vehicle, differs for each type of vehicle.
-    protected int perPassengerFee;
-
-    // Space required expressed as a multiple of the space occupied by a car.
-    protected int spaceRequired;
-
-    // Maximum number of passengers.
-    protected int passengerCapacity;
-
+    /**
+     * Constructor common to all vehicles.
+     */
     public Vehicle()
     {
         passengers = new ArrayList<>();
+        aboardFerry = false;
     }
 
+    // Cost for the vehicle alone, differs for each type of vehicle.
+    public abstract int getVehicleFee();
+
+    // Cost per passenger riding the vehicle, differs for each type of vehicle.
+    public abstract int getPerPassengerFee();
+
+    // Space required expressed as a multiple of the space occupied by a car.
+    public abstract int getSpaceRequired();
+
+    // Maximum number of passengers.
+    public abstract int getPassengerCapacity();
+
+    /**
+     * Asks this vehicle to pay its vehicle-specific fee.
+     *
+     * @return The fee as a positive integer.
+     */
     public int payVehicleFee()
     {
-        return vehicleFee > 0 ? vehicleFee : 0;
+        return getVehicleFee() > 0 ? getVehicleFee() : 0;
     }
 
+    /**
+     * Asks this vehicle to pay its vehicle-specific fee for the passengers
+     * in this vehicle. Calculated as: (numberPassengers * perPassengerFee)
+     *
+     * @return The fee as a positive integer.
+     */
     public int payPassengerFee()
     {
-        if (passengers.isEmpty() || perPassengerFee <= 0) {
+        if (passengers.isEmpty() || getPerPassengerFee() <= 0) {
             return 0;
         }
 
-        return passengers.size() * perPassengerFee;
-    }
-
-    public int getSpaceRequired()
-    {
-        return spaceRequired > 0 ? spaceRequired : 0;
-    }
-
-    public int getPassengerCapacity()
-    {
-        return passengerCapacity > 0 ? passengerCapacity : 0;
+        return passengers.size() * getPerPassengerFee();
     }
 
     public boolean isAboardFerry()

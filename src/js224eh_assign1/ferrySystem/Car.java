@@ -6,12 +6,32 @@ package js224eh_assign1.ferrySystem;
  */
 public class Car extends Vehicle
 {
-    private final int vehicleFee = 100;
-    private final int perPassengerFee = 15;
-    private final int spaceRequired = 1;
-    private final int passengerCapacity = 4;
-
     public Car()
     {
+        System.out.println("Instantiated a new car ..");
+    }
+
+    @Override
+    public int getVehicleFee()
+    {
+        return 100;
+    }
+
+    @Override
+    public int getPerPassengerFee()
+    {
+        return 15;
+    }
+
+    @Override
+    public int getSpaceRequired()
+    {
+        return 1;
+    }
+
+    @Override
+    public int getPassengerCapacity()
+    {
+        return 4;
     }
 }
