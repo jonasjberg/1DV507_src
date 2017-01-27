@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class FerryImplementation implements FerryInterface
 {
     // An extra fee that might be added for passengers.
-    private final boolean CHARGE_EXTRA_PASSENGER_FEE = false;
+    private final boolean SHOULD_CHARGE_EXTRA_PASSENGER_FEE = false;
 
     private ArrayList<Vehicle> vehiclesAboard;
     private ArrayList<Passenger> passengersAboard;
@@ -35,7 +35,7 @@ public class FerryImplementation implements FerryInterface
         passengersAboard = new ArrayList<>();
     }
 
-    private void chargeMoney(int amount)
+    private void acceptPayment(int amount)
     {
         if (amount > 0) {
             moneyEarned += amount;
@@ -104,12 +104,18 @@ public class FerryImplementation implements FerryInterface
             return;
         }
 
+        if (!hasSpaceFor(v)) {
+            System.out.println("[WARNING] The ferry is filled to capacity -- " +
+                               "the vehicle cannot embark!");
+            return;
+        }
+
         // Charge for the vehicle itself.
-        chargeMoney(v.payFeeForVehicle());
+        acceptPayment(v.payVehicleFee());
 
         // Option to charge an extra fee for the passengers in the vehicle.
-        if (CHARGE_EXTRA_PASSENGER_FEE) {
-            chargeMoney(v.payFeeForPassengers());
+        if (SHOULD_CHARGE_EXTRA_PASSENGER_FEE) {
+            acceptPayment(v.payPassengerFee());
         }
 
         vehiclesAboard.add(v);
@@ -124,10 +130,12 @@ public class FerryImplementation implements FerryInterface
     public void embark(Passenger p)
     {
         if (countPassengers() >= maxPassengerCapacity) {
-
+            System.out.println("[WARNING] The ferry is filled to capacity -- " +
+                               "the passenger cannot embark!");
+            return;
         }
 
-
+        passengersAboard.add(p);
     }
 
     /**
@@ -149,7 +157,7 @@ public class FerryImplementation implements FerryInterface
     @Override
     public boolean hasSpaceFor(Vehicle v)
     {
-        return false;
+        return countVehicleSpace() < maxVehicleCapacity;
     }
 
     /**
@@ -162,7 +170,7 @@ public class FerryImplementation implements FerryInterface
     @Override
     public boolean hasRoomFor(Passenger p)
     {
-        return false;
+        return countPassengers() < maxPassengerCapacity;
     }
 
     @Override

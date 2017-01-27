@@ -35,12 +35,12 @@ public abstract class Vehicle
         passengers = new ArrayList<>();
     }
 
-    public int payFeeForVehicle()
+    public int payVehicleFee()
     {
         return vehicleFee > 0 ? vehicleFee : 0;
     }
 
-    public int payFeeForPassengers()
+    public int payPassengerFee()
     {
         if (passengers.isEmpty() || perPassengerFee <= 0) {
             return 0;
