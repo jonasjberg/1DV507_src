@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class FerryImplementation implements FerryInterface
+public class Ferry implements FerryInterface
 {
     // An extra fee that might be added for passengers.
     private final boolean SHOULD_CHARGE_EXTRA_PASSENGER_FEE = false;
@@ -22,7 +22,7 @@ public class FerryImplementation implements FerryInterface
     private int maxVehicleCapacity;
     private int moneyEarned;
 
-    public FerryImplementation(int maxPassengerCapacity, int maxVehicleCapacity)
+    public Ferry(int maxPassengerCapacity, int maxVehicleCapacity)
     {
         if (maxPassengerCapacity < 0 || maxVehicleCapacity < 0) {
             throw new IllegalArgumentException("Max capacity must not be < 0");

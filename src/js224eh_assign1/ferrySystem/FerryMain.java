@@ -20,6 +20,6 @@ public class FerryMain
         Passenger p1 = new Passenger();
         Passenger p2 = new Passenger();
 
-        FerryImplementation ussEnterprise = new FerryImplementation(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
+        Ferry ussEnterprise = new Ferry(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
     }
 }
