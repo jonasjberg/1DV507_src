@@ -58,4 +58,31 @@ public abstract class Vehicle
     {
         return passengerCapacity > 0 ? passengerCapacity : 0;
     }
+
+    public boolean isAboardFerry()
+    {
+        return aboardFerry;
+    }
+
+    @Override
+    public String toString()
+    {
+        final String FORMAT = "    %-20.20s : %s%n";
+        StringBuilder str = new StringBuilder("\n    ");
+        str.append(this.getClass().getName()).append("\n");
+
+        // Inspired by the ToStringBuilder in "Apache Commons Lang".
+        // https://git-wip-us.apache.org/repos/asf?p=commons-lang.git
+        str.append(String.format(FORMAT, "instance ID",
+                                 Integer.toHexString(
+                                         System.identityHashCode(this))));
+
+        str.append(String.format(FORMAT, "Aboard ferry", isAboardFerry()));
+        str.append(String.format(FORMAT, "Space required", getSpaceRequired()));
+        str.append(String.format(FORMAT, "Passenger capacity", getPassengerCapacity()));
+        //str.append(String.format(FORMAT, "Vehicle fee", fe()));
+        //str.append(String.format(FORMAT, "Per passenger fee", countVehicleSpace()));
+
+        return str.toString();
+    }
 }

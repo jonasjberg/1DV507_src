@@ -84,7 +84,7 @@ public class Ferry implements FerryInterface
     /**
      * Vehicle iterator
      *
-     * @return
+     * @return Iterable over vehicles aboard this Ferry.
      */
     @Override
     public Iterator<Vehicle> iterator()
@@ -99,7 +99,7 @@ public class Ferry implements FerryInterface
 
             @Override public Vehicle next()
             {
-                return vehicles.remove(0);
+                return vehicles.remove(vehicles.size() - 1);
             }
         };
     }
@@ -188,7 +188,7 @@ public class Ferry implements FerryInterface
     @Override
     public String toString()
     {
-        String FORMAT = "  %-15.15s : %s%n";
+        String FORMAT = "  %-20.20s : %s%n";
         StringBuilder str = new StringBuilder("{\n  ");
         str.append(this.getClass().getName()).append("\n");
 
@@ -206,15 +206,18 @@ public class Ferry implements FerryInterface
         StringBuilder itStr = new StringBuilder();
 
         if (!iterator.hasNext()) {
-            itStr.append("(empty)");
+            str.append(String.format(FORMAT, "Vehicles on board", "(empty)"));
         } else {
+
             while (iterator.hasNext()) {
                 Vehicle v = iterator.next();
-                itStr.append("[").append(v).append("] ");
+                itStr.append(v).append("");
             }
         }
 
-        str.append(String.format(FORMAT, "Vehicles on board", itStr.toString()));
+        str.append("  Vehicles on board:\n").append(itStr.toString());
+
+        //str.append(itStr.toString());
         str.append("}");
 
         return str.toString();
