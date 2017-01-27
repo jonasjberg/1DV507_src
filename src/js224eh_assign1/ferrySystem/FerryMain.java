@@ -20,6 +20,16 @@ public class FerryMain
         Passenger p1 = new Passenger();
         Passenger p2 = new Passenger();
 
-        Ferry ussEnterprise = new Ferry(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
+        Ferry ferry = new Ferry(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
+
+        System.out.println(ferry);
+
+        ferry.embark(p1);
+        ferry.embark(p2);
+
+        ferry.embark(car1);
+        ferry.embark(car2);
+
+        System.out.println(ferry);
     }
 }

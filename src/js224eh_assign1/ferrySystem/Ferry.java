@@ -89,7 +89,19 @@ public class Ferry implements FerryInterface
     @Override
     public Iterator<Vehicle> iterator()
     {
-        return null;
+        final ArrayList<Vehicle> vehicles = this.vehiclesAboard;
+
+        return new Iterator<Vehicle>() {
+            @Override public boolean hasNext()
+            {
+                return !vehicles.isEmpty();
+            }
+
+            @Override public Vehicle next()
+            {
+                return vehicles.remove(0);
+            }
+        };
     }
 
     /**
