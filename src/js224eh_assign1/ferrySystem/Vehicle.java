@@ -12,9 +12,17 @@ import java.util.ArrayList;
 
 public abstract class Vehicle
 {
-    protected boolean aboardFerry;
-    protected int fee;
+    // The passengers riding is this vehicle.
     protected ArrayList<Passenger> passengers;
+
+    // Is the vehicle aboard the ferry or not?
+    protected boolean aboardFerry;
+
+    // Cost for the vehicle alone, differs for each type of vehicle.
+    protected int vehicleFee;
+
+    // Cost per passenger riding the vehicle, differs for each type of vehicle.
+    protected int perPassengerFee;
 
     public Vehicle()
     {
@@ -23,7 +31,7 @@ public abstract class Vehicle
 
     public int payFeeForVehicle()
     {
-        return fee > 0 ? fee : 0;
+        return vehicleFee > 0 ? vehicleFee : 0;
     }
 
     public int payFeeForPassengers()
@@ -32,10 +40,6 @@ public abstract class Vehicle
             return 0;
         }
 
-        int sum = 0;
-        for (Passenger p : passengers) {
-            sum += p.payFee();
-        }
-        return sum;
+        return passengers.size() * perPassengerFee;
     }
 }

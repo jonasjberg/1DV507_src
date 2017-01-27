@@ -63,15 +63,17 @@ FEES
 * There are different fees for different vehicles
 * An extra fee might be added for passengers.
 
-Use the following fees:
+* Use the following fees:
 
-    1. Passenger without vehicle, 20 kr.
-    2. Bicycle 40 kr                  (passenger included)
-    3. Car 100 kr + 15 kr/passenger   (maximum 4 passengers)
-    4. Bus 200 kr + 10 kr/passenger   (maximum 20 passengers)
-    5. Lorry 300 kr + 15 kr/passenger (maximum 2 passengers)
+      1. Passenger without vehicle, 20 kr.
+      2. Bicycle 40 kr                  (passenger included)
+      3. Car 100 kr + 15 kr/passenger   (maximum 4 passengers)
+      4. Bus 200 kr + 10 kr/passenger   (maximum 20 passengers)
+      5. Lorry 300 kr + 15 kr/passenger (maximum 2 passengers)
 
 
+REQUIREMENTS
+================================================================================
 
 * Each type of vehicle (car, bus, lorry, bicycle) will inherit from the class
   Vehicle.

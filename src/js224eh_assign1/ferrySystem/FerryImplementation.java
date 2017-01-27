@@ -13,6 +13,9 @@ import java.util.Iterator;
 
 public class FerryImplementation implements FerryInterface
 {
+    // An extra fee that might be added for passengers.
+    private final boolean CHARGE_EXTRA_PASSENGER_FEE = false;
+
     private ArrayList<Vehicle> vehiclesAboard;
     private ArrayList<Passenger> passengersAboard;
     private int occupiedVehicleSpace;
@@ -24,6 +27,13 @@ public class FerryImplementation implements FerryInterface
         vehiclesAboard = new ArrayList<>();
         passengersAboard = new ArrayList<>();
         occupiedVehicleSpace = 0;
+    }
+
+    private void chargeMoney(int amount)
+    {
+        if (amount > 0) {
+            moneyEarned += amount;
+        }
     }
 
     @Override
@@ -57,8 +67,15 @@ public class FerryImplementation implements FerryInterface
             return;
         }
 
+        // Charge for the vehicle itself.
+        chargeMoney(v.payFeeForVehicle());
+
+        // Option to charge an extra fee for the passengers in the vehicle.
+        if (CHARGE_EXTRA_PASSENGER_FEE) {
+            chargeMoney(v.payFeeForPassengers());
+        }
+
         vehiclesAboard.add(v);
-        moneyEarned += v.ge
     }
 
     @Override
