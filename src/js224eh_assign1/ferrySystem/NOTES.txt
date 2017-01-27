@@ -8,6 +8,9 @@ Exercise 2
 ==========
 
 
+SPACE
+================================================================================
+
 * The ferry transports passengers and vehicles: cars, busses, lorries, bicycles
 
 * The ferry has space for 200 passengers and 40 cars.
@@ -28,8 +31,6 @@ Exercise 2
       Which gives:  1*car = 5*bicycle
 
 
---------------------------------------------------------------------------------
-
 Use smallest size unit as the "unit length" for all sizes?
 
     1*sizeUnit = 1*bicycle
@@ -39,11 +40,25 @@ Use smallest size unit as the "unit length" for all sizes?
 
     Which translates to:         | Vehicle | Space needed |
                                  |---------|--------------|
+                                 | Bicycle | 1 sizeUnits  |
                                  | Car     | 5 sizeUnits  |
                                  | Bus     | 20 sizeUnits |
                                  | Lorry   | 40 sizeUnits |
-                                 | Bicycle | 40 sizeUnits |
 
+
+    .. HOWEVER; countVehicleSpace() uses 1*car as normalized unit.
+    .. So, dividing everything by 5 gives the final numbers:
+
+                                 | Vehicle | Space needed  |
+                                 |---------|---------------|
+                                 | Bicycle | 1/5 sizeUnits |
+                                 | Car     | 1 sizeUnits   |
+                                 | Bus     | 4 sizeUnits   |
+                                 | Lorry   | 8 sizeUnits   |
+
+
+FEES
+================================================================================
 
 * There are different fees for different vehicles
 * An extra fee might be added for passengers.
@@ -57,8 +72,12 @@ Use the following fees:
     5. Lorry 300 kr + 15 kr/passenger (maximum 2 passengers)
 
 
-Each type of vehicle (car, bus, lorry, bicycle) will inherit from the class
-Vehicle.
+
+* Each type of vehicle (car, bus, lorry, bicycle) will inherit from the class
+  Vehicle.
+
+* A vehicle cannot leave the ferry until the ferry has been disembarked and the
+  same vehicle cannot embark twice.
 
 
 The functionality of the ferry is given by the interface Ferry:
@@ -79,11 +98,10 @@ public interface Ferry  {
 }
 
 
-A vehicle cannot leave the ferry until the ferry has been disembarked and the
-same vehicle cannot embark twice.
+* The ferry iterator should iterate over all vehicles embarked (not the
+  passengers).
 
-The ferry iterator should iterate over all vehicles embarked (not the
-passengers).
 
 Also write a program FerryMain.java, embarking a number of vehicles and
 passengers, showing the functionality of the methods.
+

@@ -7,20 +7,26 @@
 package js224eh_assign1.ferrySystem;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
 public class FerryImplementation implements FerryInterface
 {
-    private int occupiedSpace;
+    private ArrayList<Vehicle> vehiclesAboard;
+    private ArrayList<Passenger> passengersAboard;
+    private int occupiedVehicleSpace;
+    private int passengerCount;
+    private int moneyEarned;
 
     public FerryImplementation()
     {
-        occupiedSpace = 0;
+        vehiclesAboard = new ArrayList<>();
+        passengersAboard = new ArrayList<>();
+        occupiedVehicleSpace = 0;
     }
 
     @Override
-
     public int countPassengers()
     {
         return 0;
@@ -47,7 +53,12 @@ public class FerryImplementation implements FerryInterface
     @Override
     public void embark(Vehicle v)
     {
+        if (vehiclesAboard.contains(v)) {
+            return;
+        }
 
+        vehiclesAboard.add(v);
+        moneyEarned += v.ge
     }
 
     @Override

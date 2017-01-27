@@ -9,4 +9,15 @@ package js224eh_assign1.ferrySystem;
 
 public class Passenger
 {
+    private final int fee = 10;
+
+    public Passenger()
+    {
+
+    }
+
+    public int payFee()
+    {
+        return fee;
+    }
 }
