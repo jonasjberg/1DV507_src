@@ -129,7 +129,7 @@ public class FerryImplementation implements FerryInterface
     @Override
     public void embark(Passenger p)
     {
-        if (countPassengers() >= maxPassengerCapacity) {
+        if (!hasRoomFor(p)) {
             System.out.println("[WARNING] The ferry is filled to capacity -- " +
                                "the passenger cannot embark!");
             return;
