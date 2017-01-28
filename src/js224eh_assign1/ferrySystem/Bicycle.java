@@ -8,7 +8,7 @@ public class Bicycle extends Vehicle
 {
     public Bicycle()
     {
-        System.out.println("Instantiated a new BICYCLE ..");
+        System.out.println("Created a new BICYCLE ..");
     }
 
     @Override

@@ -125,7 +125,7 @@ public abstract class Vehicle
                                          System.identityHashCode(this))));
 
         str.append(String.format(FORMAT, "Aboard ferry", aboardFerry));
-        str.append(String.format(FORMAT, "Space required", getSpaceRequired()));
+        str.append(String.format(FORMAT, "Space required", (float) getSpaceRequired() / 5));
         str.append(String.format(FORMAT, "Passenger capacity", getPassengerCapacity()));
         //str.append(String.format(FORMAT, "Vehicle fee", fe()));
         //str.append(String.format(FORMAT, "Per passenger fee", countVehicleSpace()));

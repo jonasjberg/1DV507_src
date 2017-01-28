@@ -14,20 +14,18 @@ public class FerryMain
 
     public static void main(String[] args)
     {
+        Ferry ferry = new Ferry(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
+        System.out.println(ferry);
+
         Car car1 = new Car();
         Car car2 = new Car();
+        ferry.embark(car1);
+        ferry.embark(car2);
 
         Passenger p1 = new Passenger();
         Passenger p2 = new Passenger();
-
-        Ferry ferry = new Ferry(MAX_PASSENGER_CAPACITY, MAX_VEHICLE_CAPACITY);
-
-        System.out.println(ferry);
-
         ferry.embark(p1);
         ferry.embark(p2);
-        ferry.embark(car1);
-        ferry.embark(car2);
 
         System.out.println(ferry);
 
@@ -39,9 +37,17 @@ public class FerryMain
 
         Bicycle b1 = new Bicycle();
         Bicycle b2 = new Bicycle();
-
         ferry.embark(b1);
         ferry.embark(b2);
+
+        System.out.println(ferry);
+
+
+        Lorry l1 = new Lorry();
+        ferry.embark(l1);
+
+        Bus u1 = new Bus();
+        ferry.embark(u1);
 
         System.out.println(ferry);
     }

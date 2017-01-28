@@ -6,6 +6,11 @@ package js224eh_assign1.ferrySystem;
  */
 public class Lorry extends Vehicle
 {
+    public Lorry()
+    {
+        System.out.println("Created a new LORRY ..");
+    }
+
     @Override
     public int getVehicleFee()
     {

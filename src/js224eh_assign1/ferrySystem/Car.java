@@ -8,7 +8,7 @@ public class Car extends Vehicle
 {
     public Car()
     {
-        System.out.println("Instantiated a new CAR ..");
+        System.out.println("Created a new CAR ..");
     }
 
     @Override
