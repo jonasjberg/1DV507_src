@@ -33,6 +33,21 @@ public abstract class Vehicle
     // Cost per passenger riding the vehicle, differs for each type of vehicle.
     public abstract int getPerPassengerFee();
 
+    /* Normalize the unit of vehicle sizes to the size of the smallest
+       vehicle, the bicycle. Otherwise we would have to use a floating
+       point number to store the space required for a bicycle --- 0.2
+
+       Which means:            The ferry has 200 sizeUnits of space
+                               ((40 cars) * (5*car per bicycle))
+
+       Which translates to:    | Vehicle | Space needed |
+                               |---------|--------------|
+                               | Bicycle |  1 sizeUnits |
+                               | Car     |  5 sizeUnits |
+                               | Bus     | 20 sizeUnits |
+                               | Lorry   | 40 sizeUnits |
+     */
+
     // Space required expressed as a multiple of the space occupied by a car.
     public abstract int getSpaceRequired();
 
@@ -42,10 +57,15 @@ public abstract class Vehicle
     /**
      * Asks this vehicle to pay its vehicle-specific fee.
      *
+     * It is assumed for brevity that this only happens when the vehicle is
+     * boarding a ferry. Otherwise the ferry would have to call a separate
+     * method to toggle the aboardFerry variable through an accessor.
+     *
      * @return The fee as a positive integer.
      */
     public int payVehicleFee()
     {
+        aboardFerry = true;
         return getVehicleFee() > 0 ? getVehicleFee() : 0;
     }
 
@@ -67,6 +87,12 @@ public abstract class Vehicle
     public boolean isAboardFerry()
     {
         return aboardFerry;
+    }
+
+    public void leaveFerry(Ferry ferry)
+    {
+        aboardFerry = false;
+
     }
 
     @Override

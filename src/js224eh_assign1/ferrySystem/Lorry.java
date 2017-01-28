@@ -2,19 +2,14 @@ package js224eh_assign1.ferrySystem;
 
 
 /**
- * Created by Jonas Sjöberg (js224eh) on 2017-01-27.
+ * Created by Jonas Sjöberg (js224eh) on 2017-01-28.
  */
-public class Car extends Vehicle
+public class Lorry extends Vehicle
 {
-    public Car()
-    {
-        System.out.println("Instantiated a new CAR ..");
-    }
-
     @Override
     public int getVehicleFee()
     {
-        return 100;
+        return 300;
     }
 
     @Override
@@ -26,12 +21,12 @@ public class Car extends Vehicle
     @Override
     public int getSpaceRequired()
     {
-        return 5;
+        return 40;
     }
 
     @Override
     public int getPassengerCapacity()
     {
-        return 4;
+        return 2;
     }
 }

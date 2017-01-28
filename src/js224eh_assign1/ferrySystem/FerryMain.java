@@ -10,7 +10,7 @@ package js224eh_assign1.ferrySystem;
 public class FerryMain
 {
     final static int MAX_PASSENGER_CAPACITY = 200;
-    final static int MAX_VEHICLE_CAPACITY = 40;
+    final static int MAX_VEHICLE_CAPACITY = 200;
 
     public static void main(String[] args)
     {
@@ -26,9 +26,22 @@ public class FerryMain
 
         ferry.embark(p1);
         ferry.embark(p2);
-
         ferry.embark(car1);
         ferry.embark(car2);
+
+        System.out.println(ferry);
+
+        Car car3 = new Car();
+        ferry.embark(car3);
+
+        System.out.println(ferry);
+
+
+        Bicycle b1 = new Bicycle();
+        Bicycle b2 = new Bicycle();
+
+        ferry.embark(b1);
+        ferry.embark(b2);
 
         System.out.println(ferry);
     }

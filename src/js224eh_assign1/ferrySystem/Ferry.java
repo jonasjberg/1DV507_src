@@ -13,7 +13,8 @@ import java.util.Iterator;
 
 public class Ferry implements FerryInterface
 {
-    // An extra fee that might be added for passengers.
+    // Option to charge an extra fee for the passengers in the vehicle.
+    //   "An extra fee that might be added for passengers."
     private final boolean SHOULD_CHARGE_EXTRA_PASSENGER_FEE = false;
 
     private ArrayList<Vehicle> vehiclesAboard;
@@ -21,6 +22,21 @@ public class Ferry implements FerryInterface
     private int maxPassengerCapacity;
     private int maxVehicleCapacity;
     private int moneyEarned;
+
+    /* Normalize the unit of vehicle sizes to the size of the smallest
+       vehicle, the bicycle. Otherwise we would have to use a floating
+       point number to store the space required for a bicycle --- 0.2
+
+       Which means:            The ferry has 200 sizeUnits of space
+                               ((40 cars) * (5*car per bicycle))
+
+       Which translates to:    | Vehicle | Space needed |
+                               |---------|--------------|
+                               | Bicycle |  1 sizeUnits |
+                               | Car     |  5 sizeUnits |
+                               | Bus     | 20 sizeUnits |
+                               | Lorry   | 40 sizeUnits |
+     */
 
     public Ferry(int maxPassengerCapacity, int maxVehicleCapacity)
     {
@@ -67,7 +83,8 @@ public class Ferry implements FerryInterface
             spaceOccupied += v.getSpaceRequired();
         }
 
-        return spaceOccupied;
+        /* Restore normalized size unit. */
+        return spaceOccupied / 5;
     }
 
     /**
@@ -78,7 +95,7 @@ public class Ferry implements FerryInterface
     @Override
     public int countMoney()
     {
-        return 0;
+        return moneyEarned;
     }
 
     /**
@@ -89,15 +106,18 @@ public class Ferry implements FerryInterface
     @Override
     public Iterator<Vehicle> iterator()
     {
-        final ArrayList<Vehicle> vehicles = this.vehiclesAboard;
-
         return new Iterator<Vehicle>() {
-            @Override public boolean hasNext()
+            private ArrayList<Vehicle> vehicles =
+                    (ArrayList<Vehicle>) vehiclesAboard.clone();
+
+            @Override
+            public boolean hasNext()
             {
                 return !vehicles.isEmpty();
             }
 
-            @Override public Vehicle next()
+            @Override
+            public Vehicle next()
             {
                 return vehicles.remove(vehicles.size() - 1);
             }
@@ -122,10 +142,8 @@ public class Ferry implements FerryInterface
             return;
         }
 
-        // Charge for the vehicle itself.
         acceptPayment(v.payVehicleFee());
 
-        // Option to charge an extra fee for the passengers in the vehicle.
         if (SHOULD_CHARGE_EXTRA_PASSENGER_FEE) {
             acceptPayment(v.payPassengerFee());
         }
@@ -156,7 +174,8 @@ public class Ferry implements FerryInterface
     @Override
     public void disembark()
     {
-
+        passengersAboard.clear();
+        vehiclesAboard.clear();
     }
 
     /**
@@ -169,7 +188,7 @@ public class Ferry implements FerryInterface
     @Override
     public boolean hasSpaceFor(Vehicle v)
     {
-        return countVehicleSpace() < maxVehicleCapacity;
+        return (countVehicleSpace() + v.getSpaceRequired()) < maxVehicleCapacity;
     }
 
     /**
@@ -201,6 +220,8 @@ public class Ferry implements FerryInterface
         str.append(String.format(FORMAT, "Money earned", countMoney()));
         str.append(String.format(FORMAT, "Passengers #", countPassengers()));
         str.append(String.format(FORMAT, "Vehicle space used", countVehicleSpace()));
+
+        //str.append(vehiclesAboard.toString());
 
         Iterator<Vehicle> iterator = iterator();
         StringBuilder itStr = new StringBuilder();
