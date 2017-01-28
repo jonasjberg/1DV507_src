@@ -57,15 +57,10 @@ public abstract class Vehicle
     /**
      * Asks this vehicle to pay its vehicle-specific fee.
      *
-     * It is assumed for brevity that this only happens when the vehicle is
-     * boarding a ferry. Otherwise the ferry would have to call a separate
-     * method to toggle the aboardFerry variable through an accessor.
-     *
      * @return The fee as a positive integer.
      */
     public int payVehicleFee()
     {
-        aboardFerry = true;
         return getVehicleFee() > 0 ? getVehicleFee() : 0;
     }
 
