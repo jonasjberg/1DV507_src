@@ -8,6 +8,7 @@ package js224eh_assign1.ferrySystem;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public abstract class Vehicle
@@ -79,15 +80,35 @@ public abstract class Vehicle
         return passengers.size() * getPerPassengerFee();
     }
 
-    public boolean isAboardFerry()
+    /**
+     * Tests whether this Vehicle is aboard a specified ferry.
+     *
+     * @param ferry The ferry to test.
+     * @return True if this vehicle is aboard the specified ferry.
+     */
+    public boolean isAboardFerry(Ferry ferry)
     {
-        return aboardFerry;
+        Iterator<Vehicle> iterator = ferry.iterator();
+
+        while (iterator.hasNext()) {
+            Vehicle v = iterator.next();
+
+            if (v.equals(this)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void leaveFerry(Ferry ferry)
     {
-        aboardFerry = false;
-
+        if (!isAboardFerry(ferry)) {
+            System.out.println("The vehicle has left the ferry!");
+        } else {
+            System.out.println("[WARNING] The vehicle is unable to leave the " +
+                               "ferry -- the ferry must first disembark!");
+        }
     }
 
     @Override
@@ -103,7 +124,7 @@ public abstract class Vehicle
                                  Integer.toHexString(
                                          System.identityHashCode(this))));
 
-        str.append(String.format(FORMAT, "Aboard ferry", isAboardFerry()));
+        str.append(String.format(FORMAT, "Aboard ferry", aboardFerry));
         str.append(String.format(FORMAT, "Space required", getSpaceRequired()));
         str.append(String.format(FORMAT, "Passenger capacity", getPassengerCapacity()));
         //str.append(String.format(FORMAT, "Vehicle fee", fe()));
