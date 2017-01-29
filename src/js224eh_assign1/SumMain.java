@@ -23,28 +23,18 @@ public class SumMain
 {
     public static void main(String[] args)
     {
-        System.out.println(recursiveSum(1, 1));
-        System.out.println(recursiveSum(1, 2));
-        System.out.println(recursiveSum(1, 3));
-        System.out.println(recursiveSum(1, 4));
-        System.out.println(recursiveSum(1, 5));
-        System.out.println();
-        System.out.println(recursiveSum(1, 1));
-        //System.out.println(recursiveSum(1, 2));
-        System.out.println(recursiveSum(1, 3));
-        System.out.println(recursiveSum(1, 4));
-        System.out.println(recursiveSum(1, 5));
+        getIntegerSumFromOneToN(6);
     }
 
     /*
      *      sum [1..N]  =  sum [1 .. N/2]  +  sum [N/2+1 .. N]
      *
      *
-     *      Full range, 1 to N:     1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+     *      1 to N, with N = 10:    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
      *                              |                           |
      *                              1 ......................... N
      *
-     *      Halved, with N = 6:     1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+     *      Halved, with N = 10:    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
      *                              |              |  |         |
      *                              1 .......... N/2  N/2+1 ... N
      *
@@ -76,14 +66,13 @@ public class SumMain
      *
      */
 
-    public static int getZeroToNintegerSum(int n)
+    public static int getIntegerSumFromOneToN(int n)
     {
         if (n == 1) {
             return n;
         }
 
-
-
+        return recursiveSum(1, n);
     }
 
     public static int recursiveSum(int rangeLow, int rangeHigh)
@@ -93,18 +82,26 @@ public class SumMain
         }
 
         if (rangeHigh == 1) {
-            return rangeHigh;
+            return 1;
         }
 
-        int partOneLow = rangeLow;
-        int partOneHigh = rangeHigh / 2;
-        int partTwoLow = (rangeLow / 2) + 1;
-        int partTwoHigh = rangeHigh;
+        if (rangeHigh - rangeLow == 1) {
+            return rangeHigh + rangeLow;
 
-        int partOneSum = recursiveSum(partOneLow, partOneHigh);
-        int partTwoSum = recursiveSum(partTwoLow, partTwoHigh);
+        }
 
-        return partOneSum + partTwoSum;
+        int firstHalfLow = rangeLow;
+        int firstHalfHigh = rangeHigh / 2;
+        if (rangeHigh % 2 != 0) {
+            //firstHalfHigh++;
+        }
 
+        int secondHalfLow = rangeHigh / 2 + 1;
+        int secondHalfHigh = rangeHigh;
+        if (rangeHigh % 2 != 0) {
+            //secondHalfLow++;
+        }
+
+        return recursiveSum(firstHalfLow, firstHalfHigh) + recursiveSum(secondHalfLow, secondHalfHigh);
     }
 }
