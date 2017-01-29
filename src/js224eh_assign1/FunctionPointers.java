@@ -23,7 +23,7 @@ public class FunctionPointers {
 
 		System.out.print("Print all numbers: ");
 		Predicate<Integer> all = n -> true;
-		selectAndPrint(list, all);                // 
+		selectAndPrint(list, all);                //
 
 		System.out.print("\nPrint all odd numbers: ");
 		Predicate<Integer> odd = n -> false;      // Must be updated
@@ -43,19 +43,25 @@ public class FunctionPointers {
 
 	// Prints all elements in the list where predicate evaluates to true
 	public static void selectAndPrint(List<Integer> list, Predicate<Integer> predicate) {
-		
-		// Add code here
-		
-	}
+        for (Integer n : list) {
+            if (predicate.test(n)) {
+                System.out.println(n);
+            }
+        }
+    }
 
-	// Returns a new list containing the numbers resulting from applying fx 
+	// Returns a new list containing the numbers resulting from applying fx
 	// on the input list numbers
 	private static List<Double> applyFunction(List<Double> numbers, Function<Double, Double> fx) {
 
-		// Add code here
-		
-		return null;
-	}
+	    List<Double> result = new ArrayList<>();
+
+        for (Double d : numbers) {
+            result.add(fx.apply(d));
+        }
+
+        return result;
+    }
 
 	private static Double powerOfTwo(Double d) {
 		return 0.0;    // Must be updated
