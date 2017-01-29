@@ -23,8 +23,10 @@ public class SumMain
 {
     public static void main(String[] args)
     {
-        getIntegerSumFromOneToN(6);
+        getIntegerSumFromOneToN(3);
     }
+
+    // TODO: FIX EVERYTHING !!!
 
     /*
      *      sum [1..N]  =  sum [1 .. N/2]  +  sum [N/2+1 .. N]
@@ -64,11 +66,37 @@ public class SumMain
      *     1 N/2   N/2+1  N      1 N/2   N/2+1  N      1 N/2   N/2+1  N
      *
      *
+     *                              L       C       H
+     *  partLow:  2             1,  2,  3,  4,  5,  6,  7,  8,  9,  10
+     *  partHigh: 6                 |               |
+     *                              '...............'
+     *                              pL             pH
+     *
+     *                              L       C       H
+     *  Split into two parts:   1,  2,  3,  4,  5,  6,  7,  8,  9,  10
+     *                              |   |   |       |
+     *                              '...'   '.......'
+     *
+     *                            p1L  p1H  p2L   p2H
+     *
+     *      p1L = partLow
+     *      p1H =
+     *
+     *                              L       C           H
+     *  Split into two parts:   1,  2,  3,  4,  5,  6,  7,  8,  9,  10
+     *                              |   |   |           |
+     *                              '...'   '...........'
+     *
+     *                            p1L  p1H  p2L      p2H
+     *
+     *
      */
 
     public static int getIntegerSumFromOneToN(int n)
     {
-        if (n == 1) {
+        if (n < 1) {
+            throw new IllegalArgumentException("n must be >= 1");
+        } else if (n == 1) {
             return n;
         }
 
@@ -85,23 +113,13 @@ public class SumMain
             return 1;
         }
 
-        if (rangeHigh - rangeLow == 1) {
-            return rangeHigh + rangeLow;
+        int center = rangeHigh - rangeLow;
+        //if (span % 2 != 0) {
+        //    center--;
+        //}
 
-        }
-
-        int firstHalfLow = rangeLow;
-        int firstHalfHigh = rangeHigh / 2;
-        if (rangeHigh % 2 != 0) {
-            //firstHalfHigh++;
-        }
-
-        int secondHalfLow = rangeHigh / 2 + 1;
-        int secondHalfHigh = rangeHigh;
-        if (rangeHigh % 2 != 0) {
-            //secondHalfLow++;
-        }
-
-        return recursiveSum(firstHalfLow, firstHalfHigh) + recursiveSum(secondHalfLow, secondHalfHigh);
+        int firstHalfSum = recursiveSum(rangeLow, center);
+        int secondHalfSum = recursiveSum(center, rangeHigh);
+        return firstHalfSum + secondHalfSum;
     }
 }
