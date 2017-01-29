@@ -51,6 +51,11 @@ public class Ferry implements FerryInterface
         passengersAboard = new ArrayList<>();
     }
 
+    /**
+     * Take payment and add to the total amount of money earned.
+     *
+     * @param amount The amount of money that is received.
+     */
     private void acceptPayment(int amount)
     {
         if (amount > 0) {
@@ -143,7 +148,6 @@ public class Ferry implements FerryInterface
         }
 
         acceptPayment(v.payVehicleFee());
-
         if (SHOULD_CHARGE_EXTRA_PASSENGER_FEE) {
             acceptPayment(v.payPassengerFee());
         }
@@ -165,6 +169,7 @@ public class Ferry implements FerryInterface
             return;
         }
 
+        acceptPayment(p.payFee());
         passengersAboard.add(p);
     }
 
@@ -175,7 +180,14 @@ public class Ferry implements FerryInterface
     public void disembark()
     {
         passengersAboard.clear();
+
+        ArrayList<Vehicle> vehiclesNowAllowedToLeave =
+                (ArrayList<Vehicle>) vehiclesAboard.clone();
         vehiclesAboard.clear();
+
+        for (Vehicle v : vehiclesNowAllowedToLeave) {
+            v.leaveFerry(this);
+        }
     }
 
     /**

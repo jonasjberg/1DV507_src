@@ -11,10 +11,7 @@ public class Passenger
 {
     private final int fee = 10;
 
-    public Passenger()
-    {
-        System.out.println("Created a new PASSENGER ..");
-    }
+    public Passenger() { }
 
     public int payFee()
     {
