@@ -38,11 +38,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.joining;
 
 
 public class WarAndPeace
@@ -59,54 +55,14 @@ public class WarAndPeace
 
         Stream<String> stream = Arrays.stream(words);
 
-        long c = stream.map(s -> s.trim())
-                       .map(String::toLowerCase)
-                       .map(word -> word.replaceAll("[^a-zA-Z\'-]", ""))
-                       .filter(s -> s.length() > 0)
-                       .distinct()
-                       .count();
-        System.out.println(c);
+        long count = stream.map(s -> s.trim())
+                           .map(String::toLowerCase)
+                           .map(word -> word.replaceAll("[^a-zA-Z\'-]", ""))
+                           .filter(s -> s.length() > 0)
+                           .distinct()
+                           .count();
 
-        // long count = Arrays.stream(text.trim().split(" "))
-        //                    .map(String::toLowerCase)
-        //                    .map(word -> word.replaceAll("[^a-zA-Z\'-]", ""))
-        //                    .collect(joining(" "))
-        //                    .length();
-        // System.out.println(count);
-
-
-        // long c = stream.map(w -> w.toLowerCase()).distinct().count();
-        // System.out.println(c);
-
-
-        // long d = stream.map(word -> word.replaceAll("[^a-zA-Z]", "")
-        // .toLowerCase().trim()).filter(word -> word.length() > 0).count();
-        // System.out.println(d);
-
-/*        stream.map(w -> {
-            return w.replaceAll("[^a-zA-Z\'-]", "");
-        }).count();
-
-        List<String> result = stream.map(String::toLowerCase)
-                                    .map()
-                                    .collect(Collectors.toList());*/
-
-        List<String> list  = Arrays.asList("abc", "def", "ghi");
-        List<String> upped = list.stream().map(String::toUpperCase).collect(
-                Collectors.toList());
-
-
-        // TODO: FIX EVERYTHING!!!!!11
-
-        //List<String> words = Arrays.asList(text.split(" "));
-
-        // Using internal iterator (lambda)
-        //long counterStream = stream.filter(w->w.length() > 7).count();
-        //System.out.println("Number of words: " + counterStream);
-
-        //long qWords = stream.map(String::toLowerCase) .filter(s->s
-        // .startsWith(”q”)).count(); System.out.println(”Words starting with
-        // q: ” + qWords);
+        System.out.printf("Number of unique words: %d%n", count);
     }
 
     /**
