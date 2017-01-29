@@ -57,30 +57,32 @@ public class CountrySort {
 	    "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis and Futuna", "Western Sahara",
 	    "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"
 	  };
-	
+
 	public static void main(String[] args) {
 		// Task 1: Print Top 10 list of countries with the longest names
-		Comparator<String> longestName = (s1,s2) -> 0;       // Must be updated 
+		Comparator<String> longestName = (s1,s2) -> s2.length() - s1.length();
 		Arrays.sort(COUNTRIES,longestName);
 		System.out.println("\nCountries with longest names");
 		for (int i=0; i<10;i++)
 			System.out.println("\t"+COUNTRIES[i]);
-		
-		
+
+
 		// Task 2: Print Top 10 list of countries in reverse alphabetic order
-		Comparator<String> reverseAlphabetic = (s1,s2) -> 0;       // Must be updated 
+		Comparator<String> reverseAlphabetic = (s1,s2) -> s2.compareTo(s1);
 		Arrays.sort(COUNTRIES,reverseAlphabetic);
-		System.out.println("\nCountries with shortest names");
+		System.out.println("\nCountries in reverse alphabetic order");
 		for (int i=0; i<10;i++)
 			System.out.println("\t"+COUNTRIES[i]);
-		
-		// Task 3: Print Top 10 list of country names containing most As (either A or a). 
-		Comparator<String> countAs = (s1,s2) -> 0;       // Must be updated 
+
+		// Task 3: Print Top 10 list of country names containing most As (either A or a).
+        // Solution very much inspired by the following Stack Overflow post:
+		//     http://stackoverflow.com/a/8910767
+        Comparator<String> countAs = (s1, s2) ->
+				(s2.length() - s2.toLowerCase().replace("a", "").length()) -
+                (s1.length() - s1.toLowerCase().replace("a", "").length());
 		Arrays.sort(COUNTRIES,countAs);
 		System.out.println("\nCountry names containing most As (either A or a)");
 		for (int i=0; i<10;i++)
 			System.out.println("\t"+COUNTRIES[i]);
-
 	}
-
 }
