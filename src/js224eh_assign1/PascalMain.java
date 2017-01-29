@@ -38,8 +38,10 @@ public class PascalMain
             n = DEFAULT_N;
         }
 
+        print(n);
+
         // Do the calculation. Uses a recursive method.
-        int[] row = pascalRow(n);
+/*        int[] row = pascalRow(n);
 
         // Prepare and print results.
         StringBuilder sb = new StringBuilder("[ ");
@@ -47,30 +49,40 @@ public class PascalMain
             sb.append(i).append(" ");
         }
         sb.append("]");
-        System.out.printf("Line %d  -->  %s%n", n, sb.toString());
+        System.out.printf("Line %d  -->  %s%n", n, sb.toString());*/
     }
 
-    static private int[] pascalRow(int n)
+    public static void print(int n)
     {
-        int[] rows = new int[5000];
-
-        int index = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < 1; j++) {
-                rows[index++] = recursePascalTriangle(i, j);
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n - row; col++) {
+                // print space for triangle like structure
+                System.out.print(" ");
             }
-        }
 
-        return rows;
+            for (int j = 0; j <= row; j++) {
+                System.out.print(pascal(row, j) + " ");
+            }
+            System.out.println();
+        }
     }
 
-    static private int recursePascalTriangle(int row, int column)
+    public static int pascal(int row, int col)
     {
-        if (column == 0 || row == column + 1 || column == row) {
+        if (col == 0 || col == row) {
+            return 1;
+        } else {
+            return pascal(row - 1, col - 1) + pascal(row - 1, col);
+        }
+    }
+
+    static private int pascalRow(int row, int column)
+    {
+        if (column == 0 || column == row) {
             return 1;
         }
 
-        return recursePascalTriangle(row - 1, column - 1) +
-               recursePascalTriangle(row - 1, column);
+        return pascalRow(row - 1, column - 1) +
+               pascalRow(row - 1, column);
     }
 }
