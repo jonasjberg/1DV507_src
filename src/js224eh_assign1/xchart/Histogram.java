@@ -1,4 +1,19 @@
-package js224eh_lab4;
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// 1DV507 -- Programming and Data Structures, VT2017
+// Assignment 1: Inheritance, Recursion and Java 1.8
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Created by Jonas Sjöberg (js224eh) on 2017-01-29.
+
+/*
+ *  Exercise 6
+ *  ----------
+ *  To be submitted:
+ *  In the previous course you wrote the program Histogram.java showing a
+ *  very primitive bar chart of a number of integers. Change the program to
+ *  use XChart to present a bar chart and a pie chart of the same set of data.
+ */
+
+package js224eh_assign1.xchart;
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Created by Jonas Sjöberg (js224eh) on 2017-01-07.
@@ -35,8 +50,14 @@ package js224eh_lab4;
  *           programmet (via String[] args).
  */
 
+import org.knowm.xchart.*;
+import org.knowm.xchart.style.Styler;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -49,15 +70,41 @@ public class Histogram
 
     public static void main(String[] args)
     {
-        if (args == null || args[0].isEmpty()) {
+        if (args == null || args.length == 0) {
             System.out.println("Usage: Histogram [FILE]");
             System.exit(0);
         }
 
-        showFileStatistics(args[0]);
+        int[] stats = calculateFileStatistics(args[0]);
+        displayHistogram(stats);
     }
 
-    private static void showFileStatistics(String path)
+    private static void displayHistogram(int[] data)
+    {
+        // Create and Customize Chart
+        CategoryChart chart = new CategoryChartBuilder().width(800).height(600).title("Histogram").xAxisTitle("Number").yAxisTitle("Frequency").build();
+        chart.getStyler().setChartTitleVisible(false);
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
+        chart.getStyler().setMarkerSize(5);
+
+        // Generate data
+        List<Double> xData = new ArrayList();
+        List<Double> yData = new ArrayList();
+
+        for (int i = 0; i < data.length; i++) {
+            xData.add((double) i);
+            yData.add((double) data[i]);
+        }
+
+        //chart.addSeries("Series", xData, yData);
+
+        chart.addSeries("Number Frequency Series", new ArrayList<String>(Arrays.asList(new String[] { "1-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"})), yData);
+
+        // Display plot
+        new SwingWrapper(chart).displayChart();
+    }
+
+    private static int[] calculateFileStatistics(String path)
     {
         Scanner scan = null;
         try {
@@ -68,6 +115,7 @@ public class Histogram
             System.exit(1);
         }
 
+        int[] intervalCounter = new int[10];
         System.out.printf("Läser heltal från filen: \"%s\"%n", path);
         while (scan.hasNextLine()) {
             /* Match one or more digits, possibly preceded by a dash. */
@@ -81,6 +129,7 @@ public class Histogram
                 int number = Integer.parseInt(digits);
                 if (number >= 1 && number <= 100) {
                     numberFrequency[number]++;
+                    intervalCounter[(number - 1) / 10]++;
                     numbersInRange++;
                 } else {
                     numbersOutsideOfRange++;
@@ -117,6 +166,7 @@ public class Histogram
             bucketLow += 10;
             bucketHigh += 10;
         }
+        return intervalCounter;
     }
 
     /**
