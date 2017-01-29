@@ -30,12 +30,17 @@ public class SumMain
 
         System.out.printf("n: %d  n/2: %d  n/2+1: %d%n", n, m, o);
 
-        System.out.println(recursiveSum(0, 1));
-        System.out.println(recursiveSum(0, 2));
-        System.out.println(recursiveSum(0, 3));
-        System.out.println(recursiveSum(0, 4));
-        System.out.println(recursiveSum(0, 5));
-
+        System.out.println(recursiveSum(1, 1));
+        System.out.println(recursiveSum(1, 2));
+        System.out.println(recursiveSum(1, 3));
+        System.out.println(recursiveSum(1, 4));
+        System.out.println(recursiveSum(1, 5));
+        System.out.println();
+        System.out.println(recursiveSumTwo(1, 1));
+        System.out.println(recursiveSumTwo(1, 2));
+        System.out.println(recursiveSumTwo(1, 3));
+        System.out.println(recursiveSumTwo(1, 4));
+        System.out.println(recursiveSumTwo(1, 5));
     }
 
     /*
@@ -79,18 +84,32 @@ public class SumMain
      */
     private static int recursiveSum(int rangeLow, int rangeHigh)
     {
-        if (rangeHigh > rangeLow)
-        {
+        if (rangeHigh > rangeLow) {
             return rangeHigh + recursiveSum(rangeLow, rangeHigh - 1);
-
         }
 
-        if (rangeHigh < rangeLow)
-        {
+        if (rangeHigh < rangeLow) {
             return rangeLow + recursiveSum(rangeHigh, rangeLow - 1);
-
         }
 
         return rangeHigh;
+    }
+
+    public static int recursiveSumTwo(int rangeLow, int rangeHigh)
+    {
+        if (rangeHigh == rangeLow) {
+            return rangeHigh;
+        }
+
+        int partOneLow = rangeLow;
+        int partOneHigh = rangeHigh / 2;
+        int partTwoLow = rangeLow / 2 + 1;
+        int partTwoHigh = rangeHigh;
+
+        int partOneSum = recursiveSumTwo(partOneLow, partOneHigh);
+        int partTwoSum = recursiveSumTwo(partTwoLow, partTwoHigh);
+
+        return partOneSum + partTwoSum;
+
     }
 }
