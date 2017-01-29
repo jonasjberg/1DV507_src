@@ -76,10 +76,10 @@ public class PascalMain
     /**
      * Calculate the number at a specific row and column in a Pascal triangle.
      *
-     * .     .        .         .       .         .
-     * |  row  |  ==  |  row - 1  |  +  |  row - 1  |
-     * |  col  |  ==  |  col      |  +  |  col - 1  |
-     * '     '        '         '       '         '
+     *      .     .        .         .       .         .
+     *     |  row  |  ==  |  row - 1  |  +  |  row - 1  |
+     *     |  col  |  ==  |  col      |  +  |  col - 1  |
+     *      '     '        '         '       '         '
      *
      * @param row    The row of the entry.
      * @param column The column of the entry.
