@@ -37,9 +37,9 @@ public class ScatterPlot
 
         // Generate data
         List xData = new ArrayList();
-        List   yData  = new ArrayList();
+        List yData = new ArrayList();
         Random random = new Random();
-        int    size   = 1000;
+        int size = 1000;
         for (int i = 0; i < size; i++) {
             xData.add(random.nextGaussian());
             yData.add(random.nextGaussian());
