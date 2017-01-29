@@ -101,6 +101,11 @@ public abstract class Vehicle
         return false;
     }
 
+    /**
+     * Have this vehicle leave the ferry.
+     *
+     * @param ferry The ferry to leave.
+     */
     public void leaveFerry(Ferry ferry)
     {
         if (!isAboardFerry(ferry)) {

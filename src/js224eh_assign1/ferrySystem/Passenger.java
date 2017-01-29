@@ -13,7 +13,7 @@ public class Passenger
 
     public Passenger()
     {
-
+        System.out.println("Created a new PASSENGER ..");
     }
 
     public int payFee()
