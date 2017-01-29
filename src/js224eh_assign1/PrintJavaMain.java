@@ -51,15 +51,16 @@ public class PrintJavaMain
             System.out.printf("[ERROR] %s%n", e.toString());
         }
 
-        // Recurse paths and store results  in
-        if (startPath != null && startPath.exists() && startPath.isDirectory()) {
-            recursePath(startPath);
+        if (startPath == null || !startPath.isDirectory()) {
+            System.out.println("[ERROR] Please provide a valid starting path!");
+            System.exit(1);
         } else {
-            System.out.println("Please provide a valid starting path.");
+            // Recurse paths and store results in the ArrayList "foundJavaFiles".
+            recursePath(startPath);
         }
 
         if (foundJavaFiles.isEmpty()) {
-            System.out.printf("Found no \"*.java\" files in \"%s\"", startPath);
+            System.out.printf("Found no \"*.java\" files in \"%s\"%n", startPath);
 
         } else {
             // Sort by file size.
@@ -72,7 +73,7 @@ public class PrintJavaMain
                                   " (%d bytes)%n";
 
             // Print results header.
-            System.out.printf("%s%n%s%n%n", "THESE ARE THE SEARCH RESULTS",
+            System.out.printf("%n%s %s%n%n", "THE SEARCH RESULTS",
                               "(sorted by file size, smallest first)");
 
             // Print results line by line.
