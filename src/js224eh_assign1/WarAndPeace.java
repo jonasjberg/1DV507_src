@@ -31,18 +31,57 @@
 package js224eh_assign1;
 
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 
 public class WarAndPeace
 {
+    static final String TEXT_FILE_PATH = "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src/js224eh_assign1/WarAndPeace.txt";
+
     public static void main(String[] args)
     {
-        String text = readText("WarAndPeace.txt");
+        String text = readText(TEXT_FILE_PATH);
         String[] words = text.split(" ");
         System.out.println("Initial word count: " + words.length);
 
         Stream stream = Arrays.stream(words);
+
+        // TODO: FIX EVERYTHING!!!!!11
+
+        //List<String> words = Arrays.asList(text.split(" "));
+
+        // Using internal iterator (lambda)
+        //long counterStream = stream.filter(w->w.length() > 7).count();
+        //System.out.println("Number of words: " + counterStream);
+
+        //long qWords = stream.map(String::toLowerCase) .filter(s->s.startsWith(”q”)).count(); System.out.println(”Words starting with q: ” + qWords);
+    }
+
+    /**
+     * Reads text from a path and returns the contents.
+     *
+     * Lifted pretty much as-is from eample in the slides for Lecture #3
+     * in the course 1DV507 at Linnaeus University, page 24.
+     *
+     * @param path The path to the file to read.
+     * @return The contents of the file at path as a string.
+     */
+    private static String readText(String path)
+    {
+        String contents = null;
+        try {
+            contents = new String(Files.readAllBytes(Paths.get(path)),
+                                  StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.printf("[ERROR] %s%n", e.toString());
+        }
+
+        return contents;
     }
 }
