@@ -38,10 +38,8 @@ public class PascalMain
             n = DEFAULT_N;
         }
 
-        print(n);
-
         // Do the calculation. Uses a recursive method.
-/*        int[] row = pascalRow(n);
+        int[] row = pascalRow(n);
 
         // Prepare and print results.
         StringBuilder sb = new StringBuilder("[ ");
@@ -49,40 +47,51 @@ public class PascalMain
             sb.append(i).append(" ");
         }
         sb.append("]");
-        System.out.printf("Line %d  -->  %s%n", n, sb.toString());*/
+
+        System.out.printf("Line %d  -->  %s%n", n, sb.toString());
     }
 
-    public static void print(int n)
+    /**
+     * Get row N in a Pascal triangle.
+     *
+     * @param n The row to get.
+     * @return The triangle row as an array of integers.
+     */
+    static private int[] pascalRow(int n)
     {
-        for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n - row; col++) {
-                // print space for triangle like structure
-                System.out.print(" ");
-            }
-
-            for (int j = 0; j <= row; j++) {
-                System.out.print(pascal(row, j) + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static int pascal(int row, int col)
-    {
-        if (col == 0 || col == row) {
-            return 1;
+        if (n == 0) {
+            return new int[]{1};
         } else {
-            return pascal(row - 1, col - 1) + pascal(row - 1, col);
+
+            int[] row = new int[n + 1];
+
+            for (int i = 0; i < row.length; i++) {
+                row[i] = pascalTriangleEntry(n, i);
+            }
+
+            return row;
         }
     }
 
-    static private int pascalRow(int row, int column)
+    /**
+     * Calculate the number at a specific row and column in a Pascal triangle.
+     *
+     * .     .        .         .       .         .
+     * |  row  |  ==  |  row - 1  |  +  |  row - 1  |
+     * |  col  |  ==  |  col      |  +  |  col - 1  |
+     * '     '        '         '       '         '
+     *
+     * @param row    The row of the entry.
+     * @param column The column of the entry.
+     * @return The number at the specified row and column.
+     */
+    static private int pascalTriangleEntry(int row, int column)
     {
         if (column == 0 || column == row) {
             return 1;
         }
 
-        return pascalRow(row - 1, column - 1) +
-               pascalRow(row - 1, column);
+        return pascalTriangleEntry(row - 1, column - 1) +
+               pascalTriangleEntry(row - 1, column);
     }
 }
