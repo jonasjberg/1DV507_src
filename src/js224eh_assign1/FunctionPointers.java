@@ -23,14 +23,14 @@ public class FunctionPointers {
 
 		System.out.print("Print all numbers: ");
 		Predicate<Integer> all = n -> true;
-		selectAndPrint(list, all);                //
+		selectAndPrint(list, all);
 
 		System.out.print("\nPrint all odd numbers: ");
-		Predicate<Integer> odd = n -> false;      // Must be updated
+		Predicate<Integer> odd = n -> n % 2 != 0;
 		selectAndPrint(list, odd);
 
 		System.out.print("\nPrint all numbers greater than 10: ");
-		Predicate<Integer> aboveTen = n -> false;   // Must be updated
+		Predicate<Integer> aboveTen = n -> n > 10;
 		selectAndPrint(list, aboveTen);
 
 		System.out.println("\n\nPart 2: Apply functions");
@@ -45,7 +45,7 @@ public class FunctionPointers {
 	public static void selectAndPrint(List<Integer> list, Predicate<Integer> predicate) {
         for (Integer n : list) {
             if (predicate.test(n)) {
-                System.out.println(n);
+                System.out.printf("%d ", n);
             }
         }
     }
@@ -53,7 +53,6 @@ public class FunctionPointers {
 	// Returns a new list containing the numbers resulting from applying fx
 	// on the input list numbers
 	private static List<Double> applyFunction(List<Double> numbers, Function<Double, Double> fx) {
-
 	    List<Double> result = new ArrayList<>();
 
         for (Double d : numbers) {
@@ -64,6 +63,6 @@ public class FunctionPointers {
     }
 
 	private static Double powerOfTwo(Double d) {
-		return 0.0;    // Must be updated
+		return d * d;
 	}
 }
