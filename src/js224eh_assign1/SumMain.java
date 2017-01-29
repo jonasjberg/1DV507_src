@@ -21,9 +21,28 @@ package js224eh_assign1;
 
 public class SumMain
 {
+    final static int DEFAULT_N = 21;
+
     public static void main(String[] args)
     {
-        getIntegerSumFromOneToN(3);
+        // Check command line argument, fall back to default if checks fail.
+        int n = -1;
+
+        if (args.length == 1) {
+            try {
+                n = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.out.printf("[ERROR] %s%n", e.toString());
+            }
+        }
+
+        if (n < 0) {
+            System.out.printf("%n(Using default: N = %d)%n", DEFAULT_N);
+            n = DEFAULT_N;
+        }
+
+        int sum = getIntegerSumFromOneToN(n);
+        System.out.printf("The sum of integers {1..%d} = %d%n", n, sum);
     }
 
     // TODO: FIX EVERYTHING !!!
@@ -114,12 +133,13 @@ public class SumMain
         }
 
         int center = rangeHigh - rangeLow;
-        //if (span % 2 != 0) {
-        //    center--;
-        //}
+
+        if (center == 1) {
+            return rangeHigh + rangeLow;
+        }
 
         int firstHalfSum = recursiveSum(rangeLow, center);
-        int secondHalfSum = recursiveSum(center, rangeHigh);
+        int secondHalfSum = recursiveSum(center + 1, rangeHigh);
         return firstHalfSum + secondHalfSum;
     }
 }
