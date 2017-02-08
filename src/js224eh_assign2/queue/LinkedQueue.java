@@ -12,18 +12,38 @@ import java.util.Iterator;
 
 public class LinkedQueue implements Queue
 {
+    private static final int QUEUE_INITIAL_SIZE = 4;
+    private static final int QUEUE_RESIZE_INCREMENT = 8;
+
+    private Object[] elements;
+    private int size;
+
+    public LinkedQueue()
+    {
+        elements = new Object[QUEUE_INITIAL_SIZE];
+        size = 0;
+    }
+
+    /**
+     * Resizes the queue in order to accommodate additional elements.
+     *
+     *
+     */
+    private void resize()
+    {
+        /* TODO: Implement .. */
+    }
+
     @Override
     public int size()
     {
-        /* TODO: Implement .. */
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty()
     {
-        /* TODO: Implement .. */
-        return false;
+        return size == 0;
     }
 
     @Override
