@@ -1,58 +1,78 @@
 package js224eh_assign2.queue;
 
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
+
 /**
- * Created by jonas on 2017-02-09.
+ * Created by Jonas Sjöberg (js224eh) on 2017-02-09.
  */
-public class LinkedQueueTest {
-    @org.junit.Before
-    public void setUp() throws Exception {
-        LinkedQueue queue = new LinkedQueue();
+public class LinkedQueueTest
+{
+    private LinkedQueue queue;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        queue = new LinkedQueue();
     }
 
-    @org.junit.After
-    public void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception { }
 
+    @Test
+    public void size() throws Exception
+    {
+        assertEquals(0, queue.size());
+
+        String o1 = "object1";
+        queue.enqueue(o1);
+        assertEquals(1, queue.size());
     }
 
-    @org.junit.Test
-    public void Constructor() throws Exception {
-    }
-
-    @org.junit.Test
-    public void size() throws Exception {
-
-    }
-
-    @org.junit.Test
-    public void isEmpty() throws Exception {
-
-    }
-
-    @org.junit.Test
-    public void enqueue() throws Exception {
-
-    }
-
-    @org.junit.Test
-    public void dequeue() throws Exception {
+    @Test
+    public void isEmpty() throws Exception
+    {
 
     }
 
-    @org.junit.Test
-    public void first() throws Exception {
+    @Test
+    public void enqueue() throws Exception
+    {
 
     }
 
-    @org.junit.Test
-    public void last() throws Exception {
+    @Test
+    public void dequeue() throws Exception
+    {
 
     }
 
-    @org.junit.Test
-    public void iterator() throws Exception {
+    @Test
+    public void first() throws Exception
+    {
 
     }
 
+    @Test
+    public void last() throws Exception
+    {
+
+    }
+
+    @Test
+    public void toString() throws Exception
+    {
+
+    }
+
+    @Test
+    public void iterator() throws Exception
+    {
+
+    }
 }
