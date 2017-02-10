@@ -97,7 +97,7 @@ public class LinkedQueueTest
     @Test
     public void testLast() throws Exception
     {
-        queue.enqueue("Object 1");
+        queue.enqueue("object 1");
         assertEquals("Object 1", queue.last());
 
         queue.enqueue("Object 2");
@@ -113,12 +113,16 @@ public class LinkedQueueTest
     @Test
     public void testToString() throws Exception
     {
+        queue.enqueue("object 1");
+        queue.enqueue("object 2");
+        queue.enqueue("object 3");
 
+        // TODO: Implement ..
     }
 
     @Test
     public void testIterator() throws Exception
     {
-
+        // TODO: Implement ..
     }
 }
