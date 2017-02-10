@@ -154,9 +154,34 @@ public class LinkedQueue implements Queue
     @Override
     public Iterator<Object> iterator()
     {
-        /* TODO: Implement .. */
-        return null;
+        return new LinkedQueueIterator();
     }
+
+    private class LinkedQueueIterator implements Iterator<Object> {
+        private Node current = head;
+
+        @Override
+        public boolean hasNext(){
+            return current != null;
+        }
+
+        @Override
+        public Object next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            Object data = current.data;
+            current = current.next;
+            return data;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
 
     /**
      * Class Node holds an entry in the queue as well as a pointer to the
