@@ -156,32 +156,33 @@ public class LinkedQueue implements Queue
     @Override
     public Iterator<Object> iterator()
     {
-        return new LinkedQueueIterator();
-    }
+        return new Iterator<Object>() {
+            private Node current = head;
 
-    private class LinkedQueueIterator implements Iterator<Object> {
-        private Node current = head;
-
-        @Override
-        public boolean hasNext(){
-            return current != null;
-        }
-
-        @Override
-        public Object next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
+            @Override
+            public boolean hasNext()
+            {
+                return current != null;
             }
 
-            Object data = current.data;
-            current = current.next;
-            return data;
-        }
+            @Override
+            public Object next()
+            {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
 
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
+                Object data = current.data;
+                current = current.next;
+                return data;
+            }
+
+            @Override
+            public void remove()
+            {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
 
