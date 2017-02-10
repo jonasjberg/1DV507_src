@@ -13,9 +13,13 @@ import java.util.NoSuchElementException;
 
 public class LinkedQueue implements Queue
 {
+    /* Number of elements in the queue. */
+    private int  size;
 
-    private int size;
+    /* The first element in the queue. */
     private Node head;
+
+    /* The last element in the queue. */
     private Node tail;
 
     /**
