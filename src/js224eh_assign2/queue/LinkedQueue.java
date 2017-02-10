@@ -13,8 +13,6 @@ import java.util.NoSuchElementException;
 
 public class LinkedQueue implements Queue
 {
-    private static final int QUEUE_INITIAL_SIZE = 4;
-    private static final int QUEUE_RESIZE_INCREMENT = 8;
 
     private int size;
     private Node head;
