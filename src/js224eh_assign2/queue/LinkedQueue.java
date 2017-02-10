@@ -19,6 +19,9 @@ public class LinkedQueue implements Queue
     private Node head;
     private Node tail;
 
+    /**
+     * Instantiates a new instance of the "LinkedQueue" class.
+     */
     public LinkedQueue()
     {
         size = 0;
@@ -27,27 +30,33 @@ public class LinkedQueue implements Queue
     }
 
     /**
-     * Resizes the queue in order to accommodate additional elements.
+     * Gets the current size of the queue, I.E. the number of enqueued elements.
      *
-     *
+     * @return The number of elements stored in this queue.
      */
-    private void resize()
-    {
-        /* TODO: Implement .. */
-    }
-
     @Override
     public int size()
     {
         return size;
     }
 
+    /**
+     * Returns whether the queue is empty or not.
+     *
+     * @return True if this queue is empty, otherwise False.
+     */
     @Override
     public boolean isEmpty()
     {
         return head == null;
     }
 
+    /**
+     * Adds an element to the queue. The element is added to the back of
+     * the queue; FIFO -- First In First Out.
+     *
+     * @param element The element to add to this queue.
+     */
     @Override
     public void enqueue(Object element)
     {
@@ -69,6 +78,12 @@ public class LinkedQueue implements Queue
         size++;
     }
 
+    /**
+     * Removes an element from the queue. The element that was enqueued first
+     * is returned; FIFO -- First In First Out.
+     *
+     * @return The next element in line in this queue.
+     */
     @Override
     public Object dequeue()
     {
@@ -86,35 +101,55 @@ public class LinkedQueue implements Queue
         return returnValue;
     }
 
+    /**
+     * Returns the first element of the queue, without removing it.
+     *
+     * @return The first element in this queue.
+     */
     @Override
     public Object first()
     {
-        Object first = null;
-        boolean foundFirst = false;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("The queue is empty");
+        }
 
-        do {
-
-
-
-
-        } while (!foundFirst);
-
-        return first;
+        return head.data;
     }
 
+    /**
+     * Returns the last element of the queue, without removing it.
+     *
+     * @return The last element in this queue.
+     */
     @Override
     public Object last()
     {
-        /* TODO: Implement .. */
-        return null;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("The queue is empty");
+        }
+
+        return tail.data;
     }
 
+    /**
+     * Returns a human readable textual representation of the queue.
+     *
+     * @return A string representation of this queue.
+     */
     @java.lang.Override
     public String toString()
     {
-        return null;
+        StringBuilder sb = new StringBuilder("[ ");
+
+
+        return sb.append("]").toString();
     }
 
+    /**
+     * Returns an element iterator for the queue.
+     *
+     * @return An element iterator for this queue.
+     */
     @Override
     public Iterator<Object> iterator()
     {
@@ -122,11 +157,20 @@ public class LinkedQueue implements Queue
         return null;
     }
 
+    /**
+     * Class Node holds an entry in the queue as well as a pointer to the
+     * following queue entry.
+     */
     class Node {
         Object data;
         Node next;
 
-        public Node(Object data)
+        /**
+         * Creates a new queue Node containing the Object "data".
+         *
+         * @param data The data contained within this node.
+         */
+        Node(Object data)
         {
             this.data = data;
             next = null;

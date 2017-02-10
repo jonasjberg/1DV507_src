@@ -53,25 +53,61 @@ public class LinkedQueueTest
     @Test
     public void testEnqueue() throws Exception
     {
+        queue.enqueue("Object 1");
+        assertEquals("Object 1", queue.first());
 
+        queue.enqueue("Object 2");
+        queue.enqueue("Object 3");
+        assertEquals("Object 1", queue.first());
+        assertEquals("Object 3", queue.last());
     }
 
     @Test
     public void testDequeue() throws Exception
     {
+        queue.enqueue("Object 1");
 
+        Object o1 = queue.dequeue();
+        assertEquals(o1, "Object 1");
+
+        queue.enqueue("Object 2");
+        queue.enqueue("Object 3");
+        queue.enqueue("Object 4");
+
+        Object o2 = queue.dequeue();
+        Object o3 = queue.dequeue();
+        assertEquals(o2, "Object 2");
+        assertEquals(o3, "Object 3");
+
+        queue.dequeue();
+        assertTrue(queue.isEmpty());
     }
 
     @Test
     public void testFirst() throws Exception
     {
+        queue.enqueue("Object 1");
+        assertEquals("Object 1", queue.first());
 
+        queue.enqueue("Object 2");
+        queue.enqueue("Object 3");
+        assertEquals("Object 1", queue.first());
     }
 
     @Test
     public void testLast() throws Exception
     {
+        queue.enqueue("Object 1");
+        assertEquals("Object 1", queue.last());
 
+        queue.enqueue("Object 2");
+        assertEquals("Object 2", queue.last());
+
+        queue.enqueue("Object 3");
+        assertEquals("Object 3", queue.last());
+
+        queue.dequeue();
+        assertEquals("Object 3", queue.last());
     }
 
     @Test
