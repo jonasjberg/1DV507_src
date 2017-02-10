@@ -25,53 +25,63 @@ public class LinkedQueueTest
     public void tearDown() throws Exception { }
 
     @Test
-    public void size() throws Exception
+    public void testSize() throws Exception
     {
         assertEquals(0, queue.size());
 
-        String o1 = "object1";
-        queue.enqueue(o1);
+        queue.enqueue(new Object());
         assertEquals(1, queue.size());
+
+        queue.enqueue(new Object());
+        queue.enqueue(new Object());
+        queue.enqueue(new Object());
+        assertEquals(4, queue.size());
     }
 
     @Test
-    public void isEmpty() throws Exception
+    public void testIsEmpty() throws Exception
+    {
+        assertTrue(queue.isEmpty());
+
+        queue.enqueue(new Object());
+        assertFalse(queue.isEmpty());
+
+        queue.dequeue();
+        assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testEnqueue() throws Exception
     {
 
     }
 
     @Test
-    public void enqueue() throws Exception
+    public void testDequeue() throws Exception
     {
 
     }
 
     @Test
-    public void dequeue() throws Exception
+    public void testFirst() throws Exception
     {
 
     }
 
     @Test
-    public void first() throws Exception
+    public void testLast() throws Exception
     {
 
     }
 
     @Test
-    public void last() throws Exception
+    public void testToString() throws Exception
     {
 
     }
 
     @Test
-    public void toString() throws Exception
-    {
-
-    }
-
-    @Test
-    public void iterator() throws Exception
+    public void testIterator() throws Exception
     {
 
     }

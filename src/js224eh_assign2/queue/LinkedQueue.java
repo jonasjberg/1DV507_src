@@ -15,13 +15,15 @@ public class LinkedQueue implements Queue
     private static final int QUEUE_INITIAL_SIZE = 4;
     private static final int QUEUE_RESIZE_INCREMENT = 8;
 
-    private Object[] elements;
     private int size;
+    private Node head;
+    private Node tail;
 
     public LinkedQueue()
     {
-        elements = new Object[QUEUE_INITIAL_SIZE];
         size = 0;
+        head = null;
+        tail = null;
     }
 
     /**
@@ -43,27 +45,61 @@ public class LinkedQueue implements Queue
     @Override
     public boolean isEmpty()
     {
-        return size == 0;
+        return head == null;
     }
 
     @Override
     public void enqueue(Object element)
     {
-        /* TODO: Implement .. */
+        Node newNode = new Node(element);
+
+        /* If the queue is empty, both head and tail point to the single new
+         * Node "newNode". Otherwise, update the "next" pointer in the tail to
+         * point at the new Node "newNode", then let the new node be the
+         * tail itself.
+         */
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+
+        size++;
     }
 
     @Override
     public Object dequeue()
     {
-        /* TODO: Implement .. */
-        return null;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("The queue is empty");
+        }
+
+        Object returnValue = head.data;
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+
+        size--;
+        return returnValue;
     }
 
     @Override
     public Object first()
     {
-        /* TODO: Implement .. */
-        return null;
+        Object first = null;
+        boolean foundFirst = false;
+
+        do {
+
+
+
+
+        } while (!foundFirst);
+
+        return first;
     }
 
     @Override
@@ -73,10 +109,27 @@ public class LinkedQueue implements Queue
         return null;
     }
 
+    @java.lang.Override
+    public String toString()
+    {
+        return null;
+    }
+
     @Override
     public Iterator<Object> iterator()
     {
         /* TODO: Implement .. */
         return null;
+    }
+
+    class Node {
+        Object data;
+        Node next;
+
+        public Node(Object data)
+        {
+            this.data = data;
+            next = null;
+        }
     }
 }
