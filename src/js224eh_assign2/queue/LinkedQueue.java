@@ -185,14 +185,14 @@ public class LinkedQueue implements Queue
         };
     }
 
-
     /**
      * Class Node holds an entry in the queue as well as a pointer to the
      * following queue entry.
      */
-    class Node {
+    class Node
+    {
         Object data;
-        Node next;
+        Node   next;
 
         /**
          * Creates a new queue Node containing the Object "data".
