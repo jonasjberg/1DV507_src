@@ -8,6 +8,7 @@ package js224eh_assign2.queue;
 
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public class LinkedQueue implements Queue
@@ -88,7 +89,7 @@ public class LinkedQueue implements Queue
     public Object dequeue()
     {
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("The queue is empty");
+            throw new NoSuchElementException("Queue underflow (is empty)");
         }
 
         Object returnValue = head.data;
