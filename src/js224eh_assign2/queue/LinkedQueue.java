@@ -117,7 +117,7 @@ public class LinkedQueue implements Queue
     public Object first()
     {
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("The queue is empty");
+            throw new NoSuchElementException("Queue underflow (is empty)");
         }
 
         return head.data;
@@ -132,7 +132,7 @@ public class LinkedQueue implements Queue
     public Object last()
     {
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("The queue is empty");
+            throw new NoSuchElementException("Queue underflow (is empty)");
         }
 
         return tail.data;
