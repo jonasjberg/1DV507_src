@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
+/**
+ * Class "LinkedQueue" is a implementation of a queue using a singly linked
+ * list, or the "head-and-tail" approach.
+ */
 public class LinkedQueue implements Queue
 {
     /* Number of elements in the queue. */

@@ -18,21 +18,63 @@ import java.util.Iterator;
 
 public interface Queue
 {
-    public int size();                     // current queue size
+    /**
+     * Gets the current size of the queue, I.E. the number of enqueued elements.
+     *
+     * @return The number of elements stored in this queue.
+     */
+    public int size();
 
-    public boolean isEmpty();              // true if queue is empty
+    /**
+     * Returns whether the queue is empty or not.
+     *
+     * @return True if this queue is empty, otherwise False.
+     */
+    public boolean isEmpty();
 
-    public void enqueue(Object element);   // add element at end of queue
+    /**
+     * Adds an element to the queue. The element is added to the back of
+     * the queue; FIFO -- First In First Out.
+     *
+     * @param element The element to add to this queue.
+     */
+    public void enqueue(Object element);
 
-    public Object dequeue();               // return and remove first element.
+    /**
+     * Removes an element from the queue. The element that was enqueued first
+     * is returned; FIFO -- First In First Out.
+     *
+     * @return The next element in line in this queue.
+     */
+    public Object dequeue();
 
-    public Object first();                 // return (without removing) first
-                                           // element
-    public Object last();                  // return (without removing) last
-                                           // element
-    public String toString();              // return a string representation
-                                           // of the queue content
-    public Iterator<Object> iterator();    // element iterator
+    /**
+     * Returns the first element of the queue, without removing it.
+     *
+     * @return The first element in this queue.
+     */
+    public Object first();
+
+    /**
+     * Returns the last element of the queue, without removing it.
+     *
+     * @return The last element in this queue.
+     */
+    public Object last();
+
+    /**
+     * Returns a human readable textual representation of the queue.
+     *
+     * @return A string representation of this queue.
+     */
+    public String toString();
+
+    /**
+     * Returns an element iterator for the queue.
+     *
+     * @return An element iterator for this queue.
+     */
+    public Iterator<Object> iterator();
 }
 
 /*
