@@ -11,6 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 
@@ -103,7 +106,7 @@ public class LinkedQueueTest
     @Test
     public void testLast() throws Exception
     {
-        queue.enqueue("object 1");
+        queue.enqueue("Object 1");
         assertEquals("Object 1", queue.last());
 
         queue.enqueue("Object 2");
@@ -123,12 +126,28 @@ public class LinkedQueueTest
         queue.enqueue("object 2");
         queue.enqueue("object 3");
 
-        // TODO: Implement ..
+        String expect = "[object 1] [object 2] [object 3] ";
+        assertEquals(expect, queue.toString());
     }
 
     @Test
     public void testIterator() throws Exception
     {
-        // TODO: Implement ..
+        Iterator<Object> iterator = queue.iterator();
+        assertFalse(iterator.hasNext());
+
+        boolean threwException = false;
+        try {
+            iterator.next();
+        } catch (NoSuchElementException e) {
+            threwException = true;
+        }
+        assertTrue(threwException);
+
+        queue.enqueue("Object 1");
+        iterator = queue.iterator();
+        assertTrue(iterator.hasNext());
+
+        assertEquals("Object 1", iterator.next());
     }
 }
