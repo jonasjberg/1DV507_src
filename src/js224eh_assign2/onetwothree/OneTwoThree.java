@@ -5,10 +5,13 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -60,28 +63,52 @@ public class OneTwoThree extends Application
          *    '---------------------------'
          */
 
+        VBox root = new VBox();
+
+        final Font font = Font.font("Mono", 18);
+
         Label labelOne = new Label("One");
+        labelOne.setFont(font);
+        labelOne.setTextFill(Color.rgb(255, 255, 255, 1));
+
+        DropShadow dsOne = new DropShadow();
+        dsOne.setOffsetX(2.0f);
+        dsOne.setOffsetY(2.0f);
+        // dsOne.setColor(Color.rgb(178, 34, 34, .988));
+        dsOne.setColor(Color.rgb(255, 34, 34, .988));
+        labelOne.setEffect(dsOne);
+
         BorderPane borderPaneTop = new BorderPane();
         borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
         borderPaneTop.setTop(labelOne);
+        borderPaneTop.setStyle("-fx-background-color: black;");
+        borderPaneTop.prefHeightProperty().bind(root.heightProperty().divide(3.0));
+        // circle.centerXProperty().bind(pane.widthProperty().divide(2.0));
 
         Label labelTwo = new Label("Two");
+        labelTwo.setFont(font);
+        // labelTwo.setStyle("-fx-color: black");
         BorderPane borderPaneMiddle = new BorderPane();
         borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
         borderPaneMiddle.setCenter(labelTwo);
+        borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
+        borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
         Label labelThree = new Label("Three");
+        labelThree.setFont(font);
+        // labelThree.setStyle("-fx-color: black");
         BorderPane borderPaneBottom = new BorderPane();
         borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
         borderPaneBottom.setBottom(labelThree);
+        borderPaneBottom.setStyle("-fx-background-color: ghostwhite;");
+        borderPaneBottom.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
-        VBox root = new VBox();
         root.setPadding(new Insets(10, 10, 10, 10));
         root.setSpacing(5.0);
         root.getChildren().addAll(borderPaneTop, borderPaneMiddle,
                                   borderPaneBottom);
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 320, 200);
         stage.setScene(scene);
         stage.show();
 
