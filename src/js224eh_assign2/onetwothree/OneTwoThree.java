@@ -2,9 +2,15 @@ package js224eh_assign2.onetwothree;
 
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 
 /**
@@ -20,9 +26,64 @@ public class OneTwoThree extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        VBox hboxTop    = new HBox();
-        VBox hboxMiddle = new HBox();
-        VBox hboxBottom = new HBox();
+/*        HBox hboxTop    = new HBox();
+        HBox hboxMiddle = new HBox();
+        HBox hboxBottom = new HBox();
+
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        gridPane.add(new Label("One"), 0, 0);
+        gridPane.add(new Label("Top Mid"), 1, 0);
+        gridPane.add(new Label("Top Right"), 2, 0);
+        gridPane.add(new Label("Mid Left"), 0, 1);
+        gridPane.add(new Label("Mid Mid"), 1, 1);
+        gridPane.add(new Label("Mid Right"), 2, 1);
+        gridPane.add(new Label("Bottom Left"), 0, 2);
+        gridPane.add(new Label("Bottom Mid"), 1, 2);
+        gridPane.add(new Label("Bottom Right"), 2, 2);
+
+        hboxTop.getChildren().add(gridPane);*/
+
+        /*
+         *  BorderPane
+         *     ___________________________
+         *    | (One)     Top             |
+         *    |---------------------------|
+         *    |      |            |       |
+         *    | Left |   Center   | Right |
+         *    |      |   (Two)    |       |
+         *    |---------------------------|
+         *    |          Bottom   (Three) |
+         *    '---------------------------'
+         */
+
+        Label labelOne = new Label("One");
+        BorderPane borderPaneTop = new BorderPane();
+        borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
+        borderPaneTop.setTop(labelOne);
+
+        Label labelTwo = new Label("Two");
+        BorderPane borderPaneMiddle = new BorderPane();
+        borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
+        borderPaneMiddle.setCenter(labelTwo);
+
+        Label labelThree = new Label("Three");
+        BorderPane borderPaneBottom = new BorderPane();
+        borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
+        borderPaneBottom.setBottom(labelThree);
+
+        VBox root = new VBox();
+        root.setPadding(new Insets(10, 10, 10, 10));
+        root.setSpacing(5.0);
+        root.getChildren().addAll(borderPaneTop, borderPaneMiddle,
+                                  borderPaneBottom);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
         /*
          *  BorderPane
@@ -56,11 +117,14 @@ public class OneTwoThree extends Application
          *    | Node |    Node    | Node  |    | HBox #2
          *    '---------------------------'  <-'
          *
+         *  Three of these will be placed in one HBox each.
+         *
          *
          *
          *
          *
          * */
+
 
 
     }
