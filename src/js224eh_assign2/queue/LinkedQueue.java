@@ -146,10 +146,20 @@ public class LinkedQueue implements Queue
     @java.lang.Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder("[ ");
+        StringBuilder sb = new StringBuilder();
 
+        Iterator<Object> iterator = iterator();
 
-        return sb.append("]").toString();
+        if (!iterator.hasNext()) {
+            sb.append("(empty)");
+        } else {
+            while (iterator.hasNext()) {
+                Object o = iterator.next();
+                sb.append("[").append(o).append("] ");
+            }
+        }
+
+        return sb.toString();
     }
 
     /**
