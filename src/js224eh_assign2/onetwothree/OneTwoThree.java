@@ -21,6 +21,11 @@ import javafx.scene.Scene;
  */
 public class OneTwoThree extends Application
 {
+    final String COLOR_BLUE = "#5588EE";
+    final String COLOR_GRAY = "#2B2B2B";
+    final String COLOR_WHITE = "#DBDBDB";
+    final String COLOR_RED = "#B22222";
+
     public static void main(String[] args)
     {
         launch(args);
@@ -29,85 +34,48 @@ public class OneTwoThree extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-/*        HBox hboxTop    = new HBox();
-        HBox hboxMiddle = new HBox();
-        HBox hboxBottom = new HBox();
-
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.setHgap(5);
-        gridPane.setVgap(5);
-
-        gridPane.add(new Label("One"), 0, 0);
-        gridPane.add(new Label("Top Mid"), 1, 0);
-        gridPane.add(new Label("Top Right"), 2, 0);
-        gridPane.add(new Label("Mid Left"), 0, 1);
-        gridPane.add(new Label("Mid Mid"), 1, 1);
-        gridPane.add(new Label("Mid Right"), 2, 1);
-        gridPane.add(new Label("Bottom Left"), 0, 2);
-        gridPane.add(new Label("Bottom Mid"), 1, 2);
-        gridPane.add(new Label("Bottom Right"), 2, 2);
-
-        hboxTop.getChildren().add(gridPane);*/
         // Top-level container which will hold three stacked BorderPanes.
         VBox root = new VBox();
 
-
-        // Label labelOne = new Label("One");
-        // labelOne.setFont(font);
-        // labelOne.setTextFill(Color.rgb(255, 255, 255, 1));
-
-        // DropShadow dsOne = new DropShadow();
-        // dsOne.setOffsetX(2.0f);
-        // dsOne.setOffsetY(2.0f);
-        // // dsOne.setColor(Color.rgb(178, 34, 34, .988));
-        // dsOne.setColor(Color.rgb(255, 34, 34, .988));
-        // labelOne.setEffect(dsOne);
-
-        //final Color COLOR_BLUE = Color.rgb(85, 136, 238, 1);
-        final String COLOR_BLUE = "#5588EE";
-        //final Color COLOR_GRAY = Color.web("#2B2B2B");
-        final String COLOR_GRAY = "#2B2B2B";
-        //final Color COLOR_WHITE = Color.rgb(219, 219, 219);
-        final String COLOR_WHITE = "#DBDBDB";
-        final String COLOR_RED = "#B22222";
-
+        // Create the first text label.
         Label labelOne = createTextLabel("One",
                                          Color.web(COLOR_WHITE),
                                          Color.web(COLOR_RED));
 
+        // Create the first of the three horizontal slices.
         BorderPane borderPaneTop = new BorderPane();
-        borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
         borderPaneTop.setTop(labelOne);
-        //borderPaneTop.setStyle("-fx-background-color: black;");
+        borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
         borderPaneTop.setStyle("-fx-background-color: " + COLOR_GRAY + ";");
-        borderPaneTop.prefHeightProperty().bind(root.heightProperty().divide(3.0));
-        // circle.centerXProperty().bind(pane.widthProperty().divide(2.0));
 
 
+        // Create the second text label.
         Label labelTwo = createTextLabel("Two",
                                          Color.web(COLOR_WHITE),
                                          Color.web(COLOR_GRAY));
 
+        // Create the second of the three horizontal slices.
         BorderPane borderPaneMiddle = new BorderPane();
-        borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
         borderPaneMiddle.setCenter(labelTwo);
-        //borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
+        borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
         borderPaneMiddle.setStyle("-fx-background-color: " + COLOR_RED + ";");
 
-        borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
-
-
+        // Create the third text label.
         Label labelThree = createTextLabel("Three",
                                            Color.web(COLOR_GRAY),
                                            Color.web(COLOR_RED));
-                                           //Color.rgb(0, 0, 0, 1),
-                                           //Color.rgb(0, 0, 0, 1));
 
+        // Create the third of the three horizontal slices.
         BorderPane borderPaneBottom = new BorderPane();
-        borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
         borderPaneBottom.setBottom(labelThree);
+        borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
         borderPaneBottom.setStyle("-fx-background-color: " + COLOR_WHITE + ";");
+
+        // Dynamically resize the BorderPanes to each take up one third of the
+        // total window height, I.E. continuously calculate and set the height
+        // of all three panes.
+        borderPaneTop.prefHeightProperty().bind(root.heightProperty().divide(3.0));
+        borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
         borderPaneBottom.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
         root.setPadding(new Insets(10, 10, 10, 10));
