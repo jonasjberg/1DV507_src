@@ -1,30 +1,31 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// 1DV507 -- Programming and Data Structures, VT2017
+// Assignment 2: Data Structures, JUnit, and JavaFX1
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Created by Jonas Sjöberg (js224eh) on 2017-02-11.
+
 package js224eh_assign2.onetwothree;
 
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 
 
-/**
- * Created by Jonas Sjöberg (js224eh) on 2017-02-11.
- */
 public class OneTwoThree extends Application
 {
-    final String COLOR_BLUE = "#5588EE";
-    final String COLOR_GRAY = "#2B2B2B";
+    final String COLOR_BLUE  = "#5588EE";
+    final String COLOR_GRAY  = "#2B2B2B";
     final String COLOR_WHITE = "#DBDBDB";
-    final String COLOR_RED = "#B22222";
+    final String COLOR_RED   = "#B22222";
 
     public static void main(String[] args)
     {
@@ -74,9 +75,12 @@ public class OneTwoThree extends Application
         // Dynamically resize the BorderPanes to each take up one third of the
         // total window height, I.E. continuously calculate and set the height
         // of all three panes.
-        borderPaneTop.prefHeightProperty().bind(root.heightProperty().divide(3.0));
-        borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
-        borderPaneBottom.prefHeightProperty().bind(root.heightProperty().divide(3.0));
+        borderPaneTop.prefHeightProperty().bind(
+                root.heightProperty().divide(3.0));
+        borderPaneMiddle.prefHeightProperty().bind(
+                root.heightProperty().divide(3.0));
+        borderPaneBottom.prefHeightProperty().bind(
+                root.heightProperty().divide(3.0));
 
         root.setPadding(new Insets(10, 10, 10, 10));
         root.setSpacing(5.0);
@@ -88,12 +92,21 @@ public class OneTwoThree extends Application
         stage.show();
     }
 
+    /**
+     * COnvenience method for creating a JavaFX text "Label" with a specified
+     * text color and dropshadow color.
+     *
+     * @param labelText   The text to use in the label.
+     * @param labelColor  The text color.
+     * @param shadowColor The shadow color.
+     * @return A JavaFX Label object.
+     */
     private Label createTextLabel(String labelText, Color labelColor,
                                   Color shadowColor)
     {
         final Font LABEL_FONT = Font.font("Mono", 18);
 
-        Label label = new Label(labelText);;
+        Label label = new Label(labelText);
 
         label.setFont(LABEL_FONT);
         label.setTextFill(labelColor);
