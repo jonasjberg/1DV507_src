@@ -111,48 +111,5 @@ public class OneTwoThree extends Application
         Scene scene = new Scene(root, 320, 200);
         stage.setScene(scene);
         stage.show();
-
-        /*
-         *  BorderPane
-         *     ___________________________
-         *    |           Top             |
-         *    |---------------------------|
-         *    |      |            |       |
-         *    | Left |   Center   | Right |
-         *    |      |            |       |
-         *    |---------------------------|
-         *    |          Bottom           |
-         *    '---------------------------'
-         *
-         *  HBox
-         *     ___________________________
-         *    |      |            |       |
-         *    | Node |    Node    | Node  |
-         *    |      |            |       |
-         *    '---------------------------'
-         *
-         *  Place one HBox in BorderPane "Top" and another HBox in BorderPane
-         *  "Bottom". This allows diagonal placement.
-         *
-         *    .---------------------------.  <-.
-         *    | Node |    Node    | Node  |    | HBox #1
-         *    |---------------------------|  <-'
-         *    |      |            |       |
-         *    | Left |   Center   | Right |
-         *    |      |            |       |
-         *    |---------------------------|  <-.
-         *    | Node |    Node    | Node  |    | HBox #2
-         *    '---------------------------'  <-'
-         *
-         *  Three of these will be placed in one HBox each.
-         *
-         *
-         *
-         *
-         *
-         * */
-
-
-
     }
 }
