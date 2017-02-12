@@ -49,20 +49,7 @@ public class OneTwoThree extends Application
         gridPane.add(new Label("Bottom Right"), 2, 2);
 
         hboxTop.getChildren().add(gridPane);*/
-
-        /*
-         *  BorderPane
-         *     ___________________________
-         *    | (One)     Top             |
-         *    |---------------------------|
-         *    |      |            |       |
-         *    | Left |   Center   | Right |
-         *    |      |   (Two)    |       |
-         *    |---------------------------|
-         *    |          Bottom   (Three) |
-         *    '---------------------------'
-         */
-
+        // Top-level container which will hold three stacked BorderPanes.
         VBox root = new VBox();
 
 
