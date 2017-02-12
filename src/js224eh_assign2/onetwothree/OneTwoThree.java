@@ -65,38 +65,49 @@ public class OneTwoThree extends Application
 
         VBox root = new VBox();
 
-        final Font font = Font.font("Mono", 18);
 
-        Label labelOne = new Label("One");
-        labelOne.setFont(font);
-        labelOne.setTextFill(Color.rgb(255, 255, 255, 1));
+        // Label labelOne = new Label("One");
+        // labelOne.setFont(font);
+        // labelOne.setTextFill(Color.rgb(255, 255, 255, 1));
 
-        DropShadow dsOne = new DropShadow();
-        dsOne.setOffsetX(2.0f);
-        dsOne.setOffsetY(2.0f);
-        // dsOne.setColor(Color.rgb(178, 34, 34, .988));
-        dsOne.setColor(Color.rgb(255, 34, 34, .988));
-        labelOne.setEffect(dsOne);
+        // DropShadow dsOne = new DropShadow();
+        // dsOne.setOffsetX(2.0f);
+        // dsOne.setOffsetY(2.0f);
+        // // dsOne.setColor(Color.rgb(178, 34, 34, .988));
+        // dsOne.setColor(Color.rgb(255, 34, 34, .988));
+        // labelOne.setEffect(dsOne);
+
+        final Color COLOR_BLUE = Color.rgb(85, 136, 238, 1);
+        //final Color COLOR_GRAY = Color.web("#2B2B2B");
+        final String COLOR_GRAY = "#2B2B2B";
+        final Color COLOR_WHITE = Color.rgb(219, 219, 219);
+
+        Label labelOne = createTextLabel("One", Color.web(COLOR_GRAY), Color.web(COLOR_GRAY));
 
         BorderPane borderPaneTop = new BorderPane();
         borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
         borderPaneTop.setTop(labelOne);
-        borderPaneTop.setStyle("-fx-background-color: black;");
+        //borderPaneTop.setStyle("-fx-background-color: black;");
+        borderPaneTop.setStyle("-fx-background-color: " + COLOR_GRAY + ";");
         borderPaneTop.prefHeightProperty().bind(root.heightProperty().divide(3.0));
         // circle.centerXProperty().bind(pane.widthProperty().divide(2.0));
 
-        Label labelTwo = new Label("Two");
-        labelTwo.setFont(font);
-        // labelTwo.setStyle("-fx-color: black");
+
+        Label labelTwo = createTextLabel("Two", COLOR_BLUE, COLOR_BLUE);
+
         BorderPane borderPaneMiddle = new BorderPane();
         borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
         borderPaneMiddle.setCenter(labelTwo);
+        //borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
         borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
+
         borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
-        Label labelThree = new Label("Three");
-        labelThree.setFont(font);
-        // labelThree.setStyle("-fx-color: black");
+
+        Label labelThree = createTextLabel("Three", COLOR_WHITE, COLOR_WHITE);
+                                           //Color.rgb(0, 0, 0, 1),
+                                           //Color.rgb(0, 0, 0, 1));
+
         BorderPane borderPaneBottom = new BorderPane();
         borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
         borderPaneBottom.setBottom(labelThree);
@@ -111,5 +122,23 @@ public class OneTwoThree extends Application
         Scene scene = new Scene(root, 320, 200);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private Label createTextLabel(String labelText, Color labelColor, Color shadowColor)
+    {
+        final Font LABEL_FONT = Font.font("Mono", 18);
+
+        Label label = new Label(labelText);;
+
+        label.setFont(LABEL_FONT);
+        label.setTextFill(labelColor);
+
+        DropShadow shadow = new DropShadow();
+        shadow.setOffsetX(2.0f);
+        shadow.setOffsetY(2.0f);
+        shadow.setColor(shadowColor);
+        label.setEffect(shadow);
+
+        return label;
     }
 }
