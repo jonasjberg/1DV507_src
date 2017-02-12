@@ -77,12 +77,17 @@ public class OneTwoThree extends Application
         // dsOne.setColor(Color.rgb(255, 34, 34, .988));
         // labelOne.setEffect(dsOne);
 
-        final Color COLOR_BLUE = Color.rgb(85, 136, 238, 1);
+        //final Color COLOR_BLUE = Color.rgb(85, 136, 238, 1);
+        final String COLOR_BLUE = "#5588EE";
         //final Color COLOR_GRAY = Color.web("#2B2B2B");
         final String COLOR_GRAY = "#2B2B2B";
-        final Color COLOR_WHITE = Color.rgb(219, 219, 219);
+        //final Color COLOR_WHITE = Color.rgb(219, 219, 219);
+        final String COLOR_WHITE = "#DBDBDB";
+        final String COLOR_RED = "#B22222";
 
-        Label labelOne = createTextLabel("One", Color.web(COLOR_GRAY), Color.web(COLOR_GRAY));
+        Label labelOne = createTextLabel("One",
+                                         Color.web(COLOR_WHITE),
+                                         Color.web(COLOR_RED));
 
         BorderPane borderPaneTop = new BorderPane();
         borderPaneTop.setAlignment(labelOne, Pos.TOP_LEFT);
@@ -93,25 +98,29 @@ public class OneTwoThree extends Application
         // circle.centerXProperty().bind(pane.widthProperty().divide(2.0));
 
 
-        Label labelTwo = createTextLabel("Two", COLOR_BLUE, COLOR_BLUE);
+        Label labelTwo = createTextLabel("Two",
+                                         Color.web(COLOR_WHITE),
+                                         Color.web(COLOR_GRAY));
 
         BorderPane borderPaneMiddle = new BorderPane();
         borderPaneMiddle.setAlignment(labelTwo, Pos.CENTER);
         borderPaneMiddle.setCenter(labelTwo);
         //borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
-        borderPaneMiddle.setStyle("-fx-background-color: #b22222;");
+        borderPaneMiddle.setStyle("-fx-background-color: " + COLOR_RED + ";");
 
         borderPaneMiddle.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
 
-        Label labelThree = createTextLabel("Three", COLOR_WHITE, COLOR_WHITE);
+        Label labelThree = createTextLabel("Three",
+                                           Color.web(COLOR_GRAY),
+                                           Color.web(COLOR_RED));
                                            //Color.rgb(0, 0, 0, 1),
                                            //Color.rgb(0, 0, 0, 1));
 
         BorderPane borderPaneBottom = new BorderPane();
         borderPaneBottom.setAlignment(labelThree, Pos.BOTTOM_RIGHT);
         borderPaneBottom.setBottom(labelThree);
-        borderPaneBottom.setStyle("-fx-background-color: ghostwhite;");
+        borderPaneBottom.setStyle("-fx-background-color: " + COLOR_WHITE + ";");
         borderPaneBottom.prefHeightProperty().bind(root.heightProperty().divide(3.0));
 
         root.setPadding(new Insets(10, 10, 10, 10));
@@ -124,7 +133,8 @@ public class OneTwoThree extends Application
         stage.show();
     }
 
-    private Label createTextLabel(String labelText, Color labelColor, Color shadowColor)
+    private Label createTextLabel(String labelText, Color labelColor,
+                                  Color shadowColor)
     {
         final Font LABEL_FONT = Font.font("Mono", 18);
 
