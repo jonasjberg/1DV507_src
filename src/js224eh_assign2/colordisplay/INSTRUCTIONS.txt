@@ -1,0 +1,24 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1DV507 -- Programming and Data Structures, VT2017
+Assignment 2: Data Structures, JUnit, and JavaFX1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Created by Jonas Sjöberg (js224eh) on 2017-02-13.
+
+
+Exercise 7
+===========
+Write a GUI program ColorDisplay.java. When the button ”Display Color” is
+pressed, three integers (red, green, blue) are read and the color of the upper
+pane is changed according to the values of the integers. Use three components of
+the type TextField to read the integers.
+The picture below shows how the execution of the program can look.
+
+_[program mockup]_
+
+If erroneous values of the integers are read, an error message should be printed
+and the upper pane should not be updated. The most important thing is that the
+program is working properly. It is also important for the program to have a good
+structure to make it easy to follow and to understand. Divide big methods and
+big classes into smaller ones, if necessary.
+
+

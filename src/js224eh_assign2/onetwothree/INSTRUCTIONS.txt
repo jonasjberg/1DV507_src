@@ -1,0 +1,18 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1DV507 -- Programming and Data Structures, VT2017
+Assignment 2: Data Structures, JUnit, and JavaFX1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Created by Jonas Sjöberg (js224eh) on 2017-02-13.
+
+
+Exercise 5
+==========
+Write a program OneTwoThree.java which creates a JavaFX Application window
+containing the following.
+
+1. Three panes with different colors.
+2. Each pane should contain a word: One, Two or Three.
+3. One should be placed in the upper left corner, Two should be placed in the
+   middle of the panel and Three in the lower right corner.
+
+Choose size and color of the panes to make it look nice.

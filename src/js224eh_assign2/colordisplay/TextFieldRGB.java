@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 
 /**
- * Custom class for entering RGB color values; integers 0-255.
+ * Custom class for entering RGB color values.
  */
 public class TextFieldRGB extends TextField
 {
