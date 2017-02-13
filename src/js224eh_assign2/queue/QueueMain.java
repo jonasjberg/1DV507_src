@@ -4,6 +4,8 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Created by Jonas Sjöberg (js224eh) on 2017-02-06.
 
+// Exercise 1
+
 package js224eh_assign2.queue;
 
 

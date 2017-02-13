@@ -4,6 +4,8 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Created by Jonas Sjöberg (js224eh) on 2017-02-06.
 
+// Exercise 1
+
 package js224eh_assign2.queue;
 
 
@@ -18,7 +20,7 @@ import java.util.NoSuchElementException;
 public class LinkedQueue implements Queue
 {
     /* Number of elements in the queue. */
-    private int  size;
+    private int size;
 
     /* The first element in the queue. */
     private Node head;
@@ -170,7 +172,8 @@ public class LinkedQueue implements Queue
     @Override
     public Iterator<Object> iterator()
     {
-        return new Iterator<Object>() {
+        return new Iterator<Object>()
+        {
             private Node current = head;
 
             @Override
