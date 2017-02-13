@@ -1,7 +1,14 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// 1DV507 -- Programming and Data Structures, VT2017
+// Assignment 2: Data Structures, JUnit, and JavaFX1
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Created by Jonas Sjöberg (js224eh) on 2017-02-13.
+
+// Exercise 7
+
 package js224eh_assign2.colordisplay;
 
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,12 +20,11 @@ import java.util.Random;
 
 
 /**
- * Created by Jonas Sjöberg (js224eh) on 2017-02-13.
+ * The main class for the ColorDisplay application.
  */
 public class ColorDisplay extends BorderPane
 {
     private Pane         topPane;
-    private Button       displayButton;
     private TextFieldRGB red;
     private TextFieldRGB green;
     private TextFieldRGB blue;
@@ -38,14 +44,12 @@ public class ColorDisplay extends BorderPane
         setCenter(createColorEntryPane());
 
         // Create and add the button to the lower region.
-        displayButton = new Button("Display Color");
+        Button displayButton = new Button("Display Color");
         setAlignment(displayButton, Pos.CENTER);
         setBottom(displayButton);
 
         // Setup event listener for displaying current RGB values.
-        displayButton.setOnAction((ActionEvent actionEvent) -> {
-            updateColorDisplay();
-        });
+        displayButton.setOnAction(e -> updateColorDisplay());
 
         /* Do an initial redraw at first launch. */
         updateColorDisplay();
@@ -68,13 +72,18 @@ public class ColorDisplay extends BorderPane
         topPane.setBackground(bg);
     }
 
+    /**
+     * Creates a GridPane for entering R, G, B values in custom text fields.
+     *
+     * @return A GridPane with the appropriate fields.
+     */
     private GridPane createColorEntryPane()
     {
         GridPane pane = new GridPane();
 
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(5));
-        pane.setHgap(5);
+        pane.setHgap(30);
         pane.setVgap(5);
 
         ColumnConstraints colCon = new ColumnConstraints(50, 100, 150);
@@ -83,6 +92,7 @@ public class ColorDisplay extends BorderPane
         // Default to randomized color value entries at startup.
         Random random = new Random();
 
+        // Create and add the text input fields.
         pane.add(new Label("Red"), 0, 0);
         red = new TextFieldRGB(random.nextInt(256));
         pane.add(red, 0, 1);
