@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.Random;
+
 
 /**
  * Created by Jonas Sjöberg (js224eh) on 2017-02-13.
@@ -19,19 +21,22 @@ import javafx.scene.text.FontWeight;
 public class ColorDisplay extends BorderPane
 {
     private Label     topLabel;
+    private Pane topPane;
     private Button    displayButton;
-    private TextField red;
-    private TextField green;
-    private TextField blue;
-
-    private int r, g, b;
+    private TextFieldRGB red;
+    private TextFieldRGB green;
+    private TextFieldRGB blue;
 
     public ColorDisplay()
     {
         topLabel = new Label("Color Display");
         topLabel.setFont(Font.font("Sans Serif", FontWeight.BOLD, 42));
         setAlignment(topLabel, Pos.CENTER);
-        setTop(topLabel);
+        //setTop(topLabel);
+
+        topPane = new Pane();
+        topPane.setPrefSize(640, 200);
+        setTop(topPane);
 
         setCenter(createColorEntryPane());
 
@@ -39,60 +44,26 @@ public class ColorDisplay extends BorderPane
         setAlignment(displayButton, Pos.CENTER);
         setBottom(displayButton);
 
-        setupTextFieldListeners(red, green, blue);
-
         /* Setup event listener that displays the current RGB values. */
         displayButton.setOnAction((ActionEvent actionEvent) -> {
-            r = Integer.parseInt(red.textProperty().getValue());
-            g = Integer.parseInt(red.textProperty().getValue());
-            b = Integer.parseInt(red.textProperty().getValue());
-
-            topLabel.setBackground(
-                    new Background(new BackgroundFill(Color.rgb(r, g, b, 1.0f),
-                                                      CornerRadii.EMPTY,
-                                                      Insets.EMPTY)));
-
-            //           topLabel.setStyle("-fx-background-color: " +
-            // COLOR_WHITE + ";");
+            updateColorDisplay();
         });
+
+        updateColorDisplay();
     }
 
-    /**
-     * Attaches listeners to the text fields.
-     *
-     * Logic for rejecting non-numeric entries is heavily inspired by the
-     * following post: http://stackoverflow.com/a/30796829
-     * Main thread:    http://stackoverflow
-     * .com/questions/7555564/what-is-the-recommended-way-to-make-a-numeric
-     * -textfield-in-javafx
-     */
-    private void setupTextFieldListeners(TextField... textFields)
+    private void updateColorDisplay()
     {
-        for (TextField textField : textFields) {
-            textField.textProperty().addListener(
-                    (observableValue, valueOld, valueNew) -> {
-                        // Regex matches zero or more digits.
-                        if (!valueNew.matches("\\d*")) {
-                            // Remove non-digits.
-                            textField.setText(
-                                    valueNew.replaceAll("[^\\d]", ""));
-                        } else {
-                            // Handle exceptions thrown by negative numbers,
-                            // etc.
-                            // Clamp the value to 0-255.
-                            try {
-                                int value = Integer.parseInt(valueNew);
-                                if (value < 0) {
-                                    value = 0;
-                                } else if (value > 255) {
-                                    value = 255;
-                                }
-                                textField.setText(String.valueOf(value));
-                            } catch (NumberFormatException e) {
-                            }
-                        }
-                    });
-        }
+        int r = red.getColorValue();
+        int g = green.getColorValue();
+        int b = blue.getColorValue();
+
+        System.out.printf("[DEBUG] Setting background to (RGB): %2d %2d %2d%n", r, g, b);
+        Background bg = new Background(new BackgroundFill(Color.rgb(r, g, b),
+                                                          new CornerRadii(0),
+                                                          new Insets(0)));
+        //topLabel.setBackground(bg);
+        topPane.setBackground(bg);
     }
 
     private GridPane createColorEntryPane()
@@ -107,16 +78,19 @@ public class ColorDisplay extends BorderPane
         ColumnConstraints colCon = new ColumnConstraints(50, 100, 150);
         pane.getColumnConstraints().addAll(colCon, colCon, colCon);
 
+        // Start with randomized color value entries.
+        Random random = new Random();
+
         pane.add(new Label("Red"), 0, 0);
-        red = new TextField();
+        red = new TextFieldRGB(String.valueOf(random.nextInt(256)));
         pane.add(red, 0, 1);
 
         pane.add(new Label("Green"), 1, 0);
-        green = new TextField();
+        green = new TextFieldRGB(String.valueOf(random.nextInt(256)));
         pane.add(green, 1, 1);
 
         pane.add(new Label("Blue"), 2, 0);
-        blue = new TextField();
+        blue = new TextFieldRGB(String.valueOf(random.nextInt(256)));
         pane.add(blue, 2, 1);
 
         return pane;
