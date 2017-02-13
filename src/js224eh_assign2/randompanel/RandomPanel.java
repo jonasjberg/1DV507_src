@@ -12,6 +12,7 @@ package js224eh_assign2.randompanel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -38,24 +39,26 @@ public class RandomPanel extends BorderPane
     private ObjectProperty<Font>
             fontTracking = new SimpleObjectProperty<>(Font.getDefault());
     private Button button;
-    private Text   randomNumber;
-    private Random random;
+    private Text   randomNumberText;
+    private Random rng;
 
     public RandomPanel()
     {
-        random = new Random();
+        rng = new Random();
+
+        // Add padding around all elements to window borders.
+        setPadding(new Insets(0, 0, 10, 0));
 
         /* Create the text that displays the randomized number. */
-        randomNumber = new Text("100");
-        setTop(randomNumber);
-        setAlignment(randomNumber, Pos.CENTER);
+        randomNumberText = new Text("100");
+        setTop(randomNumberText);
+        setAlignment(randomNumberText, Pos.CENTER);
 
         /* Bind the text font size to the size of this container. */
-        randomNumber.fontProperty().bind(fontTracking);
+        randomNumberText.fontProperty().bind(fontTracking);
         widthProperty().addListener(
                 (observableValue, oldWidth, newWidth) ->
                         fontTracking.set(Font.font(newWidth.doubleValue() / 2)));
-
 
         /* Create the button that triggers randomization. */
         button = new Button("New Random");
@@ -64,9 +67,9 @@ public class RandomPanel extends BorderPane
 
         /* Setup event listener that randomizes and displays a new number. */
         button.setOnAction((ActionEvent actionEvent) -> {
-            int n = random.nextInt((RANDOM_NUMBER_MAX - RANDOM_NUMBER_MIN + 1))
+            int n = rng.nextInt((RANDOM_NUMBER_MAX - RANDOM_NUMBER_MIN + 1))
                     + RANDOM_NUMBER_MIN;
-            randomNumber.setText(String.valueOf(n));
+            randomNumberText.setText(String.valueOf(n));
         });
     }
 }

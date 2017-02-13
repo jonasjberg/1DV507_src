@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 public class RandomMain extends Application
 {
+    final static int WINDOW_WIDTH = 300;
+    final static int WINDOW_HEIGHT = 220;
+
     public static void main(String[] args)
     {
         launch(args);
@@ -24,9 +27,9 @@ public class RandomMain extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        RandomPanel randomPanel = new RandomPanel();
-
-        Scene scene = new Scene(randomPanel, 300, 200);
+        Scene scene = new Scene(new RandomPanel(), WINDOW_WIDTH, WINDOW_HEIGHT);
+        stage.setMinWidth(WINDOW_WIDTH);
+        stage.setMinHeight(WINDOW_HEIGHT);
         stage.setTitle("1DV507 Assignment 2 -- Exercise 6");
         stage.setScene(scene);
         stage.show();
