@@ -11,10 +11,10 @@ public class TextFieldRGB extends TextField
 {
     private int colorValue;
 
-    public TextFieldRGB(String initalValue)
+    public TextFieldRGB(int initialValue)
     {
-        super(initalValue);
-        colorValue = Integer.parseInt(initalValue);
+        super();
+        setColorValue(clampValueToByte(initialValue));
 
         // Logic for rejecting non-numeric entries is heavily inspired by the
         // following post: http://stackoverflow.com/a/30796829
@@ -30,17 +30,10 @@ public class TextFieldRGB extends TextField
                         // clamp the value to the range 0-255.
                         try {
                             int value = Integer.parseInt(valueNew);
-                            if (value < 0) {
-                                value = 0;
-                            } else if (value > 255) {
-                                value = 255;
-                            }
-                            this.setText(String.valueOf(value));
-                            colorValue = value;
+                            setColorValue(clampValueToByte(value));
                         } catch (NumberFormatException e) {
                             // TODO: Print warning/error message ..
-                            this.setText("0");
-                            colorValue = 0;
+                            setColorValue(0);
                         }
                     }
                 });
@@ -50,5 +43,21 @@ public class TextFieldRGB extends TextField
     {
         return colorValue;
         // Integer.parseInt(this.textProperty().getValue());
+    }
+
+    private void setColorValue(int colorValue)
+    {
+        this.colorValue = colorValue;
+        this.setText(String.valueOf(colorValue));
+    }
+
+    private int clampValueToByte(int value)
+    {
+        if (value < 0) {
+            value = 0;
+        } else if (value > 255) {
+            value = 255;
+        }
+        return value;
     }
 }
