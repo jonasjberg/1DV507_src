@@ -26,7 +26,7 @@ public class RandomMain extends Application
     {
         RandomPanel randomPanel = new RandomPanel();
 
-        Scene scene = new Scene(randomPanel, 320, 200);
+        Scene scene = new Scene(randomPanel, 300, 200);
         stage.setTitle("1DV507 Assignment 2 -- Exercise 6");
         stage.setScene(scene);
         stage.show();

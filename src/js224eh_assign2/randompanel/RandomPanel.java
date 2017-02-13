@@ -21,39 +21,48 @@ import javafx.scene.text.Text;
 import java.util.Random;
 
 
+/**
+ * The "RandomPanel" class displays a simple UI that allows the user to click
+ * a button to display a random number within a predefined range.
+ */
 public class RandomPanel extends BorderPane
 {
+    /* Sets the range of possible numbers. */
     final private int RANDOM_NUMBER_MIN = 1;
     final private int RANDOM_NUMBER_MAX = 100;
 
+    /* Dynamic text resizing solution is based on the following:
+     *  - "JavaFX 8 Introduction by Example" 2nd Ed. Apress 2014. Chapter 6.
+     *  - "Learn JavaFX 8", 1st Ed. Apress 2015. Chapter 2.
+     */
+    private ObjectProperty<Font>
+            fontTracking = new SimpleObjectProperty<>(Font.getDefault());
     private Button button;
     private Text   randomNumber;
     private Random random;
-
-    private ObjectProperty<Font>
-            fontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
 
     public RandomPanel()
     {
         random = new Random();
 
-        /* Setup the text displaying the randomized number. */
-        randomNumber = new Text();
-        setBottom(randomNumber);
+        /* Create the text that displays the randomized number. */
+        randomNumber = new Text("100");
+        setTop(randomNumber);
         setAlignment(randomNumber, Pos.CENTER);
 
-        /* Bind font size to this containers size. */
+        /* Bind the text font size to the size of this container. */
         randomNumber.fontProperty().bind(fontTracking);
         widthProperty().addListener(
                 (observableValue, oldWidth, newWidth) ->
-                        fontTracking.set(Font.font(newWidth.doubleValue() / 4)));
+                        fontTracking.set(Font.font(newWidth.doubleValue() / 2)));
 
 
-        /* Setup the button that triggers randomization. */
+        /* Create the button that triggers randomization. */
         button = new Button("New Random");
-        setTop(button);
+        setBottom(button);
         setAlignment(button, Pos.CENTER);
 
+        /* Setup event listener that randomizes and displays a new number. */
         button.setOnAction((ActionEvent actionEvent) -> {
             int n = random.nextInt((RANDOM_NUMBER_MAX - RANDOM_NUMBER_MIN + 1))
                     + RANDOM_NUMBER_MIN;
