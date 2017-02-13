@@ -88,6 +88,7 @@ public class OneTwoThree extends Application
                                   borderPaneBottom);
 
         Scene scene = new Scene(root, 320, 200);
+        stage.setTitle("1DV507 Assignment 2 -- Exercise 5");
         stage.setScene(scene);
         stage.show();
     }
