@@ -4,6 +4,8 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Created by Jonas Sjöberg (js224eh) on 2017-02-11.
 
+// Exercise 5
+
 package js224eh_assign2.onetwothree;
 
 
@@ -22,7 +24,6 @@ import javafx.stage.Stage;
 
 public class OneTwoThree extends Application
 {
-    final String COLOR_BLUE  = "#5588EE";
     final String COLOR_GRAY  = "#2B2B2B";
     final String COLOR_WHITE = "#DBDBDB";
     final String COLOR_RED   = "#B22222";
