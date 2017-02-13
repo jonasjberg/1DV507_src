@@ -1,0 +1,16 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1DV507 -- Programming and Data Structures, VT2017
+Assignment 2: Data Structures, JUnit, and JavaFX1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Created by Jonas Sjöberg (js224eh) on 2017-02-13.
+
+
+Exercise 6
+==========
+Create a class RandomPanel (extends BorderPane) containing two panes.
+One of the panes should contain a button with the text New Random.
+When the button is pressed a random number in the interval 1-100 is
+generated and shown in the other pane. Try to change the size of the text
+so that the number 100 fills the pane.
+Also, write a test program RandomMain.java starting an Application
+containing a RandomPanel.
