@@ -2,7 +2,7 @@
 // 1DV507 -- Programming and Data Structures, VT2017
 // Assignment 3: Algorithms, Hashing/BSTs and GUI #2
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Created by Jonas Sjöberg (js224eh) on 2017-02-28.
+// Created by Jonas Sjöberg (js224eh) on 2017-03-01.
 
 // Exercise 2
 // ==========
@@ -37,24 +37,29 @@ package js224eh_assign3;
 
 import java.util.Comparator;
 
-/**
- * Created by jonas on 2017-03-01.
- */
+
 public class SortingAlgorithms {
 
     public int[] insertionSort(int[] in) {
+        // TODO: Implement insertionSort for integer arrays.
         return null;
     }
+
+    // VG Exercise
     public int[] mergeSort(int[] in) {
+        // TODO: Implement mergeSort for integer arrays.
         return null;
-    }        // VG Exercise
+    }
 
     public String[] insertionSort(String[] in, Comparator<String> c) {
+        // TODO: Implement insertionSort for string arrays.
         return null;
     }
 
+    // VG Exercise
     public String[] mergeSort(String[] in, Comparator<String> c) {
+        // TODO: Implement mergeSort for string arrays.
         return null;
-    }  // VG Exercise
+    }
 
 }
