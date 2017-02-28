@@ -26,23 +26,21 @@ package js224eh_assign3;
 
 import java.util.Scanner;
 
-/**
- * Created by jonas on 2017-02-28.
- */
+
 public class EuclideanMain {
 
     public static void main(String[] args) {
-        System.out.println("This program calculates the greatest common " +
-                           "divisor X of two positive integres, N and M; ");
-        System.out.println("X = GCD(M,N)");
+        System.out.println("This program calculates the greatest common ");
+        System.out.println("divisor X of two positive integres, N and M.");
         System.out.println();
 
-        int m = getPositiveIntegerFromUser("Enter the integer M: ");
-        int n = getPositiveIntegerFromUser("Enter the integer N: ");
+        int m = getPositiveIntegerFromUser("Enter the integer M");
+        int n = getPositiveIntegerFromUser("Enter the integer N");
+
         int x = getGreatestCommonDivisor(m, n);
 
         System.out.println();
-        System.out.printf("The greatest common divisor of %d and %d = %d%n",
+        System.out.printf("The greatest common divisor; GCD(%d,%d) = %d%n",
                           m, n, x);
     }
 
@@ -98,7 +96,6 @@ public class EuclideanMain {
             number = scan.nextInt();
         } while (number <= 0);
 
-        scan.close();
         return number;
     }
 }
