@@ -35,14 +35,39 @@
 
 package js224eh_assign3;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 
 public class SortingAlgorithms {
 
+    /**
+     * Sorts an array of integers with the "insertion sort" algorithm.
+     *
+     * This code is based on the example implementation in
+     * "Big Java, Late Objects" by C. Horstmann (Wiley, 2013), page 638.
+     *
+     * @param in The integer array to sort.
+     * @return A sorted copy of the integer array "in".
+     */
     public int[] insertionSort(int[] in) {
-        // TODO: Implement insertionSort for integer arrays.
-        return null;
+        int[] intArray = Arrays.copyOf(in, in.length);
+
+        for (int i = 1; i < intArray.length; i++) {
+            int next = intArray[i];
+
+            // Move all larger elements up.
+            int j = i;
+            while (j > 0 && intArray[j - 1] > next) {
+                intArray[j] = intArray[j - 1];
+                j--;
+            }
+
+            //  Insert the element.
+            intArray[j] = next;
+        }
+
+        return intArray;
     }
 
     // VG Exercise
