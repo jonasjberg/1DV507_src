@@ -12,6 +12,7 @@ package js224eh_assign3.count_words;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -47,12 +48,15 @@ public class TestWord
     {
         assertEquals("History", wordOne.toString());
         assertEquals("programming", wordTwo.toString());
+        assertEquals("history", wordThree.toString());
     }
 
     @Test
     public void testHashCode() throws Exception
     {
-        // TODO: Implement test (?)
+        assertEquals(-1703379821, wordOne.hashCode());
+        assertEquals(1011310840, wordTwo.hashCode());
+        assertEquals(926934195, wordThree.hashCode());
     }
 
     @Test
