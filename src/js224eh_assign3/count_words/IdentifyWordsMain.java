@@ -31,7 +31,7 @@
 //
 // All exceptions related to file handling shall be handled within the program.
 
-package js224eh_assign3.exercise3;
+package js224eh_assign3.count_words;
 
 
 import java.io.File;
@@ -44,10 +44,10 @@ public class IdentifyWordsMain
 {
     static final String SOURCE_TEXT_FILE_PATH =
             "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
-            "/js224eh_assign3/exercise3/HistoryOfProgramming.txt";
+            "/js224eh_assign3/count_words/HistoryOfProgramming.txt";
     static final String DEST_TEXT_FILE_PATH   =
             "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
-            "/js224eh_assign3/exercise3/words.txt";
+            "/js224eh_assign3/count_words/words.txt";
 
     public static void main(String[] args)
     {

@@ -141,4 +141,4 @@ local.properties
 *.orig
 
 # Generated test files
-src/js224eh_assign3/exercise3/words.txt
+src/js224eh_assign3/count_words/words.txt

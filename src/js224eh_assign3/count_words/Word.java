@@ -32,7 +32,7 @@
 // * Exercise 5 and onward is based on Exercise 4. Thus, carefully test all
 //   methods before proceeding.
 
-package js224eh_assign3.exercise3;
+package js224eh_assign3.count_words;
 
 
 /**

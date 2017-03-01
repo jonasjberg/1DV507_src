@@ -23,7 +23,7 @@
 //    WarAndPeace exercise in Assignment 2), we do not expect all of you to end
 //    up with exactly 350 words. But it should be rather close.
 
-package js224eh_assign3.exercise3;
+package js224eh_assign3.count_words;
 
 
 public class WordCount1Main
