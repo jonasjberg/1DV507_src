@@ -33,7 +33,7 @@
 //     clearly state in your assignments submission which implementation you
 //     have used. Provide a web site if you have taken it from the Internet.
 
-package js224eh_assign3;
+package js224eh_assign3.exercise2;
 
 import java.util.Arrays;
 import java.util.Comparator;

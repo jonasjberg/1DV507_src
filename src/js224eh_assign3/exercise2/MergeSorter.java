@@ -4,7 +4,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Created by Jonas Sjöberg (js224eh) on 2017-03-01.
 
-package js224eh_assign3;
+package js224eh_assign3.exercise2;
 
 
 /**
