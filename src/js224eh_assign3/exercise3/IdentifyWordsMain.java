@@ -31,13 +31,12 @@
 //
 // All exceptions related to file handling shall be handled within the program.
 
-
 package js224eh_assign3.exercise3;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 
@@ -46,25 +45,53 @@ public class IdentifyWordsMain
     static final String SOURCE_TEXT_FILE_PATH =
             "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
             "/js224eh_assign3/exercise3/HistoryOfProgramming.txt";
-    static final String DEST_TEXT_FILE_PATH =
+    static final String DEST_TEXT_FILE_PATH   =
             "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
             "/js224eh_assign3/exercise3/words.txt";
 
     public static void main(String[] args)
     {
-        String rawText = readTextFromFilePath(SOURCE_TEXT_FILE_PATH);
-        String textLetters = stripAllNonLetters(rawText);
-        writeTextToFilePath(textLetters, DEST_TEXT_FILE_PATH);
-
+        String textWords = readWordsFromFilePath(SOURCE_TEXT_FILE_PATH);
+        System.out.println(textWords);
+        writeTextToFilePath(textWords, DEST_TEXT_FILE_PATH);
     }
 
-    private static void writeTextToFilePath(String textLetters,
+    /**
+     * Writes a text string to a file on disk.
+     *
+     * @param text The text string to write.
+     * @param destTextFilePath The path to the written file.
+     */
+    private static void writeTextToFilePath(String text,
                                             String destTextFilePath)
     {
-        // TODO: Implement ..
+        if (text.isEmpty()) {
+            return;
+        }
+
+        PrintWriter output = null;
+        try {
+            output = new PrintWriter(destTextFilePath);
+            output.write(text);
+        } catch (FileNotFoundException e) {
+            System.err.printf("ERROR: %s%n", e.toString());
+        } finally {
+            if (output != null) {
+                output.close();
+            }
+        }
     }
 
-    private static String readTextFromFilePath(String sourcePath)
+    /**
+     * Reads words from a text file at a specified path.
+     *
+     * Only the letters A through Z and spaces are read, any other letters
+     * or symbols are ignored. Empty lines are also omitted.
+     *
+     * @param sourcePath The path of the file to read.
+     * @return The words in the specified file as a string.
+     */
+    private static String readWordsFromFilePath(String sourcePath)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -76,7 +103,7 @@ public class IdentifyWordsMain
 
             while (scan.hasNext()) {
                 String str = scan.nextLine();
-                
+
                 str = str.replaceAll("[^A-Za-z ]", "");
                 if (!str.isEmpty()) {
                     sb.append(str).append("\n");
