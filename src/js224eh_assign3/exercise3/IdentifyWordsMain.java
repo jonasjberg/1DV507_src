@@ -96,10 +96,8 @@ public class IdentifyWordsMain
         StringBuilder sb = new StringBuilder();
 
         Scanner scan = null;
-        File file;
         try {
-            file = new File(sourcePath);
-            scan = new Scanner(file);
+            scan = new Scanner(new File(sourcePath));
 
             while (scan.hasNext()) {
                 String str = scan.nextLine();
