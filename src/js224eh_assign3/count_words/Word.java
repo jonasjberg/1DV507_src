@@ -81,14 +81,20 @@ public class Word implements Comparable<Word>
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Word word1 = (Word) o;
-        return Objects.equals(word, word1.word);
+        return getNormalizedString().equals(word1.getNormalizedString());
     }
 
+    /**
+     * Compare this word against another word by doing a lexicographical
+     * comparison on the "normalized" versions; simply lower-cased for now.
+     * The 'String.compareTo()' method performs a lexicographical comparison
+     * by default.
+     */
     @Override
     public int compareTo(Word word)
     {
-        // TODO: Implement lexicographical comparison of two words.
         return word.getNormalizedString().compareTo(this.getNormalizedString());
     }
 }
