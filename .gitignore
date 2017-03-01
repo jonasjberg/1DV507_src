@@ -139,3 +139,6 @@ local.properties
 
 ### Git ###
 *.orig
+
+# Generated test files
+src/js224eh_assign3/exercise3/words.txt
