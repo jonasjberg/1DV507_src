@@ -35,6 +35,12 @@
 package js224eh_assign3.exercise3;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+
 public class IdentifyWordsMain
 {
     static final String SOURCE_TEXT_FILE_PATH =
@@ -58,15 +64,32 @@ public class IdentifyWordsMain
         // TODO: Implement ..
     }
 
-    private static String stripAllNonLetters(String rawText)
+    private static String readTextFromFilePath(String sourcePath)
     {
-        // TODO: Implement ..
-        return null;
-    }
+        StringBuilder sb = new StringBuilder();
 
-    private static String readTextFromFilePath(String sourceTextFilePath)
-    {
-        // TODO: Implement ..
-        return null;
+        Scanner scan = null;
+        File file;
+        try {
+            file = new File(sourcePath);
+            scan = new Scanner(file);
+
+            while (scan.hasNext()) {
+                String str = scan.nextLine();
+                
+                str = str.replaceAll("[^A-Za-z ]", "");
+                if (!str.isEmpty()) {
+                    sb.append(str).append("\n");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.printf("ERROR: %s%n", e.toString());
+        } finally {
+            if (scan != null) {
+                scan.close();
+            }
+        }
+
+        return sb.toString();
     }
 }
