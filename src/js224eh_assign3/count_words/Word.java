@@ -35,6 +35,9 @@
 package js224eh_assign3.count_words;
 
 
+import java.util.Objects;
+
+
 /**
  * The class "Word" represents a word.
  */
@@ -42,35 +45,50 @@ public class Word implements Comparable<Word>
 {
     private String word;
 
+    /**
+     * Creates a new instance of the "Word" class.
+     *
+     * @param string This word as a text string.
+     */
     public Word(String string)
     {
-        // TODO: Implement.
+        word = string;
+    }
+
+    public String getNormalizedString()
+    {
+        return word.toLowerCase();
     }
 
     @Override
     public String toString()
     {
-        // TODO: Implement.
-        return null;
+        return word;
     }
 
-    /* Override Object methods. */
+    @Override
     public int hashCode()
     {
-        // TODO: Implement " ... compute a hash value for word"
-        return 0;
+        return Objects.hash(word);
     }
 
-    public boolean equals(Object other)
+    @Override
+    public boolean equals(Object o)
     {
-        // TODO: Implement " ... true if two words are equal"
-        return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Word word1 = (Word) o;
+        return Objects.equals(word, word1.word);
     }
 
     @Override
     public int compareTo(Word word)
     {
         // TODO: Implement lexicographical comparison of two words.
-        return 0;
+        return word.getNormalizedString().compareTo(this.getNormalizedString());
     }
 }
