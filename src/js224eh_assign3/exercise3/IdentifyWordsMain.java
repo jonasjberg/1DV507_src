@@ -37,8 +37,36 @@ package js224eh_assign3.exercise3;
 
 public class IdentifyWordsMain
 {
+    static final String SOURCE_TEXT_FILE_PATH =
+            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/js224eh_assign3/exercise3/HistoryOfProgramming.txt";
+    static final String DEST_TEXT_FILE_PATH =
+            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/js224eh_assign3/exercise3/words.txt";
+
     public static void main(String[] args)
     {
-        // TODO: Implement.
+        String rawText = readTextFromFilePath(SOURCE_TEXT_FILE_PATH);
+        String textLetters = stripAllNonLetters(rawText);
+        writeTextToFilePath(textLetters, DEST_TEXT_FILE_PATH);
+
+    }
+
+    private static void writeTextToFilePath(String textLetters,
+                                            String destTextFilePath)
+    {
+        // TODO: Implement ..
+    }
+
+    private static String stripAllNonLetters(String rawText)
+    {
+        // TODO: Implement ..
+        return null;
+    }
+
+    private static String readTextFromFilePath(String sourceTextFilePath)
+    {
+        // TODO: Implement ..
+        return null;
     }
 }
