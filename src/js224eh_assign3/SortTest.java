@@ -14,16 +14,24 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class SortTest {
-    private int[] unsortedIntArray = { 6, -7, 9, -12, -2, 5 };
-    private int[] sortedIntArray = { -12, -7, -2, 5, 6, 9 };
+    private final int[] TEST_ARRAY_1_PRE = { 6, -7, 9, -12, -2, 5 };
+    private final int[] TEST_ARRAY_1_POST = { -12, -7, -2, 5, 6, 9 };
+
+    private int[] unsortedIntArray;
+    private int[] sortedIntArray;
+
     SortingAlgorithms sortingAlgorithms;
 
     @Before
     public void setUp() throws Exception {
         sortingAlgorithms = new SortingAlgorithms();
+        unsortedIntArray = Arrays.copyOf(TEST_ARRAY_1_PRE, TEST_ARRAY_1_PRE.length);
+        sortedIntArray = Arrays.copyOf(TEST_ARRAY_1_POST, TEST_ARRAY_1_POST.length);
     }
 
     @After
@@ -38,9 +46,9 @@ public class SortTest {
     }
 
     @Test
-    @Ignore
     public void testIntMergeSort() throws Exception {
-        // TODO: Add integer merge sort test.
+        int[] actual = sortingAlgorithms.mergeSort(unsortedIntArray);
+        assertArrayEquals(sortedIntArray, actual);
     }
 
     @Test

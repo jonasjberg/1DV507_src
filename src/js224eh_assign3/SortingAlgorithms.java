@@ -70,9 +70,8 @@ public class SortingAlgorithms {
         return intArray;
     }
 
-    // VG Exercise
-
     /**
+     * (VG Exercise)
      * Sorts an array of integers with the "merge sort" algorithm.
      * <p>
      * This code is based on the example implementation in
@@ -85,65 +84,9 @@ public class SortingAlgorithms {
     public int[] mergeSort(int[] in) {
         int[] intArray = Arrays.copyOf(in, in.length);
 
-        if (intArray.length <= 1) {
-            return intArray;
-        }
-
-        int[] first = new int[intArray.length / 2];
-        int[] second = new int[intArray.length - first.length];
-
-        /* Copy the first half of "intArray" into "first",
-         * the second half into "second".
-         */
-        for (int i = 0; i < first.length; i++) {
-            first[i] = intArray[i];
-        }
-        for (int i = 0; i < second.length; i++) {
-            second[i] = intArray[first.length + i];
-        }
-
-        mergeSort(first);
-        mergeSort(second);
-
-        /* The below code was extracted from a class method with signature:
-         *     private void merge(int[] first, int[] second)
-         *
-         * Merges two sorted arrays into the array managed by this merge sorter.
-         */
-        int iFirst = 0;  // Next element to consider in the first array.
-        int iSecond = 0; // Next element to consider in the second array.
-        int j = 0;       // Next open position in "intArray".
-
-        /* As long as neither "iFirst" nor "iSecond" passed the end,
-         * move the smaller element into "intArray".
-         */
-        while (iFirst < first.length && iSecond < second.length) {
-            if (first[iFirst] < second[iSecond]) {
-                intArray[j] = first[iFirst];
-                iFirst++;
-            } else {
-                intArray[j] = second[iSecond];
-                iSecond++;
-            }
-
-            j++;
-        }
-
-        /* Note that only of of the two loops below copies entries (due to the fact that either "iFirst" or "iSecond" must have reached the end in order to get here) */
-        while (iFirst < first.length) {
-            intArray[j] = first[iFirst];
-            iFirst++;
-            j++;
-        }
-
-        /* Copy any remaining entries of the second half. */
-        while (iSecond < second.length) {
-            intArray[j] = second[iSecond];
-            iSecond++;
-            j++;
-        }
-
-        return intArray;
+        MergeSorter sorter = new MergeSorter(intArray);
+        sorter.sort();
+        return sorter.getA();
     }
 
     public String[] insertionSort(String[] in, Comparator<String> c) {
