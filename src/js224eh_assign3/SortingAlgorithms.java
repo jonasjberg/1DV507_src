@@ -82,11 +82,10 @@ public class SortingAlgorithms {
      * @return A sorted copy of the integer array "in".
      */
     public int[] mergeSort(int[] in) {
-        int[] intArray = Arrays.copyOf(in, in.length);
+        int[] inCopy = Arrays.copyOf(in, in.length);
 
-        MergeSorter sorter = new MergeSorter(intArray);
-        sorter.sort();
-        return sorter.getA();
+        MergeSorter.sort(inCopy);
+        return inCopy;
     }
 
     public String[] insertionSort(String[] in, Comparator<String> c) {

@@ -6,7 +6,6 @@
 
 package js224eh_assign3;
 
-import java.util.Arrays;
 
 /**
  * Sorts an array of integers with the "merge sort" algorithm.
@@ -18,24 +17,13 @@ import java.util.Arrays;
  * This class sorts an array, using the merge sort algorithm.
  */
 public class MergeSorter {
-    private int[] a;
 
     /**
-     * Constructs a merge sorter.
+     * Sorts an array, using the "merge sort" algorithm.
      *
-     * @param anArray The array to sort.
+     * @param a The integer array to sort.
      */
-    public MergeSorter(int[] anArray)
-    {
-        a = anArray;
-    }
-
-    public int[] getA()
-    {
-        return a;
-    }
-
-    public void sort()
+    public static void sort(int[] a)
     {
         if (a.length <= 1) {
             return;
@@ -44,9 +32,8 @@ public class MergeSorter {
         int[] first = new int[a.length / 2];
         int[] second = new int[a.length - first.length];
 
-        /* Copy the first half of "intArray" into "first",
-         * the second half into "second".
-         */
+        // Copy the first half of "intArray" into "first", then
+        // the second half into "second".
         for (int i = 0; i < first.length; i++) {
             first[i] = a[i];
         }
@@ -54,27 +41,25 @@ public class MergeSorter {
             second[i] = a[first.length + i];
         }
 
-        MergeSorter firstSorter = new MergeSorter(first);
-        MergeSorter secondSorter = new MergeSorter(second);
-        firstSorter.sort();
-        secondSorter.sort();
-        merge(first, second);
+        sort(first);
+        sort(second);
+        merge(first, second, a);
     }
 
     /**
-     * Merges two sorted arrays into the array managed by this merge sorter.
+     * Merges two sorted arrays into an array.
      *
      * @param first  The first sorted array.
      * @param second The second sorted array.
+     * @param a      The array into which to merge "first" and "second".
      */
-    private void merge(int[] first, int[] second) {
+    private static void merge(int[] first, int[] second, int[] a) {
         int iFirst = 0;  // Next element to consider in the first array.
         int iSecond = 0; // Next element to consider in the second array.
-        int j = 0;       // Next open position in "intArray".
+        int j = 0;       // Next open position in "a".
 
-        /* As long as neither "iFirst" nor "iSecond" passed the end,
-         * move the smaller element into "intArray".
-         */
+        // As long as neither "iFirst" nor "iSecond" passed the end,
+        // move the smaller element into "a".
         while (iFirst < first.length && iSecond < second.length) {
             if (first[iFirst] < second[iSecond]) {
                 a[j] = first[iFirst];
@@ -85,20 +70,22 @@ public class MergeSorter {
             }
 
             j++;
+        }
 
-            /* Note that only of of the two loops below copies entries (due to the fact that either "iFirst" or "iSecond" must have reached the end in order to get here) */
-            while (iFirst < first.length) {
-                a[j] = first[iFirst];
-                iFirst++;
-                j++;
-            }
+        // Note that only of of the two loops below copies entries (due to the
+        // fact that either "iFirst" or "iSecond" must have reached the end in
+        // order to get here)
+        while (iFirst < first.length) {
+            a[j] = first[iFirst];
+            iFirst++;
+            j++;
+        }
 
-            /* Copy any remaining entries of the second half. */
-            while (iSecond < second.length) {
-                a[j] = second[iSecond];
-                iSecond++;
-                j++;
-            }
+        // Copy any remaining entries of the second half.
+        while (iSecond < second.length) {
+            a[j] = second[iSecond];
+            iSecond++;
+            j++;
         }
     }
 }
