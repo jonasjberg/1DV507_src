@@ -76,6 +76,7 @@ public class SortingAlgorithms {
      * <p>
      * This code is based on the example implementation in
      * "Big Java, Late Objects 4th Edition" by C. Horstmann (Wiley, 2010), page 646.
+     * "Big Java, Late Objects ?th Edition" by C. Horstmann (Wiley, 2013), page 640.
      * Some of the comments are also lifted as-is, some with modifications.
      *
      * @param in The integer array to sort.
