@@ -30,7 +30,6 @@ public class TestWord
         wordOne = new Word("History");
         wordTwo = new Word("programming");
         wordThree = new Word("history");
-
     }
 
     @After
@@ -69,6 +68,9 @@ public class TestWord
     @Test
     public void testCompareTo() throws Exception
     {
-        // TODO: Implement test ..
+        assertEquals(8, wordOne.compareTo(wordTwo));
+        assertEquals(-8, wordTwo.compareTo(wordOne));
+        assertEquals(0, wordOne.compareTo(wordThree));
+        assertEquals(-8, wordTwo.compareTo(wordThree));
     }
 }
