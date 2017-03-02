@@ -60,6 +60,11 @@ public class Word implements Comparable<Word>
         return word.toLowerCase();
     }
 
+    public int size()
+    {
+        return word.length();
+    }
+
     @Override
     public String toString()
     {

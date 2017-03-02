@@ -29,7 +29,9 @@ package js224eh_assign3.count_words;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 
 public class WordCount1Main
@@ -49,17 +51,47 @@ public class WordCount1Main
         }
 
         // Create an empty list of "Word" objects.
-        ArrayList<Word> words = new ArrayList<>();
+        HashSet<Word> wordsHashSet = new HashSet<>();
+        TreeSet<Word> wordsTreeSet = new TreeSet<>();
 
         // Read words from a text file on disk, create "Word" objects and
         // add to the list of "Word" objects.
         ArrayList<String> rawWords = readWordsFromFilePath(textFilePath);
-        for (String w : rawWords) {
+        for (String str : rawWords) {
             // System.out.println(w);
-            words.add(new Word(w));
+            Word wordObject = new Word(str);
+            wordsHashSet.add(wordObject);
+            wordsTreeSet.add(wordObject);
         }
 
-        System.out.println(words);
+        System.out.printf("Using words from file:%n\"%s\"%n%n", textFilePath);
+
+        System.out.println("Size of resulting sets of Word objects:");
+        System.out.printf("  HashSet: %d%n", wordsHashSet.size());
+        System.out.printf("  TreeSet: %d%n", wordsTreeSet.size());
+
+
+        System.out.printf("%nIterating over the words in the TreeSet:%n");
+
+        final int MAX_LINE_LENGTH = 80;
+        int lineLength = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (Word word : wordsTreeSet) {
+            int wordLength = word.size();
+            if (lineLength + wordLength >= MAX_LINE_LENGTH) {
+                sb.append("\n");
+                lineLength = wordLength;
+            } else {
+                lineLength += wordLength;
+            }
+
+            sb.append(word).append(", ");
+        }
+
+        System.out.println(sb.append("\n").toString());
+        //System.out.println(wordsHashSet);
+        //System.out.println(wordsTreeSet);
     }
 
     /**
