@@ -10,6 +10,7 @@
 package js224eh_assign3.count_words;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
@@ -126,9 +127,44 @@ public class HashWordSet implements WordSet {
         return 0;
     }
 
+    /**
+     * Returns an element iterator for the queue.
+     *
+     * @return An element iterator for this queue.
+     */
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<Object> iterator()
+    {
+        return new Iterator<Object>()
+        {
+            // TODO: Implement iterator.
+
+            private Node current;
+
+            @Override
+            public boolean hasNext()
+            {
+                return false;
+            }
+
+            @Override
+            public Object next()
+            {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+
+                Object data = current.data;
+                current = current.next;
+                return data;
+            }
+
+            @Override
+            public void remove()
+            {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
     @Override
