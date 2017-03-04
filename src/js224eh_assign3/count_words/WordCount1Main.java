@@ -68,11 +68,11 @@ public class WordCount1Main
 
 
         System.out.printf("%nIterating over the words in the TreeSet:%n");
-        String treeSetText = prettyPrintText(wordsTreeSet);
+        String treeSetText = lineWrapWordSet(wordsTreeSet);
         System.out.println(treeSetText);
 
         System.out.printf("%nIterating over the words in the HashSet:%n");
-        String hashSetText = prettyPrintText(wordsHashSet);
+        String hashSetText = lineWrapWordSet(wordsHashSet);
         System.out.println(hashSetText);
     }
 
@@ -115,7 +115,14 @@ public class WordCount1Main
         return words;
     }
 
-    private static String prettyPrintText(Set<Word> wordSet)
+    /**
+     * Returns a string with words contained in a Set of words,
+     * wrapped at a maximum line length, 'MAX_LINE_LENGTH'.
+     *
+     * @param wordSet The Set of words to wrap and return.
+     * @return The given of words as a string wrapped at 'MAX_LINE_LENGTH'.
+     */
+    private static String lineWrapWordSet(Set<Word> wordSet)
     {
         final int MAX_LINE_LENGTH = 80;
         int lineLength = 0;
