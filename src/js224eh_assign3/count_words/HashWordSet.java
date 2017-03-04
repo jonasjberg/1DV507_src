@@ -13,8 +13,14 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
+/**
+ * This class borrows heavily from the 1DV507 Lecture #8 lecture notes 
+ * by Jonas Lundberg. Some parts are copied as-is or with only minor
+ * modifications.
+ */
 public class HashWordSet implements WordSet {
 
+    private int size;
     private Node[] buckets;
 
     /**
@@ -54,16 +60,17 @@ public class HashWordSet implements WordSet {
         node = new Node(word);
         node.next = buckets[pos];
         buckets[pos] = node;
-        sz++;
+        size++;
 
         /* Rehash if needed. */
-        if (sz == buckets.length) {
+        if (size == buckets.length) {
             rehash();
         }
     }
 
     private int getBucketNumber(Word word) {
-        /* Use hashCode() from String class, get absolute value and pass through simple hash function.. */
+        /* Use hashCode() from String class, get absolute value
+           and pass through simple hash function. */
         int hashCode = word.hashCode();
         if (hashCode < 0) {
             hashCode = -hashCode;
@@ -78,9 +85,9 @@ public class HashWordSet implements WordSet {
 
         /* Create a new, empty "buckets". */
         buckets = new Node[2 * temp.length];
+        size = 0;
 
         /* Insert old values into new buckets. */
-        int sz = 0;
         for (Node n : temp) {
             if (n == null) {
                 /* Empty bucket. */
