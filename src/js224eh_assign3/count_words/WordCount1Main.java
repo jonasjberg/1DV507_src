@@ -86,7 +86,7 @@ public class WordCount1Main
      * @param sourcePath The path of the file to read.
      * @return The words in the specified file as an ArrayList of strings.
      */
-    private static ArrayList<String> readWordsFromFilePath(String sourcePath)
+    public static ArrayList<String> readWordsFromFilePath(String sourcePath)
     {
         ArrayList<String> words = new ArrayList<>();
 
@@ -122,7 +122,7 @@ public class WordCount1Main
      * @param wordSet The Set of words to wrap and return.
      * @return The given of words as a string wrapped at 'MAX_LINE_LENGTH'.
      */
-    private static String lineWrapWordSet(Set<Word> wordSet)
+    public static String lineWrapWordSet(Set<Word> wordSet)
     {
         final int MAX_LINE_LENGTH = 80;
         int lineLength = 0;
