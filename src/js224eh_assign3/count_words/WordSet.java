@@ -4,7 +4,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Created by Jonas Sjöberg (js224eh) on 2017-03-04.
 
-package js224eh_assign3.wordset;
+package js224eh_assign3.count_words;
 
 import js224eh_assign3.count_words.Word;
 
