@@ -6,7 +6,7 @@
 
 // Exercise 2
 
-package js224eh_assign3.exercise2;
+package js224eh_assign3.sort;
 
 import org.junit.After;
 import org.junit.Before;

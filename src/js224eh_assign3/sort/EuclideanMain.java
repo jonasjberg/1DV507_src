@@ -22,7 +22,7 @@
 // In Swedish: Euklides algoritm
 
 
-package js224eh_assign3.exercise2;
+package js224eh_assign3.sort;
 
 import java.util.Scanner;
 
