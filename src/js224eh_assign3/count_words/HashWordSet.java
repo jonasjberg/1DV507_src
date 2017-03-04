@@ -15,14 +15,16 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 /**
- * This class borrows heavily from the 1DV507 Lecture #8 lecture notes 
+ * This class borrows heavily from the 1DV507 Lecture #8 lecture notes
  * by Jonas Lundberg. Some parts are copied as-is or with only minor
  * modifications.
  */
 public class HashWordSet implements WordSet {
 
+    private final int STARTING_SIZE = 8;
+
     private int size;
-    private Node[] buckets;
+    private Node[] buckets = new Node[STARTING_SIZE];
 
     /**
      * Private inner class "Node" represents a "bucket" in the hash set.
@@ -47,12 +49,13 @@ public class HashWordSet implements WordSet {
         /* First node in list. */
         Node node = buckets[pos];
 
+        /* Search the list in this bucket for a matching entry. */
         while (node != null) {
             if (node.data.equals(word)) {
-                /* Element found. */
+                /* Element found in the list at this bucket number. */
                 return;
             } else {
-                /* Next node in list. */
+                /* Point to the next node in the list. */
                 node = node.next;
             }
         }
@@ -124,7 +127,85 @@ public class HashWordSet implements WordSet {
 
     @Override
     public int size() {
-        return 0;
+        return size;
+    }
+
+    private class HashWordSetIterator implements Iterator<Word> {
+
+        private Node[] buckets;
+        private int currentBucket;
+        private int previousBucket;
+        private Node currentNode;
+        private Node previousNode;
+
+
+        public HashWordSetIterator() {
+            currentNode = null;
+            previousNode = null;
+            currentBucket = -1;
+            previousBucket = -1;
+        }
+
+        /**
+         * Determine if there are non-null entries in the hash set.
+         *
+         * @return True if the iterator has an additional element available.
+         */
+        @Override
+        public boolean hasNext() {
+            if (currentNode != null && currentNode.next != null) {
+                return true;
+            }
+
+            for (int b = currentBucket + 1; b < buckets.length; b++) {
+                if (buckets[b] != null) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public Word next() {
+            previousNode = currentNode;
+            previousBucket = currentBucket;
+
+            if (currentNode == null || currentNode.next == null) {
+                currentBucket++;
+
+                while (currentBucket < buckets.length && buckets[currentBucket] == null) {
+                    currentBucket++;
+                }
+
+                if (currentBucket < buckets.length) {
+                    currentNode = buckets[currentBucket];
+                } else {
+                    throw new NoSuchElementException();
+                }
+            } else {
+                currentNode = currentNode.next;
+            }
+
+            return currentNode.data;
+        }
+
+        @Override
+        public void remove() {
+            if (previousNode != null && previousNode.next == currentNode) {
+                previousNode.next = currentNode.next;
+            } else if (previousBucket < currentBucket) {
+                buckets[currentBucket] = currentNode.next;
+            } else {
+                throw new IllegalStateException();
+            }
+
+            currentNode = previousNode;
+            currentBucket = previousBucket;
+        }
+
+        // @Override
+        // public void forEachRemaining(Consumer<? super Word> action) { }
     }
 
     /**
@@ -133,38 +214,8 @@ public class HashWordSet implements WordSet {
      * @return An element iterator for this queue.
      */
     @Override
-    public Iterator<Object> iterator()
-    {
-        return new Iterator<Object>()
-        {
-            // TODO: Implement iterator.
-
-            private Node current;
-
-            @Override
-            public boolean hasNext()
-            {
-                return false;
-            }
-
-            @Override
-            public Object next()
-            {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-
-                Object data = current.data;
-                current = current.next;
-                return data;
-            }
-
-            @Override
-            public void remove()
-            {
-                throw new UnsupportedOperationException();
-            }
-        };
+    public Iterator iterator() {
+        return new HashWordSetIterator();
     }
 
     @Override
