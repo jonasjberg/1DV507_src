@@ -103,7 +103,7 @@ public class IdentifyWordsMain
             while (scan.hasNext()) {
                 String str = scan.nextLine();
 
-                str = str.replaceAll("[^A-Za-z \\n]", "");
+                str = str.replaceAll("[^A-Za-z ]", "");
                 if (!str.isEmpty()) {
                     sb.append(str).append("\n");
                 }

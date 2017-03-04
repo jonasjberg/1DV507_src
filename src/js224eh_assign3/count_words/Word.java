@@ -132,6 +132,6 @@ public class Word implements Comparable<Word>
     @Override
     public int compareTo(Word word)
     {
-        return word.getNormalizedString().compareTo(this.getNormalizedString());
+        return -word.getNormalizedString().compareTo(this.getNormalizedString());
     }
 }

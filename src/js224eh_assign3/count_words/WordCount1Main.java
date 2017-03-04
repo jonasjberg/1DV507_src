@@ -28,17 +28,14 @@ package js224eh_assign3.count_words;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 
 public class WordCount1Main
 {
     static final String DEFAULT_TEXT_FILE_PATH   =
-            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
-            "/js224eh_assign3/count_words/words.txt";
+            "/Users/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+                    "/js224eh_assign3/count_words/words.txt";
 
     public static void main(String[] args)
     {
@@ -58,7 +55,6 @@ public class WordCount1Main
         // add to the list of "Word" objects.
         ArrayList<String> rawWords = readWordsFromFilePath(textFilePath);
         for (String str : rawWords) {
-            // System.out.println(w);
             Word wordObject = new Word(str);
             wordsHashSet.add(wordObject);
             wordsTreeSet.add(wordObject);
@@ -72,26 +68,12 @@ public class WordCount1Main
 
 
         System.out.printf("%nIterating over the words in the TreeSet:%n");
+        String treeSetText = prettyPrintText(wordsTreeSet);
+        System.out.println(treeSetText);
 
-        final int MAX_LINE_LENGTH = 80;
-        int lineLength = 0;
-        StringBuilder sb = new StringBuilder();
-
-        for (Word word : wordsTreeSet) {
-            int wordLength = word.size();
-            if (lineLength + wordLength >= MAX_LINE_LENGTH) {
-                sb.append("\n");
-                lineLength = wordLength;
-            } else {
-                lineLength += wordLength;
-            }
-
-            sb.append(word).append(", ");
-        }
-
-        System.out.println(sb.append("\n").toString());
-        //System.out.println(wordsHashSet);
-        //System.out.println(wordsTreeSet);
+        System.out.printf("%nIterating over the words in the HashSet:%n");
+        String hashSetText = prettyPrintText(wordsHashSet);
+        System.out.println(hashSetText);
     }
 
     /**
@@ -132,4 +114,26 @@ public class WordCount1Main
 
         return words;
     }
+
+    private static String prettyPrintText(Set<Word> wordSet)
+    {
+        final int MAX_LINE_LENGTH = 80;
+        int lineLength = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (Word word : wordSet) {
+            int wordLength = word.size();
+            if (lineLength + wordLength >= MAX_LINE_LENGTH) {
+                sb.append("\n");
+                lineLength = wordLength;
+            } else {
+                lineLength += wordLength;
+            }
+
+            sb.append(word).append(", ");
+        }
+
+        return sb.append("\n").toString();
+    }
 }
+
