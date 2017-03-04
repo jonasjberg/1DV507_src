@@ -53,9 +53,14 @@ public class TestWord
     @Test
     public void testHashCode() throws Exception
     {
-        assertEquals(-1703379821, wordOne.hashCode());
-        assertEquals(1011310840, wordTwo.hashCode());
-        assertEquals(926934195, wordThree.hashCode());
+        Word w1 = new Word("History");
+        Word w2 = new Word("History");
+        Word w3 = new Word("history");
+        Word w4 = new Word("programming");
+
+        assertTrue(w1.hashCode() == w2.hashCode());
+        assertTrue(w1.hashCode() == w3.hashCode());
+        assertFalse(w1.hashCode() == w4.hashCode());
     }
 
     @Test

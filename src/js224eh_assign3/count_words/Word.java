@@ -74,7 +74,8 @@ public class Word implements Comparable<Word>
     @Override
     public int hashCode()
     {
-        return Objects.hash(word);
+        //return Objects.hash(word);
+        return this.getNormalizedString().hashCode();
     }
 
     @Override
