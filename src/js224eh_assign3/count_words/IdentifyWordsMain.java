@@ -43,10 +43,10 @@ import java.util.Scanner;
 public class IdentifyWordsMain
 {
     static final String SOURCE_TEXT_FILE_PATH =
-            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/Users/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
             "/js224eh_assign3/count_words/HistoryOfProgramming.txt";
     static final String DEST_TEXT_FILE_PATH   =
-            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/Users/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
             "/js224eh_assign3/count_words/words.txt";
 
     public static void main(String[] args)
@@ -75,6 +75,7 @@ public class IdentifyWordsMain
             output.write(text);
         } catch (FileNotFoundException e) {
             System.err.printf("ERROR: %s%n", e.toString());
+            System.exit(1);
         } finally {
             if (output != null) {
                 output.close();
@@ -102,13 +103,14 @@ public class IdentifyWordsMain
             while (scan.hasNext()) {
                 String str = scan.nextLine();
 
-                str = str.replaceAll("[^A-Za-z ]", "");
+                str = str.replaceAll("[^A-Za-z \\n]", "");
                 if (!str.isEmpty()) {
                     sb.append(str).append("\n");
                 }
             }
         } catch (FileNotFoundException e) {
             System.err.printf("ERROR: %s%n", e.toString());
+            System.exit(1);
         } finally {
             if (scan != null) {
                 scan.close();
