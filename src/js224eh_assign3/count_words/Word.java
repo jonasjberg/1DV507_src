@@ -55,22 +55,47 @@ public class Word implements Comparable<Word>
         word = string;
     }
 
+    /**
+     * Returns a "normalized" string; a cleanup version
+     *
+     * for simplified parsing, comparison and other operations.
+     * Simply lowers the letter case as-is, but could include character set
+     * decoding, ligature removal, umlaut removal etc.
+     *
+     * @return A normalized version of the string.
+     */
     public String getNormalizedString()
     {
         return word.toLowerCase();
     }
 
+    /**
+     * Returns the number of letters in the word.
+     *
+     * @return The number of letters in this word.
+     */
     public int size()
     {
         return word.length();
     }
 
+    /**
+     * Returns a human-readable string representation of the word.
+     *
+     * @return The Word state and date as a text string.
+     */
     @Override
     public String toString()
     {
         return word;
     }
 
+    /**
+     * Returns a hash sum that uniquely reflects the state and
+     * data stored in a Word-object.
+     *
+     * @return A hash sum for this word.
+     */
     @Override
     public int hashCode()
     {
@@ -78,6 +103,12 @@ public class Word implements Comparable<Word>
         return this.getNormalizedString().hashCode();
     }
 
+    /**
+     * Test a book and another object for equality.
+     *
+     * @param o The object to test against this book.
+     * @return True if the books are equal, otherwise False.
+     */
     @Override
     public boolean equals(Object o)
     {
