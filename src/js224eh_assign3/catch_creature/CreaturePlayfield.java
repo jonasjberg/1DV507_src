@@ -4,13 +4,6 @@ package js224eh_assign3.catch_creature;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.Group;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-
-import java.util.Random;
 
 
 /**
@@ -18,13 +11,9 @@ import java.util.Random;
  */
 public class CreaturePlayfield extends Pane
 {
-    private double playfieldWidth;
-    private double playfieldHeight;
-
-    private Image      creatureImage;
-    private ImageView  creatureImageView;
-    private DropShadow creatureDropShadow;
-    private Group      group;
+    public static double PLAYFIELD_WIDTH;
+    public static double PLAYFIELD_HEIGHT;
+    private Group        group;
 
     private Creature creature;
 
@@ -32,31 +21,16 @@ public class CreaturePlayfield extends Pane
 
     public CreaturePlayfield(double width, double height)
     {
-        playfieldWidth = width;
-        playfieldHeight = height;
-
-        try {
-            creatureImage = new Image(
-                    getClass().getResourceAsStream("creature.png"));
-        } catch (IllegalArgumentException e) {
-            System.out.printf("[ERROR] %s%n", e.toString());
-        }
-
-        creatureDropShadow = new DropShadow();
-        creatureDropShadow.setBlurType(BlurType.GAUSSIAN);
-        creatureDropShadow.setSpread(0.2f);
-        creatureDropShadow.setRadius(13f);
-        creatureDropShadow.setColor(Color.web("#B22222"));
-
-        creatureImageView = new ImageView(creatureImage);
-        creatureImageView.setEffect(creatureDropShadow);
-
-        group = new Group(creatureImageView);
+        PLAYFIELD_WIDTH = width;
+        PLAYFIELD_HEIGHT = height;
 
         creature = new Creature();
+        creature.randomizePosition();
+        group = new Group(creature.getImageView());
 
         score = 0;
-        randomizePosition();
+        getChildren().removeAll(getChildren());
+        getChildren().add(group);
         redraw();
     }
 
@@ -71,9 +45,8 @@ public class CreaturePlayfield extends Pane
         double mouseY = mouseEvent.getY();
 
         if (creature.checkMouseOverlap(mouseX, mouseY)) {
-            System.out.println("SCORE++");
             score++;
-            randomizePosition();
+            creature.randomizePosition();
             redraw();
         }
     }
@@ -83,26 +56,9 @@ public class CreaturePlayfield extends Pane
      */
     private void redraw()
     {
-        creatureImageView.setLayoutX(creature.getXpos());
-        creatureImageView.setLayoutY(creature.getYpos());
+        creature.redraw();
 
-        getChildren().removeAll(getChildren());
-        getChildren().add(group);
-    }
-
-    /**
-     * Randomizes new X,Y coordinates and updates the creature position to
-     * this random position.
-     */
-    private void randomizePosition()
-    {
-        Random rng = new Random();
-
-        double randomX = (rng.nextDouble() * playfieldWidth) - creature.SIZE / 2;
-        double randomY = (rng.nextDouble() * playfieldHeight) - creature.SIZE / 2;
-
-        System.out.printf("Randomized position: (%f,%f)%n", randomX, randomY);
-
-        creature.setPosition(randomX, randomY);
+        // getChildren().removeAll(getChildren());
+        // getChildren().add(group);
     }
 }

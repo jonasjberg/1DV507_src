@@ -20,6 +20,16 @@
 package js224eh_assign3.catch_creature;
 
 
+import javafx.scene.Node;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+
+import java.util.Random;
+
+
 public class Creature
 {
     final int SIZE = 100;
@@ -27,7 +37,28 @@ public class Creature
     private double xPos;
     private double yPos;
 
-    public Creature() { }
+    private Image      creatureImage;
+    private ImageView  creatureImageView;
+    private DropShadow creatureDropShadow;
+
+    public Creature()
+    {
+        try {
+            creatureImage = new Image(
+                    getClass().getResourceAsStream("creature.png"));
+        } catch (IllegalArgumentException e) {
+            System.out.printf("[ERROR] %s%n", e.toString());
+        }
+
+        creatureDropShadow = new DropShadow();
+        creatureDropShadow.setBlurType(BlurType.GAUSSIAN);
+        creatureDropShadow.setSpread(0.2f);
+        creatureDropShadow.setRadius(13f);
+        creatureDropShadow.setColor(Color.web("#B22222"));
+
+        creatureImageView = new ImageView(creatureImage);
+        creatureImageView.setEffect(creatureDropShadow);
+    }
 
     public void setPosition(double x, double y)
     {
@@ -49,8 +80,37 @@ public class Creature
     {
         if (((mouseX >= xPos) && (mouseX <= xPos + SIZE)) &&
             ((mouseY >= yPos) && (mouseY <= yPos + SIZE))) {
-                return true;
+            return true;
         }
         return false;
+    }
+
+    public Node getImageView()
+    {
+        return creatureImageView;
+    }
+
+    /**
+     * Randomizes new X,Y coordinates and updates the creature position to
+     * this random position.
+     */
+    public void randomizePosition()
+    {
+        Random rng = new Random();
+
+        double randomX = (rng.nextDouble() * CreaturePlayfield.PLAYFIELD_WIDTH) - SIZE / 2;
+        double randomY = (rng.nextDouble() * CreaturePlayfield.PLAYFIELD_HEIGHT) - SIZE / 2;
+
+        System.out.printf("Randomized position: (%f,%f)%n", randomX, randomY);
+        setPosition(randomX, randomY);
+    }
+
+    /**
+     * Redraw the creature.
+     */
+    public void redraw()
+    {
+        creatureImageView.setLayoutX(getXpos());
+        creatureImageView.setLayoutY(getYpos());
     }
 }
