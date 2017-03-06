@@ -26,14 +26,16 @@ import javafx.stage.Stage;
 
 public class UpDownMain extends Application
 {
+    final int WINDOWS_SIZE = 700;
+
     @Override
     public void start(Stage stage) throws Exception
     {
         stage.setTitle("1DV507 Assignment 3 -- UpDownPane");
 
-        UpDownPane playField = new UpDownPane(7);
+        UpDownPane playField = new UpDownPane(WINDOWS_SIZE / 100);
 
-        Scene scene = new Scene(playField, 700, 700);
+        Scene scene = new Scene(playField, WINDOWS_SIZE, WINDOWS_SIZE);
         scene.setOnKeyPressed(event -> playField.handleMovementEvent(event));
 
         stage.setScene(scene);

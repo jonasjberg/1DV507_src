@@ -20,6 +20,8 @@ package js224eh_assign3;
 
 
 import javafx.scene.Group;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -30,75 +32,102 @@ import javafx.scene.shape.Rectangle;
 
 public class UpDownPane extends GridPane
 {
+    private final int SMALLER_PANE_SIZE = 100;
+
     private int size;
     private int xPos;
     private int yPos;
+    private Image image;
+    private ImageView imageView;
+    private DropShadow dropShadow;
+    private Group group;
 
-    private final int SMALLER_PANE_SIZE = 100;
-
-    private Image image = new Image(
-            getClass().getResourceAsStream("UpDownImage.png"));
-    private ImageView imageView = new ImageView(image);
-    private Group group = new Group(imageView);
-
+    /**
+     * Instantiates a new UpDownPane with "size" number of panes;
+     * a grid of "size" x "size" rectangles.
+     *
+     * @param size The number of smaller panes in this UpDownPane.
+     */
     public UpDownPane(int size)
     {
         this.size = size;
         xPos = this.size / 2;
         yPos = this.size / 2;
 
+        image = new Image(getClass().getResourceAsStream("UpDownImage.png"));
+        imageView = new ImageView(image);
+
+        dropShadow = new DropShadow();
+        dropShadow.setBlurType(BlurType.GAUSSIAN);
+        dropShadow.setSpread(0.2f);
+        dropShadow.setRadius(13f);
+        dropShadow.setColor(Color.web("#B22222"));
+
+        group = new Group(imageView);
+        imageView.setEffect(dropShadow);
+
         renderState();
     }
 
-    private UpDownPane renderState()
+    /**
+     * Clears and redraws the pane to reflect the current position.
+     */
+    private void renderState()
     {
-        this.setStyle("-fx-background-color: firebrick");
+        getChildren().removeAll(getChildren());
+        setStyle("-fx-background-color: #2B2B2B");
 
+        /* Loop through all grid positions and place the group of the
+        *  image and drop shadow when at the current position, otherwise
+        *  place transparent rectangles to maintain alignment. */
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
 
                 if (xPos == i && yPos == j) {
-                    this.add(group, i, j);
+                    add(group, i, j);
 
                 } else {
                     Rectangle rectangle = new Rectangle();
                     rectangle.setWidth(SMALLER_PANE_SIZE);
                     rectangle.setHeight(SMALLER_PANE_SIZE);
-                    rectangle.setFill(Color.BLACK);
-                    this.add(rectangle, i, j);
+                    rectangle.setFill(Color.TRANSPARENT);
+                    add(rectangle, i, j);
                 }
             }
         }
-
-        return this;
     }
 
+    /**
+     * Handles a keyboard event.
+     *
+     * Tests which key was hit and updates the current position.
+     * Use either the arrow keys, Quake-style "WASD"-keys or Vi-style "hjkl".
+     *
+     * @param keyEvent The KeyEvent to handle.
+     */
     public void handleMovementEvent(KeyEvent keyEvent)
     {
+        /* Update current position. */
         switch (keyEvent.getCode()) {
             case LEFT:
             case H:
-                System.out.println("LEFT");
+            case A:
                 xPos -= 1;
-                keyEvent.consume();
                 break;
             case DOWN:
             case J:
-                System.out.println("DOWN");
-                keyEvent.consume();
+            case S:
                 yPos += 1;
                 break;
             case UP:
             case K:
-                System.out.println("UP");
-                keyEvent.consume();
+            case W:
                 yPos -= 1;
                 break;
             case RIGHT:
             case L:
-                System.out.println("RIGHT");
+            case D:
                 xPos += 1;
-                keyEvent.consume();
                 break;
             default:
                 break;
@@ -110,14 +139,13 @@ public class UpDownPane extends GridPane
         } else if (xPos == size) {
             xPos = 0;
         }
-
         if (yPos < 0) {
             yPos = size - 1;
         } else if (yPos == size) {
             yPos = 0;
         }
 
-        this.getChildren().removeAll(this.getChildren());
+        /* Clear and redraw all nodes. */
         renderState();
     }
 }
