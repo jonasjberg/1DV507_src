@@ -16,10 +16,7 @@ package js224eh_assign3.histogram_fx;
 
 
 import javafx.geometry.Insets;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -36,6 +33,7 @@ import java.util.Scanner;
 public class HistogramFXapp extends BorderPane
 {
     private BarChart barChart;
+    private PieChart pieChart;
     private Button   buttonBarChart;
     private Button   buttonPieChart;
     private Button   buttonOpenFile;
@@ -64,46 +62,46 @@ public class HistogramFXapp extends BorderPane
         setBottom(buttons);
 
 
+        /* TODO: Fix NullPointerExceptions when no file is selected. */
         buttonOpenFile.setOnAction(event -> {
-            useInputDataFile(openFileWithFileChooserDialog());
+            File f = openFileWithFileChooserDialog();
+            if (f != null) {
+                dataFile = f;
 
-            /* Calculate statistics from local file. */
-            statistics = calculateFileStatistics(dataFile);
-            displayBarChart("Bar Chart Stats for Data", statistics);
+                /* Calculate statistics from local file. */
+                statistics = calculateFileStatistics(dataFile);
+                displayBarChart("Bar Chart Stats for Data", statistics);
+            }
         });
 
         buttonBarChart.setOnAction(event -> {
-            displayBarChart("Bar Chart Stats for Data", statistics);
+            if (dataFile != null) {
+                displayBarChart("Bar Chart Stats for Data", statistics);
+            }
         });
 
         buttonPieChart.setOnAction(event -> {
-            displayPieChart("Pie Chart Stats for Data", statistics);
+            if (dataFile != null) {
+                displayPieChart("Pie Chart Stats for Data", statistics);
+            }
         });
     }
 
-    private void useInputDataFile(File file)
-    {
-        if (file == null || !file.exists()) {
-            HistogramFXapp.displayWarningMessage(
-                    "Invalid File", "Got NULL/non-existent File ..");
-        }
-        else if (!file.canRead()) {
-            HistogramFXapp.displayWarningMessage(
-                    "Unable to Read specified File!",
-                    "You might not have sufficient permissions to read the selected file.");
-        } else {
-            this.dataFile = file;
-        }
-    }
-
+    /**
+     * Opens a file selector dialog for the user to select a file.
+     * If the file passes simple verification, it becomes the current dataFile.
+     *
+     * @return A valid data input file.
+     */
     private File openFileWithFileChooserDialog()
     {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Data File to Visualize");
 
-        File file = fileChooser.showOpenDialog(stage);
         // File file = new File("/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src/js224eh_assign3/histogram_fx/histogram_data.txt");
-        if (file == null || !file.exists()) {
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (!file.exists()) {
             HistogramFXapp.displayWarningMessage(
                     "Invalid File", "Got NULL/non-existent File ..");
         }
@@ -111,11 +109,19 @@ public class HistogramFXapp extends BorderPane
             HistogramFXapp.displayWarningMessage(
                     "Unable to Read specified File!",
                     "You might not have sufficient permissions to read the selected file.");
+        } else if (file != null) {
+            return file;
         }
 
-        return file;
+        return null;
     }
 
+    /**
+     * Displays a popup warning message dialog box.
+     *
+     * @param header The text to display in the dialog box header.
+     * @param content The text to display as the dialog box content.
+     */
     public static void displayWarningMessage(String header, String content)
     {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -179,7 +185,13 @@ public class HistogramFXapp extends BorderPane
         return intervalNumberFrequency;
     }
 
-    public void displayBarChart(String name, int[] data)
+    /**
+     * Creates and displays a Bar Chart from an integer array.
+     *
+     * @param name A name to display with the Bar Chart.
+     * @param data Frequency distribution data as an integer array.
+     */
+    private void displayBarChart(String name, int[] data)
     {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Number");
@@ -192,9 +204,9 @@ public class HistogramFXapp extends BorderPane
 
         barChart = new BarChart(xAxis, yAxis);
 
-        final String[] xAxisLabels =
-                {"1-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70",
-                 "71-80", "81-90", "91-100"};
+        /* Hardcoded X-axis label .. */
+        final String[] xAxisLabels = {"1-10", "11-20", "21-30", "31-40",
+                 "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"};
 
         for (int i = 0; i < data.length; i++) {
             String category = xAxisLabels[i % 10];
@@ -205,34 +217,27 @@ public class HistogramFXapp extends BorderPane
         barChart.setPrefWidth(800);
 
         setTop(barChart);
+    }
 
-        /*
-        // Create and Customize Chart
-        CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
-                                                        .title("Histogram")
-                                                        .xAxisTitle("Number")
-                                                        .yAxisTitle("Frequency")
-                                                        .build();
-        chart.getStyler().setChartTitleVisible(false);
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
-        chart.getStyler().setMarkerSize(5);
+    /**
+     * Creates and displays a Pie Chart from an integer array.
+     *
+     * @param name A name to display with the Pie Chart.
+     * @param data Frequency distribution data as an integer array.
+     */
+    private void displayPieChart(String name, int[] data)
+    {
+        pieChart = new PieChart();
 
-        // Generate data
-        ArrayList yData = new ArrayList();
+        /* Hardcoded slice labels .. */
+        final String[] sliceLabels = {"1-10", "11-20", "21-30", "31-40",
+                 "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"};
+
         for (int i = 0; i < data.length; i++) {
-            yData.add((double) data[i]);
+            String category = sliceLabels[i % 10];
+            pieChart.getData().add(new PieChart.Data(category, data[i]));
         }
 
-        // Hardcoded xData does the job but != pretty ..
-        ArrayList<String> xData = new ArrayList<>(Arrays.asList(
-                new String[]{"1-10", "11-20", "21-30", "31-40", "41-50",
-                             "51-60", "61-70", "71-80", "81-90", "91-100"}));
-
-        chart.addSeries("Number Frequency for file \"" + fileName + "\"",
-                        xData, yData);
-
-        // Display plot
-        new SwingWrapper(chart).displayChart();
-        */
+        setTop(pieChart);
     }
 }

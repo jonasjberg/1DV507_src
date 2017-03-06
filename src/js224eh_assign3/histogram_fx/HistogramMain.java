@@ -17,10 +17,7 @@ package js224eh_assign3.histogram_fx;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 
 public class HistogramMain extends Application
@@ -37,8 +34,8 @@ public class HistogramMain extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-
         HistogramFXapp app = new HistogramFXapp(stage);
+
         Scene scene = new Scene(app, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         stage.setMinWidth(WINDOW_WIDTH);
