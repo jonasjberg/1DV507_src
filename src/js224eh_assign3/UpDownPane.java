@@ -85,14 +85,14 @@ public class UpDownPane extends GridPane
             case DOWN:
             case J:
                 System.out.println("DOWN");
-                yPos -= 1;
                 keyEvent.consume();
+                yPos += 1;
                 break;
             case UP:
             case K:
                 System.out.println("UP");
-                yPos += 1;
                 keyEvent.consume();
+                yPos -= 1;
                 break;
             case RIGHT:
             case L:
