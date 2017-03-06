@@ -55,7 +55,7 @@ public class UpDownPane extends GridPane
         this.setStyle("-fx-background-color: firebrick");
 
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j > size; j++) {
+            for (int j = 0; j < size; j++) {
 
                 if (xPos == i && yPos == j) {
                     this.add(group, i, j);
