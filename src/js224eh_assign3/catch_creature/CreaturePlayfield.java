@@ -54,9 +54,17 @@ public class CreaturePlayfield extends Pane
         group = new Group(creatureImageView);
 
         creature = new Creature();
+
         score = 0;
+        randomizePosition();
+        redraw();
     }
 
+    /**
+     * Handles left-click MouseEvents.
+     *
+     * @param mouseEvent The MouseEvent to handle.
+     */
     public void handleMouseEvent(MouseEvent mouseEvent)
     {
         double mouseX = mouseEvent.getX();
@@ -70,6 +78,9 @@ public class CreaturePlayfield extends Pane
         }
     }
 
+    /**
+     * Redraw the playfield.
+     */
     private void redraw()
     {
         creatureImageView.setLayoutX(creature.getXpos());
@@ -79,12 +90,16 @@ public class CreaturePlayfield extends Pane
         getChildren().add(group);
     }
 
+    /**
+     * Randomizes new X,Y coordinates and updates the creature position to
+     * this random position.
+     */
     private void randomizePosition()
     {
         Random rng = new Random();
 
-        double randomX = (rng.nextDouble() * playfieldWidth) - creature.SIZE;
-        double randomY = (rng.nextDouble() * playfieldHeight) - creature.SIZE;
+        double randomX = (rng.nextDouble() * playfieldWidth) - creature.SIZE / 2;
+        double randomY = (rng.nextDouble() * playfieldHeight) - creature.SIZE / 2;
 
         System.out.printf("Randomized position: (%f,%f)%n", randomX, randomY);
 

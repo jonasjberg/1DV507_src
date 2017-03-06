@@ -20,13 +20,6 @@
 package js224eh_assign3.catch_creature;
 
 
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-
-import java.util.Random;
-
-
 public class Creature
 {
     final int SIZE = 100;
@@ -34,9 +27,7 @@ public class Creature
     private double xPos;
     private double yPos;
 
-    public Creature()
-    {
-    }
+    public Creature() { }
 
     public void setPosition(double x, double y)
     {
