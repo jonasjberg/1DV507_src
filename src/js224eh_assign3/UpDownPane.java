@@ -19,8 +19,13 @@
 package js224eh_assign3;
 
 
+import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
 public class UpDownPane extends GridPane
@@ -29,31 +34,58 @@ public class UpDownPane extends GridPane
     private int xPos;
     private int yPos;
 
+    private final int SMALLER_PANE_SIZE = 100;
+
+    private Image image = new Image(
+            getClass().getResourceAsStream("UpDownImage.png"));
+    private ImageView imageView = new ImageView(image);
+    private Group group = new Group(imageView);
+
     public UpDownPane(int size)
     {
         this.size = size;
         xPos = this.size / 2;
         yPos = this.size / 2;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j > size; j++) {
+
+                if (xPos == i && yPos == j) {
+                    this.add(group, i, j);
+
+                } else {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.setWidth(SMALLER_PANE_SIZE);
+                    rectangle.setHeight(SMALLER_PANE_SIZE);
+                    rectangle.setFill(Color.BLACK);
+                    this.add(rectangle, i, j);
+                }
+            }
+        }
     }
 
-    public void handleMovementEvent(KeyEvent event)
+    public void handleMovementEvent(KeyEvent keyEvent)
     {
-        switch (event.getCode()) {
+        switch (keyEvent.getCode()) {
             case LEFT:
             case H:
                 xPos -= 1;
+                keyEvent.consume();
                 break;
             case DOWN:
             case J:
                 yPos -= 1;
+                keyEvent.consume();
                 break;
             case UP:
             case K:
                 yPos += 1;
+                keyEvent.consume();
                 break;
             case RIGHT:
             case L:
                 xPos += 1;
+                keyEvent.consume();
                 break;
             default:
                 break;
