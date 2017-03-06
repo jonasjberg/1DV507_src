@@ -20,94 +20,46 @@
 package js224eh_assign3.catch_creature;
 
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.jmx.MXNodeAlgorithm;
 import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 import java.util.Random;
 
 
 public class Creature
 {
-    private int        xPos;
-    private int        yPos;
-    private Image      image;
-    private ImageView  imageView;
-    private DropShadow dropShadow;
-    private Group      group;
+    final int SIZE = 100;
 
+    private double xPos;
+    private double yPos;
 
     public Creature()
     {
-        dropShadow = new DropShadow();
-        dropShadow.setBlurType(BlurType.GAUSSIAN);
-        dropShadow.setSpread(0.2f);
-        dropShadow.setRadius(13f);
-        dropShadow.setColor(Color.web("#B22222"));
-
-        image = new Image(getClass().getResourceAsStream("UpDownImage.png"));
-        imageView = new ImageView(image);
-        imageView.setEffect(dropShadow);
-
-        group = new Group(imageView);
-
-        randomizePosition();
-        // renderState();
     }
 
-    private void randomizePosition()
+    public void setPosition(double x, double y)
     {
-        Random rng = new Random();
-
-        // TODO: ..
+        xPos = x;
+        yPos = y;
     }
 
-    public boolean atMouseLocation()
+    public double getXpos()
     {
-        // TODO: ..
+        return xPos;
+    }
 
+    public double getYpos()
+    {
+        return yPos;
+    }
+
+    public boolean checkMouseOverlap(double mouseX, double mouseY)
+    {
+        if (((mouseX >= xPos) && (mouseX <= xPos + SIZE)) &&
+            ((mouseY >= yPos) && (mouseY <= yPos + SIZE))) {
+                return true;
+        }
         return false;
     }
-
-
-    /**
-     * @deprecated
-     * @param baseBounds
-     * @param baseTransform
-     */
-    @Override public BaseBounds impl_computeGeomBounds(BaseBounds baseBounds,
-                                                       BaseTransform baseTransform)
-    { return null; }
-
-    /**
-     * @deprecated
-     * @param v
-     * @param v1
-     */
-    @Override protected boolean impl_computeContains(double v, double v1)
-    { return false; }
-
-    /**
-     * @deprecated
-     * @param mxNodeAlgorithm
-     * @param mxNodeAlgorithmContext
-     */
-    @Override public Object impl_processMXNode(MXNodeAlgorithm mxNodeAlgorithm,
-                                               MXNodeAlgorithmContext mxNodeAlgorithmContext)
-    { return null; }
-
-    /**
-     * @deprecated
-     */
-    @Override protected NGNode impl_createPeer()
-    { return null; }
 }

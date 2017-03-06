@@ -22,7 +22,6 @@ package js224eh_assign3.catch_creature;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -36,10 +35,11 @@ public class CatchTheCreatureMain extends Application
     {
         stage.setTitle("1DV507 Assignment 3 -- Catch-the-Creature");
 
-        CreaturePlayfield playField = new CreaturePlayfield();
+        CreaturePlayfield playField = new CreaturePlayfield(WINDOW_WIDTH,
+                                                            WINDOW_HEIGHT);
 
         Scene scene = new Scene(playField, WINDOW_WIDTH, WINDOW_HEIGHT);
-        scene.setOnMouseClicked(event -> playField.handleMovementEvent(event));
+        scene.setOnMouseClicked(event -> playField.handleMouseEvent(event));
 
         stage.setScene(scene);
         stage.show();
