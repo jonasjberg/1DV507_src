@@ -42,6 +42,10 @@ public class HistogramMain extends Application
 
         //File file = fileChooser.showOpenDialog(stage);
         File file = new File("/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src/js224eh_assign3/histogram_fx/histogram_data.txt");
+        if (file == null || !file.exists()) {
+            HistogramFXapp.displayWarningMessage(
+                    "Invalid File", "Got NULL/non-existent File ..");
+        }
         if (!file.canRead()) {
             HistogramFXapp.displayWarningMessage(
                     "Unable to Read specified File!",

@@ -21,9 +21,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import org.knowm.xchart.CategoryChart;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,18 +35,47 @@ import java.util.Scanner;
 public class HistogramFXapp extends BorderPane
 {
     private BarChart barChart;
+    private Button   buttonBarChart;
+    private Button   buttonPieChart;
+    private Button   buttonOpenFile;
+    private HBox     buttons;
 
     public HistogramFXapp(File file)
     {
         // Add padding around all elements to window borders.
         setPadding(new Insets(15));
 
+        buttonBarChart = new Button("Display Bar Chart");
+        buttonPieChart = new Button("Display Pie Chart");
+        buttonOpenFile = new Button("Open File..");
+
+        buttons = new HBox(buttonBarChart,
+                           buttonPieChart,
+                           new Separator(),
+                           buttonOpenFile);
+        buttons.setPadding(new Insets(5));
+        buttons.setSpacing(10);
+        setBottom(buttons);
+
+        buttonOpenFile.setOnAction(event -> {
+
+        });
+
+        /* Calculate statistics from local file. */
         int[] stats = calculateFileStatistics(file);
-        // displayBarChart(file.getName().toString(), stats);
+
         displayBarChart("histogram_data.txt", stats);
+
     }
 
+    private File openFileWithFileChooserDialog()
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Data File to Visualize");
 
+        File file = fileChooser.showOpenDialog();
+
+    }
 
     public static void displayWarningMessage(String header, String content)
     {
@@ -57,67 +88,10 @@ public class HistogramFXapp extends BorderPane
         alert.showAndWait();
     }
 
-    public void displayBarChart(String name, int[] data)
-    {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Number");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Frequency");
-
-        XYChart.Series dataSeries = new XYChart.Series();
-        dataSeries.setName(name);
-
-        barChart = new BarChart(xAxis, yAxis);
-
-        final String[] xAxisLabels = {"1-10", "11-20", "21-30", "31-40", "41-50",
-                     "51-60", "61-70", "71-80", "81-90", "91-100"};
-
-        for (int i = 0; i < data.length; i++) {
-            String category = xAxisLabels[i % 10];
-            dataSeries.getData().add(new XYChart.Data(category, data[i]));
-        }
-        // dataSeries.getData().add(new XYChart.Data("1-10", 178));
-        // dataSeries.getData().add(new XYChart.Data("Desktop", 178));
-        // dataSeries.getData().add(new XYChart.Data("Phone", 65));
-        // dataSeries.getData().add(new XYChart.Data("Tablet", 23));
-
-        barChart.getData().add(dataSeries);
-
-        setTop(barChart);
-
-        /*
-        // Create and Customize Chart
-        CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
-                                                        .title("Histogram")
-                                                        .xAxisTitle("Number")
-                                                        .yAxisTitle("Frequency")
-                                                        .build();
-        chart.getStyler().setChartTitleVisible(false);
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
-        chart.getStyler().setMarkerSize(5);
-
-        // Generate data
-        ArrayList yData = new ArrayList();
-        for (int i = 0; i < data.length; i++) {
-            yData.add((double) data[i]);
-        }
-
-        // Hardcoded xData does the job but != pretty ..
-        ArrayList<String> xData = new ArrayList<>(Arrays.asList(
-                new String[]{"1-10", "11-20", "21-30", "31-40", "41-50",
-                             "51-60", "61-70", "71-80", "81-90", "91-100"}));
-
-        chart.addSeries("Number Frequency for file \"" + fileName + "\"",
-                        xData, yData);
-
-        // Display plot
-        new SwingWrapper(chart).displayChart();
-        */
-    }
-
     /**
      * Calculates the distribution of numbers in a specified file.
+     *
+     * NOTE (2017-03-06): This was copied AS-IS from Assignment #1.
      *
      * Based on code written for Lab #4 in the course 1DV506, 2017-01-07.
      * With the following modifications:
@@ -164,5 +138,62 @@ public class HistogramFXapp extends BorderPane
         scan.close();
 
         return intervalNumberFrequency;
+    }
+
+    public void displayBarChart(String name, int[] data)
+    {
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Number");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Frequency");
+
+        XYChart.Series dataSeries = new XYChart.Series();
+        dataSeries.setName(name);
+
+        barChart = new BarChart(xAxis, yAxis);
+
+        final String[] xAxisLabels =
+                {"1-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70",
+                 "71-80", "81-90", "91-100"};
+
+        for (int i = 0; i < data.length; i++) {
+            String category = xAxisLabels[i % 10];
+            dataSeries.getData().add(new XYChart.Data(category, data[i]));
+        }
+
+        barChart.getData().add(dataSeries);
+        barChart.setPrefWidth(800);
+
+        setTop(barChart);
+
+        /*
+        // Create and Customize Chart
+        CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
+                                                        .title("Histogram")
+                                                        .xAxisTitle("Number")
+                                                        .yAxisTitle("Frequency")
+                                                        .build();
+        chart.getStyler().setChartTitleVisible(false);
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
+        chart.getStyler().setMarkerSize(5);
+
+        // Generate data
+        ArrayList yData = new ArrayList();
+        for (int i = 0; i < data.length; i++) {
+            yData.add((double) data[i]);
+        }
+
+        // Hardcoded xData does the job but != pretty ..
+        ArrayList<String> xData = new ArrayList<>(Arrays.asList(
+                new String[]{"1-10", "11-20", "21-30", "31-40", "41-50",
+                             "51-60", "61-70", "71-80", "81-90", "91-100"}));
+
+        chart.addSeries("Number Frequency for file \"" + fileName + "\"",
+                        xData, yData);
+
+        // Display plot
+        new SwingWrapper(chart).displayChart();
+        */
     }
 }
