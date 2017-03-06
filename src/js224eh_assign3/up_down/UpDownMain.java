@@ -16,7 +16,7 @@
 // corresponding small panel in the bottom row). Also write a test program
 // UpDownMain.java, starting a window containing an UpDownPanel
 
-package js224eh_assign3;
+package js224eh_assign3.up_down;
 
 
 import javafx.application.Application;
