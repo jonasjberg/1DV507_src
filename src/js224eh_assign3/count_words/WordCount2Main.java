@@ -14,16 +14,16 @@ package js224eh_assign3.count_words;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeSet;
+import java.util.Iterator;
 
-import static js224eh_assign3.count_words.WordCount1Main.lineWrapWordSet;
 import static js224eh_assign3.count_words.WordCount1Main.readWordsFromFilePath;
 
-public class WordCount2Main {
-    static final String DEFAULT_TEXT_FILE_PATH   =
-            "/Users/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
-                    "/js224eh_assign3/count_words/words.txt";
+
+public class WordCount2Main
+{
+    static final String DEFAULT_TEXT_FILE_PATH =
+            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/js224eh_assign3/count_words/words.txt";
 
     public static void main(String[] args)
     {
@@ -37,8 +37,7 @@ public class WordCount2Main {
 
         // Create an empty list of "Word" objects.
         HashWordSet hashWordSet = new HashWordSet();
-        // TODO: Use TreeWordset below.
-        // TreeWordSet treeWordSet = new TreeWordSet();
+        TreeWordSet treeWordSet = new TreeWordSet();
 
         // Read words from a text file on disk, create "Word" objects and
         // add to the list of "Word" objects.
@@ -46,26 +45,23 @@ public class WordCount2Main {
         for (String str : rawWords) {
             Word wordObject = new Word(str);
             hashWordSet.add(wordObject);
-            // TODO: Use TreeWordset below.
-            // treeWordSet.add(wordObject);
+            treeWordSet.add(wordObject);
         }
 
         System.out.printf("Using words from file:%n\"%s\"%n%n", textFilePath);
 
         System.out.println("Size of resulting sets of Word objects:");
-        // TODO: Use TreeWordset below.
-        // System.out.printf("  TreeWordSet: %d%n", treeWordSet.size());
+        System.out.printf("  TreeWordSet: %d%n", treeWordSet.size());
         System.out.printf("  HashWordSet: %d%n", hashWordSet.size());
 
 
         System.out.printf("%nIterating over the words in the TreeSet:%n");
-        // TODO: Use TreeWordset below.
-        // String treeSetText = lineWrapWordSet(hashTreeSet);
-        // System.out.println(treeWordSet);
+        String treeWordText = lineWrapWordSet(treeWordSet);
+        System.out.println(treeWordText);
 
         System.out.printf("%nIterating over the words in the HashSet:%n");
-        String hashSetText = lineWrapWordSet(hashWordSet);
-        System.out.println(hashSetText);
+        String hashWordText = lineWrapWordSet(hashWordSet);
+        System.out.println(hashWordText);
     }
 
     /**
@@ -77,20 +73,25 @@ public class WordCount2Main {
      */
     public static String lineWrapWordSet(WordSet wordSet)
     {
-        final int MAX_LINE_LENGTH = 80;
-        int lineLength = 0;
-        StringBuilder sb = new StringBuilder();
+        final int     MAX_LINE_LENGTH = 80;
+        int           lineLength      = 0;
+        StringBuilder sb              = new StringBuilder();
 
-        for (Word word : wordSet) {
-            int wordLength = word.size();
+        Iterator<WordSet> it = wordSet.iterator();
+
+        while (it.hasNext()) {
+            Word w = (Word) it.next();
+            int wordLength = w.size();
+
             if (lineLength + wordLength >= MAX_LINE_LENGTH) {
                 sb.append("\n");
                 lineLength = wordLength;
+
             } else {
                 lineLength += wordLength;
             }
 
-            sb.append(word).append(", ");
+            sb.append(w).append(", ");
         }
 
         return sb.append("\n").toString();

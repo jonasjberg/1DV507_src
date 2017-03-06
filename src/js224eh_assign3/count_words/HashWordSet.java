@@ -72,6 +72,12 @@ public class HashWordSet implements WordSet {
         }
     }
 
+    /**
+     * Find the bucket number for a specific Word.
+     *
+     * @param word The word whose bucket to find.
+     * @return The bucket number for "word".
+     */
     private int getBucketNumber(Word word) {
         /* Use hashCode() from String class, get absolute value
            and pass through simple hash function. */
@@ -83,6 +89,10 @@ public class HashWordSet implements WordSet {
         return hashCode % buckets.length;
     }
 
+    /**
+     * Rehashes the set.
+     * Moves the current contents into a container that is twice as large.
+     */
     private void rehash() {
         /* Get a copy of the old "buckets". */
         Node[] temp = buckets;
@@ -157,8 +167,8 @@ public class HashWordSet implements WordSet {
                 return true;
             }
 
-            for (int b = currentBucket + 1; b < buckets.length; b++) {
-                if (buckets[b] != null) {
+            for (int i = currentBucket + 1; i < buckets.length; i++) {
+                if (buckets[i] != null) {
                     return true;
                 }
             }

@@ -34,7 +34,7 @@ import java.util.*;
 public class WordCount1Main
 {
     static final String DEFAULT_TEXT_FILE_PATH   =
-            "/Users/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
+            "/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src" +
                     "/js224eh_assign3/count_words/words.txt";
 
     public static void main(String[] args)
