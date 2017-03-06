@@ -37,8 +37,8 @@ public class Creature
 {
     final int SIZE = 100;
 
-    private double xPos;
-    private double yPos;
+    private double     xPos;
+    private double     yPos;
     private Image      creatureImage;
     private ImageView  creatureImageView;
     private DropShadow creatureDropShadow;
@@ -61,6 +61,7 @@ public class Creature
         creatureImageView = new ImageView(creatureImage);
         creatureImageView.setEffect(creatureDropShadow);
 
+        /* Used for continuously repositioning of the creature. */
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(750),
                 ae -> timedRandomizedPosition()));
@@ -101,7 +102,7 @@ public class Creature
     }
 
     /**
-     * Continously called by a Timer, returns early by random to make
+     * Continuously called by a Timer, returns early by random to make
      * things more interesting.
      */
     private void timedRandomizedPosition()
