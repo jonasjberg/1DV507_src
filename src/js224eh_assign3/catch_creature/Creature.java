@@ -20,15 +20,23 @@
 package js224eh_assign3.catch_creature;
 
 
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
 
 import java.util.Random;
 
+// TODO: Path movement is very buggy as-is!
 
 public class Creature
 {
@@ -37,9 +45,14 @@ public class Creature
     private double xPos;
     private double yPos;
 
+    private double newXpos;
+    private double newYpos;
+
     private Image      creatureImage;
     private ImageView  creatureImageView;
     private DropShadow creatureDropShadow;
+    private PathTransition pathTransition;
+    private Path path;
 
     public Creature()
     {
@@ -58,30 +71,57 @@ public class Creature
 
         creatureImageView = new ImageView(creatureImage);
         creatureImageView.setEffect(creatureDropShadow);
+
+        path = new Path();
+        pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.seconds(2));
+        pathTransition.setPath(path);
+        pathTransition.setNode(creatureImageView);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setCycleCount(Timeline.INDEFINITE);
+        pathTransition.setAutoReverse(false);
+
+        pathTransition.setOnFinished(actionEvent -> pathDone());
+
     }
 
-    public void setPosition(double x, double y)
+    private void pathDone()
     {
-        xPos = x;
-        yPos = y;
+        xPos = newXpos;
+        yPos = newYpos;
     }
 
-    public double getXpos()
+    private void setPosition(double x, double y)
     {
-        return xPos;
-    }
+        pathTransition.stop();
 
-    public double getYpos()
-    {
-        return yPos;
+        xPos = creatureImageView.getTranslateX();
+        yPos = creatureImageView.getTranslateX();
+
+        newXpos = x;
+        newYpos = y;
+
+        path = new Path();
+        path.getElements().add(new MoveTo(xPos, yPos));
+        path.getElements().add(new LineTo(newXpos, newYpos));
+
+        pathTransition.setPath(path);
+        pathTransition.play();
     }
 
     public boolean checkMouseOverlap(double mouseX, double mouseY)
     {
+        double xPos = creatureImageView.getTranslateX();
+        double yPos = creatureImageView.getTranslateY();
+
+        System.out.printf("Creature coords: (%f,%f) (%f,%f)%n", xPos, yPos, xPos + SIZE, yPos + SIZE);
+        System.out.printf("Mouse clicked at: (%f,%f)%n", mouseX, mouseY);
+
         if (((mouseX >= xPos) && (mouseX <= xPos + SIZE)) &&
             ((mouseY >= yPos) && (mouseY <= yPos + SIZE))) {
             return true;
         }
+
         return false;
     }
 
@@ -110,7 +150,7 @@ public class Creature
      */
     public void redraw()
     {
-        creatureImageView.setLayoutX(getXpos());
-        creatureImageView.setLayoutY(getYpos());
+        creatureImageView.setLayoutX(xPos);
+        creatureImageView.setLayoutY(yPos);
     }
 }
