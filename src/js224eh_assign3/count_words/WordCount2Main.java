@@ -77,6 +77,7 @@ public class WordCount2Main
         int           lineLength      = 0;
         StringBuilder sb              = new StringBuilder();
 
+        /* TODO: Look over this once more .. */
         Iterator<WordSet> it = wordSet.iterator();
 
         while (it.hasNext()) {

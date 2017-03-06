@@ -67,6 +67,14 @@ public class TreeWordSet implements WordSet
             data = word;
         }
 
+        /**
+         * Add a word to this node.
+         *
+         * Uses recursion to find a suitable spot in the tree where the given
+         * word is added.
+         *
+         * @param word The word to add.
+         */
         void add(Word word)
         {
             int comparisonResult = word.compareTo(data);
@@ -121,7 +129,11 @@ public class TreeWordSet implements WordSet
         }
     }
 
-
+    /**
+     * Inner iterator class return by 'iterator()'.
+     *
+     * Heavily inspired by this post: http://stackoverflow.com/a/17959135
+     */
     private class TreeWordSetIterator implements Iterator
     {
         private Stack<BST> stack = new Stack<>();
