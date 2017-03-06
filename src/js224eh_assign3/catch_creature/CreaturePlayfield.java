@@ -20,19 +20,20 @@
 package js224eh_assign3.catch_creature;
 
 
+import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.Group;
+import javafx.scene.text.Font;
 
 
-/**
- * Created by Jonas Sjöberg (js224eh) on 2017-03-06.
- */
 public class CreaturePlayfield extends Pane
 {
+    private final Font SCORE_FONT = Font.font("Mono", 42);
     public static double PLAYFIELD_WIDTH;
     public static double PLAYFIELD_HEIGHT;
-    private Group        group;
+    private       Group  group;
+    private       Label  scoreLabel;
 
     private Creature creature;
 
@@ -49,9 +50,11 @@ public class CreaturePlayfield extends Pane
         PLAYFIELD_WIDTH = width;
         PLAYFIELD_HEIGHT = height;
 
+        scoreLabel = new Label("Score: ");
+
         creature = new Creature();
         creature.randomizePosition();
-        group = new Group(creature.getImageView());
+        group = new Group(creature.getImageView(), scoreLabel);
 
         score = 0;
         getChildren().removeAll(getChildren());
@@ -82,8 +85,10 @@ public class CreaturePlayfield extends Pane
     private void redraw()
     {
         creature.redraw();
+        scoreLabel.setFont(SCORE_FONT);
+        scoreLabel.setText("Score: " + score);
 
-        // getChildren().removeAll(getChildren());
-        // getChildren().add(group);
+        getChildren().removeAll(getChildren());
+        getChildren().add(group);
     }
 }
