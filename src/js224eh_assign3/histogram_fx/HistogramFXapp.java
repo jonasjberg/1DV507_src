@@ -1,3 +1,17 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// 1DV507 -- Programming and Data Structures, VT2017
+// Assignment 3: Algorithms, Hashing/BSTs and GUI #2
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Created by Jonas Sjöberg (js224eh) on 2017-03-06.
+
+// Exercise 10
+// ===========
+// In Assignment 1 you used an external library XChart to present a bar and pie
+// chart for a set of numbers read from a file. Revisit this task but create a
+// graphical user interface that presents the numbers with one or more suitable
+// charts using JavaFX. The file should be opened using a file selector and a
+// suitable error message should be displayed if an error occurs.
+
 package js224eh_assign3.histogram_fx;
 
 
@@ -9,19 +23,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import org.knowm.xchart.CategoryChart;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
-/**
- * Created by Jonas Sjöberg (js224eh) on 2017-03-06.
- */
 public class HistogramFXapp extends BorderPane
 {
     private BarChart barChart;
-    private VBox     vbox;
 
     public HistogramFXapp(File file)
     {
@@ -59,19 +70,21 @@ public class HistogramFXapp extends BorderPane
 
         barChart = new BarChart(xAxis, yAxis);
 
-        // for (int i = 0; i < data.length; i++) {
-        //     dataSeries.getData().add(new XYChart.Data("1-10", 1));
-        // }
-        dataSeries.getData().add(new XYChart.Data("1-10", 178));
-        dataSeries.getData().add(new XYChart.Data("Desktop", 178));
-        dataSeries.getData().add(new XYChart.Data("Phone", 65));
-        dataSeries.getData().add(new XYChart.Data("Tablet", 23));
+        final String[] xAxisLabels = {"1-10", "11-20", "21-30", "31-40", "41-50",
+                     "51-60", "61-70", "71-80", "81-90", "91-100"};
+
+        for (int i = 0; i < data.length; i++) {
+            String category = xAxisLabels[i % 10];
+            dataSeries.getData().add(new XYChart.Data(category, data[i]));
+        }
+        // dataSeries.getData().add(new XYChart.Data("1-10", 178));
+        // dataSeries.getData().add(new XYChart.Data("Desktop", 178));
+        // dataSeries.getData().add(new XYChart.Data("Phone", 65));
+        // dataSeries.getData().add(new XYChart.Data("Tablet", 23));
 
         barChart.getData().add(dataSeries);
 
         setTop(barChart);
-
-        // vbox = new VBox(barChart);
 
         /*
         // Create and Customize Chart
