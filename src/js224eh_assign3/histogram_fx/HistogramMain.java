@@ -37,22 +37,8 @@ public class HistogramMain extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        //FileChooser fileChooser = new FileChooser();
-        //fileChooser.setTitle("Select Data to Visualize");
 
-        //File file = fileChooser.showOpenDialog(stage);
-        File file = new File("/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src/js224eh_assign3/histogram_fx/histogram_data.txt");
-        if (file == null || !file.exists()) {
-            HistogramFXapp.displayWarningMessage(
-                    "Invalid File", "Got NULL/non-existent File ..");
-        }
-        if (!file.canRead()) {
-            HistogramFXapp.displayWarningMessage(
-                    "Unable to Read specified File!",
-                    "You might not have sufficient permissions to read the selected file.");
-        }
-
-        HistogramFXapp app = new HistogramFXapp(file);
+        HistogramFXapp app = new HistogramFXapp(stage);
         Scene scene = new Scene(app, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         stage.setMinWidth(WINDOW_WIDTH);

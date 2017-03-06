@@ -26,6 +26,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,9 +40,14 @@ public class HistogramFXapp extends BorderPane
     private Button   buttonPieChart;
     private Button   buttonOpenFile;
     private HBox     buttons;
+    private Stage    stage;
+    private File     dataFile;
+    private int[]    statistics;
 
-    public HistogramFXapp(File file)
+    public HistogramFXapp(Stage stage)
     {
+        this.stage = stage;
+
         // Add padding around all elements to window borders.
         setPadding(new Insets(15));
 
@@ -57,15 +63,37 @@ public class HistogramFXapp extends BorderPane
         buttons.setSpacing(10);
         setBottom(buttons);
 
-        buttonOpenFile.setOnAction(event -> {
 
+        buttonOpenFile.setOnAction(event -> {
+            useInputDataFile(openFileWithFileChooserDialog());
+
+            /* Calculate statistics from local file. */
+            statistics = calculateFileStatistics(dataFile);
+            displayBarChart("Bar Chart Stats for Data", statistics);
         });
 
-        /* Calculate statistics from local file. */
-        int[] stats = calculateFileStatistics(file);
+        buttonBarChart.setOnAction(event -> {
+            displayBarChart("Bar Chart Stats for Data", statistics);
+        });
 
-        displayBarChart("histogram_data.txt", stats);
+        buttonPieChart.setOnAction(event -> {
+            displayPieChart("Pie Chart Stats for Data", statistics);
+        });
+    }
 
+    private void useInputDataFile(File file)
+    {
+        if (file == null || !file.exists()) {
+            HistogramFXapp.displayWarningMessage(
+                    "Invalid File", "Got NULL/non-existent File ..");
+        }
+        else if (!file.canRead()) {
+            HistogramFXapp.displayWarningMessage(
+                    "Unable to Read specified File!",
+                    "You might not have sufficient permissions to read the selected file.");
+        } else {
+            this.dataFile = file;
+        }
     }
 
     private File openFileWithFileChooserDialog()
@@ -73,8 +101,19 @@ public class HistogramFXapp extends BorderPane
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Data File to Visualize");
 
-        File file = fileChooser.showOpenDialog();
+        File file = fileChooser.showOpenDialog(stage);
+        // File file = new File("/home/jonas/LNU/1DV507_Datastrukturer/src/1DV507/src/js224eh_assign3/histogram_fx/histogram_data.txt");
+        if (file == null || !file.exists()) {
+            HistogramFXapp.displayWarningMessage(
+                    "Invalid File", "Got NULL/non-existent File ..");
+        }
+        else if (!file.canRead()) {
+            HistogramFXapp.displayWarningMessage(
+                    "Unable to Read specified File!",
+                    "You might not have sufficient permissions to read the selected file.");
+        }
 
+        return file;
     }
 
     public static void displayWarningMessage(String header, String content)
