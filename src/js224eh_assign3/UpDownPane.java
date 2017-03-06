@@ -47,6 +47,13 @@ public class UpDownPane extends GridPane
         xPos = this.size / 2;
         yPos = this.size / 2;
 
+        renderState();
+    }
+
+    private UpDownPane renderState()
+    {
+        this.setStyle("-fx-background-color: firebrick");
+
         for (int i = 0; i < size; i++) {
             for (int j = 0; j > size; j++) {
 
@@ -62,6 +69,8 @@ public class UpDownPane extends GridPane
                 }
             }
         }
+
+        return this;
     }
 
     public void handleMovementEvent(KeyEvent keyEvent)
@@ -69,21 +78,25 @@ public class UpDownPane extends GridPane
         switch (keyEvent.getCode()) {
             case LEFT:
             case H:
+                System.out.println("LEFT");
                 xPos -= 1;
                 keyEvent.consume();
                 break;
             case DOWN:
             case J:
+                System.out.println("DOWN");
                 yPos -= 1;
                 keyEvent.consume();
                 break;
             case UP:
             case K:
+                System.out.println("UP");
                 yPos += 1;
                 keyEvent.consume();
                 break;
             case RIGHT:
             case L:
+                System.out.println("RIGHT");
                 xPos += 1;
                 keyEvent.consume();
                 break;
@@ -103,5 +116,8 @@ public class UpDownPane extends GridPane
         } else if (yPos == size) {
             yPos = 0;
         }
+
+        this.getChildren().removeAll(this.getChildren());
+        renderState();
     }
 }
