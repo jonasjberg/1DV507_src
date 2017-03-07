@@ -19,6 +19,7 @@
 
 package js224eh_assign3.bounce;
 
+import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -26,8 +27,20 @@ import java.util.Random;
 
 public class Ball
 {
+    /* Both the visual representation and in parts the logic for the ball,
+       as the "Circle" object keeps track of position and other state. */
     private Circle circle;
 
+    /* Movement vectors/intertia/acceleration forces ..
+       Used to update the current position of the ball. */
+    private double dx, dy;
+
+    /**
+     * Creates a new instance of the 'Ball' class with a certain radius
+     * and a random color.
+     *
+     * @param radius The radius of this instance.
+     */
     public Ball(double radius)
     {
         if (radius <= 0) {
@@ -35,9 +48,32 @@ public class Ball
         }
 
         Random rng = new Random();
-
         Color randomColor = new Color(rng.nextDouble(), rng.nextDouble(),
                                       rng.nextDouble(), 0.0);
+
         circle = new Circle(radius, randomColor);
+    }
+
+    public void updateState()
+    {
+        circle.setLayoutX(circle.getLayoutX() + dx);
+        circle.setLayoutY(circle.getLayoutY() + dy);
+    }
+
+    public void checkBorderCollision(Bounds bounds)
+    {
+        // final Bounds bounds = canvas.getBoundsInLocal();
+
+        boolean atRightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
+        boolean atLeftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
+        boolean atBottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
+        boolean atTopBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
+
+        if (atRightBorder || atLeftBorder) {
+            dx *= -1;
+        }
+        if (atBottomBorder || atTopBorder) {
+            dy *= -1;
+        }
     }
 }
