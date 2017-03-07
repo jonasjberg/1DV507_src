@@ -47,9 +47,11 @@ public class BounceApp extends Pane {
 
         button = new Button("Add Ball");
         button.setOnAction(event -> {
-            ballManager.createNewBall();
+            // ballManager.createNewBall();
             // getChildren().removeAll(getChildren());
-            getChildren().addAll(ballManager.getBalls());
+            // getChildren().addAll(ballManager.getBalls());
+
+            getChildren().addAll(ballManager.createNewBall());
         });
 
         getChildren().addAll(button);

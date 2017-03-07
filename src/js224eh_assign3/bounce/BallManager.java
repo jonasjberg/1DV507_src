@@ -35,12 +35,14 @@ public class BallManager
         balls = new ArrayList<>();
     }
 
-    public void createNewBall()
+    public Ball createNewBall()
     {
         Random rng = new Random();
         double randomRadius = rng.nextDouble() * 20;
 
-        balls.add(new Ball(randomRadius));
+        Ball newBall = new Ball(randomRadius);
+        balls.add(newBall);
+        return newBall;
     }
 
     public ArrayList<Ball> getBalls()

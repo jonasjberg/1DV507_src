@@ -31,6 +31,8 @@ public class Ball extends Circle
        as the "Circle" object keeps track of position and other state. */
     //private Circle circle;
 
+    private final double INITIAL_VELOCITY = 10;
+
     /* Movement vectors/intertia/acceleration forces ..
        Used to update the current position of the ball. */
     private double dx, dy;
@@ -49,7 +51,10 @@ public class Ball extends Circle
 
         Random rng = new Random();
         Color randomColor = new Color(rng.nextDouble(), rng.nextDouble(),
-                                      rng.nextDouble(), 0.0);
+                                      rng.nextDouble(), 1.0);
+
+        dx = rng.nextDouble() * INITIAL_VELOCITY;
+        dy = rng.nextDouble() * INITIAL_VELOCITY;
 
         //circle = new Circle(radius, randomColor);
         setRadius(radius);
@@ -62,6 +67,7 @@ public class Ball extends Circle
         //  circle.setLayoutY(circle.getLayoutY() + dy);
         setLayoutX(getLayoutX() + dx);
         setLayoutY(getLayoutY() + dy);
+        System.out.printf("Ball position: (%f,%f)%n", getLayoutX(), getLayoutY());
     }
 
     public void checkBorderCollision(Bounds bounds)
