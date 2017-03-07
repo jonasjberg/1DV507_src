@@ -20,6 +20,43 @@
 package js224eh_assign3.bounce;
 
 
-public class SpriteManager
+import javafx.event.ActionEvent;
+import javafx.geometry.Bounds;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class BallManager
 {
+    private ArrayList<Ball> balls;
+
+    public BallManager()
+    {
+        balls = new ArrayList<>();
+    }
+
+    public void createNewBall()
+    {
+        Random rng = new Random();
+        double randomRadius = rng.nextDouble() * 20;
+
+        balls.add(new Ball(randomRadius));
+    }
+
+    public ArrayList<Ball> getBalls()
+    {
+        return balls;
+    }
+
+    public void updateState(ActionEvent event, Bounds bounds)
+    {
+        if (balls.isEmpty()) {
+            return;
+        }
+
+        for (Ball ball : balls) {
+            ball.updateState();
+            ball.checkBorderCollision(bounds);
+        }
+    }
 }

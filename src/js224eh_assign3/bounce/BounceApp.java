@@ -19,8 +19,39 @@
 
 package js224eh_assign3.bounce;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
-public class BounceApp extends Pane
-{
+public class BounceApp extends Pane {
+    private BallManager ballManager;
+    private Button button;
+
+    public BounceApp() {
+        ballManager = new BallManager();
+
+        final Timeline loop = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ballManager.updateState(event, getBoundsInLocal());
+            }
+        }));
+
+        loop.setCycleCount(Timeline.INDEFINITE);
+        loop.play();
+
+        button = new Button("Add Ball");
+        button.setOnAction(event -> {
+            ballManager.createNewBall();
+            // getChildren().removeAll(getChildren());
+            getChildren().addAll(ballManager.getBalls());
+        });
+
+        getChildren().addAll(button);
+    }
 }

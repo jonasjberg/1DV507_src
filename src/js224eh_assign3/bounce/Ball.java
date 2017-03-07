@@ -25,11 +25,11 @@ import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
-public class Ball
+public class Ball extends Circle
 {
     /* Both the visual representation and in parts the logic for the ball,
        as the "Circle" object keeps track of position and other state. */
-    private Circle circle;
+    //private Circle circle;
 
     /* Movement vectors/intertia/acceleration forces ..
        Used to update the current position of the ball. */
@@ -51,29 +51,35 @@ public class Ball
         Color randomColor = new Color(rng.nextDouble(), rng.nextDouble(),
                                       rng.nextDouble(), 0.0);
 
-        circle = new Circle(radius, randomColor);
+        //circle = new Circle(radius, randomColor);
+        setRadius(radius);
+        setFill(randomColor);
     }
 
     public void updateState()
     {
-        circle.setLayoutX(circle.getLayoutX() + dx);
-        circle.setLayoutY(circle.getLayoutY() + dy);
+        //  circle.setLayoutX(circle.getLayoutX() + dx);
+        //  circle.setLayoutY(circle.getLayoutY() + dy);
+        setLayoutX(getLayoutX() + dx);
+        setLayoutY(getLayoutY() + dy);
     }
 
     public void checkBorderCollision(Bounds bounds)
     {
-        // final Bounds bounds = canvas.getBoundsInLocal();
+        // double xPos = circle.getLayoutX();
+        // double yPos = circle.getLayoutY();
+        // double radius = circle.getRadius();
+        double xPos = getLayoutX();
+        double yPos = getLayoutY();
+        double radius = getRadius();
 
-        boolean atRightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
-        boolean atLeftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
-        boolean atBottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
-        boolean atTopBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
 
-        if (atRightBorder || atLeftBorder) {
-            dx *= -1;
-        }
-        if (atBottomBorder || atTopBorder) {
-            dy *= -1;
-        }
+        boolean atRightBorder  = xPos >= (bounds.getMaxX() - radius);
+        boolean atLeftBorder   = xPos <= (bounds.getMinX() + radius);
+        boolean atBottomBorder = yPos >= (bounds.getMaxY() - radius);
+        boolean atTopBorder    = yPos <= (bounds.getMinY() + radius);
+
+        if (atRightBorder  || atLeftBorder) { dx *= -1; }
+        if (atBottomBorder || atTopBorder)  { dy *= -1; }
     }
 }
