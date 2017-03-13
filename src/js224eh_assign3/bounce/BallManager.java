@@ -29,10 +29,12 @@ import java.util.Random;
 public class BallManager
 {
     private ArrayList<Ball> balls;
+    private ArrayList<Particle> particles;
 
     public BallManager()
     {
         balls = new ArrayList<>();
+        particles = new ArrayList<>();
     }
 
     public Ball createNewBall()
@@ -43,6 +45,11 @@ public class BallManager
         Ball newBall = new Ball(randomRadius);
         balls.add(newBall);
         return newBall;
+    }
+
+    public void addParticle(double x, double y)
+    {
+
     }
 
     public ArrayList<Ball> getBalls()
@@ -56,9 +63,44 @@ public class BallManager
             return;
         }
 
+        /* Keep a list of balls left to check for collisions with other balls.
+         * If a ball in this list is tested against all other balls, and no collision
+         * is detected, the ball is removed from the list.
+         *
+         * TODO: Implement above algorithm.
+         * For every ball in the set
+         *     Compare to all other balls in the set
+         *         If no collisions was found, remove from set.
+         */
+
+        ArrayList<Ball> ballsToCollisionCheck = (ArrayList<Ball>) balls.clone();
+
+        for (Ball ball1 : balls) {
+            for (Ball ball2 : balls) {
+                if (ball1.equals(ball2)) {
+                    continue;
+                }
+
+                if (ball1.collidesWith(ball2)) {
+                    ball1.bounce();
+                    ball2.bounce();
+                }
+            }
+        }
+
         for (Ball ball : balls) {
-            ball.updateState();
             ball.checkBorderCollision(bounds);
+            ball.updateState();
+        }
+
+        if (!particles.isEmpty()) {
+            for (Particle particle : particles) {
+                if (particle.shouldRemove()) {
+                    particles.remove(particle);
+                } else {
+                    particle.updateState();
+                }
+            }
         }
     }
 }

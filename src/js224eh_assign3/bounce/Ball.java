@@ -23,6 +23,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ball extends Circle
@@ -33,9 +34,14 @@ public class Ball extends Circle
 
     private final double INITIAL_VELOCITY = 10;
 
+    /* Used to randomize initial state. */
+    protected final Random rng = new Random();
+
     /* Movement vectors/intertia/acceleration forces ..
        Used to update the current position of the ball. */
-    private double dx, dy;
+    protected double dx, dy;
+
+    protected Color randomColor;
 
     /**
      * Creates a new instance of the 'Ball' class with a certain radius
@@ -49,9 +55,8 @@ public class Ball extends Circle
             throw new IllegalArgumentException("Radius must be > 0");
         }
 
-        Random rng = new Random();
-        Color randomColor = new Color(rng.nextDouble(), rng.nextDouble(),
-                                      rng.nextDouble(), 1.0);
+        randomColor = new Color(rng.nextDouble(), rng.nextDouble(),
+                                rng.nextDouble(), 1.0);
 
         dx = rng.nextDouble() * INITIAL_VELOCITY;
         dy = rng.nextDouble() * INITIAL_VELOCITY;
@@ -63,29 +68,49 @@ public class Ball extends Circle
 
     public void updateState()
     {
-        //  circle.setLayoutX(circle.getLayoutX() + dx);
-        //  circle.setLayoutY(circle.getLayoutY() + dy);
         setLayoutX(getLayoutX() + dx);
         setLayoutY(getLayoutY() + dy);
-        System.out.printf("Ball position: (%f,%f)%n", getLayoutX(), getLayoutY());
+        // System.out.printf("Ball position: (%f,%f)%n", getLayoutX(), getLayoutY());
     }
 
     public void checkBorderCollision(Bounds bounds)
     {
-        // double xPos = circle.getLayoutX();
-        // double yPos = circle.getLayoutY();
-        // double radius = circle.getRadius();
         double xPos = getLayoutX();
         double yPos = getLayoutY();
         double radius = getRadius();
 
+        // boolean atRightBorder  = xPos >= (bounds.getMaxX() - radius);
+        // boolean atLeftBorder   = xPos <= (bounds.getMinX() + radius);
+        // boolean atBottomBorder = yPos >= (bounds.getMaxY() - radius);
+        // boolean atTopBorder    = yPos <= (bounds.getMinY() + radius);
 
-        boolean atRightBorder  = xPos >= (bounds.getMaxX() - radius);
-        boolean atLeftBorder   = xPos <= (bounds.getMinX() + radius);
-        boolean atBottomBorder = yPos >= (bounds.getMaxY() - radius);
-        boolean atTopBorder    = yPos <= (bounds.getMinY() + radius);
+        if (((xPos >= (bounds.getMaxX() - radius)) && dx > 0) ||
+            ((xPos <= (bounds.getMinX() + radius)) && dx < 0)) {
+            dx *= -1;
+        }
+        if ((yPos >= (bounds.getMaxY() - radius)) && dy > 0) {
+            dy *= -1;
+        } else if ((yPos <= (bounds.getMaxY() + radius)) && dy < 0) {
+            dy *= -1;
+        }
 
-        if (atRightBorder  || atLeftBorder) { dx *= -1; }
-        if (atBottomBorder || atTopBorder)  { dy *= -1; }
+
+        // if (atRightBorder  || atLeftBorder) { dx *= -1; }
+        // if (atBottomBorder || atTopBorder)  { dy *= -1; }
+    }
+
+    public boolean collidesWith(Ball ball2)
+    {
+        if (getBoundsInParent().intersects(ball2.getBoundsInParent())) {
+            return true;
+        }
+        return false;
+    }
+
+    public void bounce()
+    {
+        System.out.println("BOUNCE");
+        dx *= -1;
+        dy *= -1;
     }
 }
