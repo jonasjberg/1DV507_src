@@ -40,12 +40,17 @@ public class LinkedQueue<T> implements Queue<T> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
+    /**
+     * Returns whether the queue is empty or not.
+     *
+     * @return True if this queue is empty, otherwise False.
+     */
     @Override
     public boolean isEmpty() {
-        return false;
+        return head == null;
     }
 
     /**
