@@ -33,17 +33,24 @@ package js224eh_assign4.time;
  * the `StringBuilder` approach.
  *
  * __Notice 2:__ Trustworthy experiments using computers is not based on a single
- * run of the program. Use repeated runs (say 5) having an average of about 1
+ * testConcatShortStrings of the program. Use repeated runs (say 5) having an average of about 1
  * second.
 
  */
 
 public class StringConcatMain
 {
-    StringConcatTest stringConcatTest = new StringConcatTest();
+    static StringConcatTest stringConcatTest = new StringConcatTest();
 
     public static void main(String[] args)
     {
         // TODO: Implement ..
+
+        // Get number of concatenations and final string length when concatenating short strings.
+        // Get number of concatenations and final string length when concatenating long strings.
+        // Get number of concatenations and final string length when appending short strings.
+        // Get number of concatenations and final string length when appending long strings.
+
+        stringConcatTest.testConcatShortStrings();
     }
 }
