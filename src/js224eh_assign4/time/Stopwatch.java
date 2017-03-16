@@ -8,7 +8,7 @@ package js224eh_assign4.time;
 
 public class Stopwatch {
     private long startTime;
-    private long stopTime;
+    private long thisTime;
     private long estimatedTime;
     private boolean running;
 
@@ -23,23 +23,12 @@ public class Stopwatch {
         running = true;
     }
 
-    public void stop()
+    public boolean hasTimeLeft()
     {
-        if (!running) {
-            return;
+        if (System.nanoTime() - startTime < 1000000000) {
+            return true;
         }
 
-        stopTime = System.nanoTime();
-        running = false;
-        estimatedTime = stopTime - startTime;
-    }
-
-    public long getRunTime()
-    {
-        if (running) {
-            return 0;
-        }
-
-        return estimatedTime;
+        return false;
     }
 }

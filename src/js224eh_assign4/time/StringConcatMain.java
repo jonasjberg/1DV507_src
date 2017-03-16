@@ -52,5 +52,8 @@ public class StringConcatMain
         // Get number of concatenations and final string length when appending long strings.
 
         stringConcatTest.testConcatShortStrings();
+        stringConcatTest.testConcatLongStrings();
+        stringConcatTest.testAppendShortStrings();
+        // TODO: stringConcatTest.testAppendLongStrings();
     }
 }
