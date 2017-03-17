@@ -158,25 +158,25 @@ public class LinkedIntList {
 	 * the nodes in the list.
 	 */
 	public void reverse() {
-	    Node currentNode = head;
-		Node previousNode = null;
-		Node nextNode;
+	    Node current = head;
+		Node previous = null;
+		Node next;
 
-		while(currentNode != null)
+		while(current != null)
 		{
 		    /* Keep track of which node gets handled for each loop iteration. */
-			nextNode = currentNode.next;
+			next = current.next;
 
 			/* The current node's next node is now the previous node. */
-			currentNode.next = previousNode;
+			current.next = previous;
 
 			/* Swap nodes. */
-			previousNode = currentNode;
-			currentNode = nextNode;
+			previous = current;
+			current = next;
 		}
 
 		/* Update head to point at the reversed list head. */
-		head = previousNode;
+		head = previous;
 	}
 
 	/* 

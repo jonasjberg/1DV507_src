@@ -1,4 +1,4 @@
-Examination in Computer Science, 1DV507.  Exercise 1.
+Examination in Computer Science, 1DV507.  Exercise 3.
 Created by Jonas Sjöberg (js224eh) on 2017-03-17.
 
 Exercise 3
