@@ -131,8 +131,25 @@ public class LinkedIntList {
 	 * {1,2,3,4} vs {1,2,3} ==> {1,2,3,4} is larger since the first list is longer 
 	 */
 	public boolean isLargerThan(LinkedIntList otherList) {
-		// To be implemented
-		return true;
+		Iterator<Integer> thisListIterator = iterator();
+		Iterator<Integer> otherListIterator = otherList.iterator();
+
+		while (thisListIterator.hasNext() && otherListIterator.hasNext()) {
+			int currentThis = thisListIterator.next();
+			int currentOther = otherListIterator.next();
+
+			if (currentThis > currentOther) {
+				return true;
+			} else if (currentThis < currentOther) {
+				return false;
+			}
+		}
+
+		if (thisListIterator.hasNext() && !otherListIterator.hasNext()) {
+			return true;
+		}
+
+		return false;
 	}
 	
 	
