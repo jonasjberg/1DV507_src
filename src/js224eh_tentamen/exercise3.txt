@@ -5,13 +5,15 @@ Exercise 3
 ==========
 
 A)
+--------------------------------------------------------------------------------
 Assume sorting algorithm X and sorting algorithm Y. They are both called with an array of
 integers as parameter. Sally is measuring the time to execute the algotihms on her computer. If
 the size of the input is 1000, then X have a execution time of 0.56 seconds and Y runs in 0.86
 seconds. When Sally is examining the code of the algorithms she draws the conclusion that X
 is O(n^2) and Y is O(n log n). Can Sally be right? Motivate your answer!
 
-
+ANSWER:
+-------
 Sallys conclusions:
     X executes in 0.56s, supposedly O(n^2)
     Y executes in 0.86s, supposedly O(nlog(n))
@@ -36,3 +38,54 @@ And second of all, Sally is wrong because the difference in execution times is
 too small, if an O(nlog(n)) algorithm executes in 0.86s, a O(n^2) algorithm
 would be a lot slower.
 
+
+
+
+B)
+--------------------------------------------------------------------------------
+Method checkForDuplicates below returns true if the list contains any duplicate elements.
+
+    public static boolean checkForDuplicates(ArrayList<String> list) {
+        for (int i=0; i<list.size();i++) {
+            String s = list.get(i);
+            int index = list.indexOf(s);
+            // Returns position if found, otherwise -1
+            if ( index != -1 && index != i) // Found AND not self
+                return true;
+        }
+        return false;
+    }
+
+What is the time complexity of the method? Motivate your answer!
+
+ANSWER:
+-------
+Iterating over the list is proportional to the list size, O(n).
+Getting elements from an ArrayList is O(1), constant time.
+Getting the index of an element is O(n).
+
+Removing the constant time operation, we are left with two operations that are
+both proportional to n. Since they are executed sequentially and not in nested
+loops, I'd say that the time complexity is O(n).
+
+
+
+B)
+--------------------------------------------------------------------------------
+Hashing is an implementation technique often used when implementing certain data structures.
+Describe how hashing works (using a figure). Under what conditions can access operations like
+add, get and remove have time complexity O(1)?
+
+ANSWER:
+-------
+                                                      
+"arbitrary data 1"               --> .-----------. --> [054387u345]
+"arbitrary different sized data" --> | hashing   | --> [hue4325935]
+"arbitrary data 2"               --> | algorithm | --> [873453jhjh]
+                                     '-----------'     
+                                                       (fixed size)
+
+
+Operations would have time complexity O(1) when they can be performed without
+"re-hashing" the hash.  That is when the operation can be performed without
+increasing the size of the container.
