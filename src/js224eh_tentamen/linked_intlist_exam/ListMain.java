@@ -37,7 +37,15 @@ public class ListMain {
 		while (it.hasNext())
 			System.out.print("  "+it.next());
 		System.out.println("\n\n");
-		
+
+
+		list.addAt(42, 2);
+
+		it = list.iterator();
+		while (it.hasNext())
+			System.out.print("  "+it.next());
+		System.out.println("\n\n");
+
 
 	}
 

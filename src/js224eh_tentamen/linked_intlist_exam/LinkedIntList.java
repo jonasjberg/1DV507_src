@@ -93,7 +93,30 @@ public class LinkedIntList {
 	 * 
 	 */
 	public void addAt(int n, int index) throws IndexOutOfBoundsException {
-		// To be implemented
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		Node newNode = new Node(n);
+		if (index == 0) {
+		    /* Trivial case where the new node replaces the head. */
+			newNode.next = head;
+			head = newNode;
+		} else {
+		    /* Traverse links to find the node situated just prior to the
+		       position of the requested index. Node "preIndex" points to
+		       each node in turn by continuously updating the next-pointer. */
+			Node preIndex = head;
+			for (int i = 0; i < index - 1; i++) {
+				preIndex = preIndex.next;
+			}
+
+			/* Insert the new node "newNode" after the "preIndex" node. */
+			newNode.next = preIndex.next;
+			preIndex.next = newNode;
+		}
+
+		size++;
 	}
 	
 	/*
