@@ -109,6 +109,18 @@ public class ListMain {
 		printListContents(secondList);
 		System.out.print("First list is larger: ");
 		System.out.println(firstList.isLargerThan(secondList) ? "true": "false");
+
+
+
+		System.out.println();
+		System.out.println("Demonstrating reverse");
+		System.out.println("---------------------");
+		System.out.println("Initial list contents:");
+		printListContents(list);
+
+		list.reverse();
+		System.out.println("After reversing the list:");
+		printListContents(list);
 	}
 
 	private static void printListContents(LinkedIntList list)
