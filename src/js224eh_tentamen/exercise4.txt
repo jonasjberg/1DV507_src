@@ -1,0 +1,108 @@
+Examination in Computer Science, 1DV507.  Exercise 4.
+Created by Jonas Sjöberg (js224eh) on 2017-03-17.
+
+Exercise 4A
+===========
+Consider a binary search tree for integers where (as usual) smaller elements are stored in the
+left subtree.
+
+1. Sketch the tree that is the result of adding the numbers
+    23, 7, 46, 27, 52, 9, 12, 8, 10, 29
+   to the tree (in given order).
+
+ANSWER:
+-------
+
+             23
+        ____/  \____
+       /            \
+       7            46
+    /     \       /    \
+   |       |     |      |
+  27       52    9     12
+ /  \     /  \
+|    |   |    |
+8   10   29   1
+
+
+
+
+2. What is printed if you apply the following recursive algorithm to the tree
+   above (starting in the root node)?
+
+       Print(Node n) {
+           print n.value
+           if n.rightChild exists
+               Print(n.rightChild)
+           if n.leftChild exists
+               Print(n.leftChild)
+       }
+
+ANSWER:
+-------
+23
+46
+12
+9
+7
+52
+1
+29
+27
+10
+8
+
+
+
+
+Exercise 4A
+===========
+Consider a binary heap for integers ordered in such a way that the largest
+element is always in the root node.
+1. Sketch the binary heap tree that is the result of adding the numbers 
+   13, 24, 6, 16, 46, 52, 7, 15 to the binary heap (in given order).
+2. What is the corresponding array representation of the tree above?
+3. Sketch the new look of the binary heap tree after having removed the largest
+   element.
+
+
+ANSWER:
+-------
+1. After adding the number:
+            
+            52
+       ____/  \____
+      /            \
+     46             24
+   /    \         /   \
+  |      |       |     |
+  16     15     13     7
+ / 
+|  
+6
+
+
+2. Array representation:
+
+.----.----.----.----.----.----.----.----.----.
+|    | 52 | 46 | 24 | 16 | 15 | 13 |  7 |  6 |
+'----'----'----'----'----'----'----'----'----'
+  0    1    2    3    4    5    6    7    8   
+
+
+3. After removing the largest element:
+            
+            46
+       ____/  \____
+      /            \
+     24             16
+   /    \         /   \
+  |      |       |     |
+  15     13      7     6
+
+
+.----.----.----.----.----.----.----.----.
+|    | 46 | 24 | 16 | 15 | 13 |  7 |  6 |
+'----'----'----'----'----'----'----'----'
+  0    1    2    3    4    5    6    7   
+
