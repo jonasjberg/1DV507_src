@@ -3,7 +3,7 @@
  * Author: Jonas Lundberg
  * Date: 15 mar 2016
  */
-package linked_intlist_exam;
+package js224eh_tentamen.linked_intlist_exam;
 
 import java.util.Iterator;
 
