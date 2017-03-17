@@ -1,0 +1,38 @@
+Examination in Computer Science, 1DV507.  Exercise 1.
+Created by Jonas Sjöberg (js224eh) on 2017-03-17.
+
+Exercise 3
+==========
+
+A)
+Assume sorting algorithm X and sorting algorithm Y. They are both called with an array of
+integers as parameter. Sally is measuring the time to execute the algotihms on her computer. If
+the size of the input is 1000, then X have a execution time of 0.56 seconds and Y runs in 0.86
+seconds. When Sally is examining the code of the algorithms she draws the conclusion that X
+is O(n^2) and Y is O(n log n). Can Sally be right? Motivate your answer!
+
+
+Sallys conclusions:
+    X executes in 0.56s, supposedly O(n^2)
+    Y executes in 0.86s, supposedly O(nlog(n))
+
+
+First of all, O(n^2) scales much worse than O(nlog(n)) as n grows.
+
+If your were to graph the functions, the curves would look about the same at
+first but O(n^2) takes off pretty quickly and becomes huge in comparison with
+O(nlog(n)) for bigger numbers.
+
+For this example, with n = 1000:
+
+    1000^2           = 1000000
+    1000 * log(1000) = 3000
+
+
+So first of all, Sally is wrong because the faster algorithm X is more probable
+to be O(nlog(n)) than is the slower algorithm Y.
+
+And second of all, Sally is wrong because the difference in execution times is
+too small, if an O(nlog(n)) algorithm executes in 0.86s, a O(n^2) algorithm
+would be a lot slower.
+
