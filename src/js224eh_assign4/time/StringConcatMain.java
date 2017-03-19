@@ -44,16 +44,16 @@ public class StringConcatMain
 
     public static void main(String[] args)
     {
-        // TODO: Implement ..
-
         // Get number of concatenations and final string length when concatenating short strings.
-        // Get number of concatenations and final string length when concatenating long strings.
-        // Get number of concatenations and final string length when appending short strings.
-        // Get number of concatenations and final string length when appending long strings.
-
         stringConcatTest.testConcatShortStrings();
+
+        // Get number of concatenations and final string length when concatenating long strings.
         stringConcatTest.testConcatLongStrings();
+
+        // Get number of concatenations and final string length when appending short strings.
         stringConcatTest.testAppendShortStrings();
-        // TODO: stringConcatTest.testAppendLongStrings();
+
+        // Get number of concatenations and final string length when appending long strings.
+        stringConcatTest.testAppendLongStrings();
     }
 }
