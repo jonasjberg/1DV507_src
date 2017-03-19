@@ -6,6 +6,10 @@
 
 package js224eh_assign4.time;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by jonas on 2017-03-16.
  */
@@ -106,4 +110,16 @@ public class StringConcatTest {
     }
 
     // TODO: Get number of concatenations and final string length when appending long strings.
+
+    private void printTestStatusMessage(String status, String message)
+    {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final String FMT = "[%s] %-15.15s: %s%n";
+
+        if (!status.isEmpty()) {
+            status = status.toUpperCase();
+        }
+
+        System.out.printf(FMT, dateFormat.format(new Date()), status, message);
+    }
 }
