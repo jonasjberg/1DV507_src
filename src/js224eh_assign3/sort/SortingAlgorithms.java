@@ -89,9 +89,32 @@ public class SortingAlgorithms {
         return inCopy;
     }
 
+    /**
+     * Sorts an array of strings with the "insertion sort" algorithm.
+     * Works just about the same as the integer version, but uses a Comparator
+     * to decide if the current element should be shifted.
+     *
+     * @param in The String array to sort.
+     * @param c The comparator to use when comparing two elements.
+     * @return A sorted copy of the string array "in".
+     */
     public String[] insertionSort(String[] in, Comparator<String> c) {
-        // TODO: Implement insertionSort for string arrays.
-        return null;
+        String[] inCopy = in.clone();
+
+        for (int i = 1; i < inCopy.length; i++){
+            String next = inCopy[i];
+            int j = i;
+
+            /* This part differs from the integer version. */
+            while ((j > 0) && c.compare(next, inCopy[j-1]) > 0){
+                inCopy[j] = inCopy[j - 1];
+                j--;
+            }
+
+            inCopy[j] = next;
+        }
+
+        return inCopy;
     }
 
     // VG Exercise
