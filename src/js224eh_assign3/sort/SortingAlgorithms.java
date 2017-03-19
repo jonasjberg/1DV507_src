@@ -117,10 +117,19 @@ public class SortingAlgorithms {
         return inCopy;
     }
 
-    // VG Exercise
+    /**
+     * (VG Exercise)
+     * Sorts an array of strings with the "merge sort" algorithm.
+     *
+     * @param in The String array to sort.
+     * @param c The comparator to use when comparing elements during the sort.
+     * @return A sorted copy of the string array "in".
+     */
     public String[] mergeSort(String[] in, Comparator<String> c) {
-        // TODO: Implement mergeSort for string arrays.
-        return null;
+        String[] inCopy = Arrays.copyOf(in, in.length);
+
+        MergeSorter.sort(inCopy, c);
+        return inCopy;
     }
 
 }

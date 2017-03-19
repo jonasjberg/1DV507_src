@@ -69,9 +69,11 @@ public class SortTest {
     }
 
     @Test
-    @Ignore
     public void testStringMergeSort() throws Exception {
-        // TODO: Add string merge sort test.
+        final Comparator<String> c =  (s1, s2) -> s2.length() - s1.length();
+
+        String[] actual = sortingAlgorithms.mergeSort(unsortedStringArray, c);
+        assertArrayEquals(sortedStringArray, actual);
     }
 
 }
