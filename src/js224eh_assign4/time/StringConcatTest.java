@@ -14,23 +14,25 @@ import java.util.Date;
  * Created by jonas on 2017-03-16.
  */
 public class StringConcatTest {
+    final static int NUMBER_TEST_RUNS = 5;
     final static String SHORT_STRING = "a";
     final static String LONG_STRING = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    public static final int NUMBER_TEST_RUNS = 5;
 
     private Stopwatch stopwatch;
 
-    public StringConcatTest() {
+    public StringConcatTest() {}
 
-
-    }
-
-    // Get number of concatenations and final string length when concatenating short strings.
-    public void testConcatShortStrings() {
+    /**
+     * Performs string concatenation of a provided string, "NUMBER_TEST_RUNS"
+     * times. It then calculates and prints the average number of concatenations
+     * and the average final string length.
+     *
+     * @param string The string that is repeatedly concatenated.
+     */
+    private void testConcatenation(String string)
+    {
         double averageConcatCount = 0;
         double averageStringLength = 0;
-
-        System.out.println("STARTING TEST: Concatenating short strings");
 
         for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
             String resultString = "";
@@ -39,7 +41,7 @@ public class StringConcatTest {
             stopwatch = new Stopwatch();
             stopwatch.start();
             do {
-                resultString += SHORT_STRING;
+                resultString += string;
                 concatCount++;
             } while (stopwatch.hasTimeLeft());
 
@@ -47,74 +49,99 @@ public class StringConcatTest {
             averageStringLength += resultString.length();
         }
 
-        System.out.println("FINISHED TEST: Concatenating short strings");
         averageConcatCount /= NUMBER_TEST_RUNS;
         averageStringLength /= NUMBER_TEST_RUNS;
-        System.out.printf("Average Concatenations: %f%n", averageConcatCount);
-        System.out.printf("Average Final string length: %f%n", averageStringLength);
+        printTestStatusMessage("", "Average Concatenations: " + averageConcatCount);
+        printTestStatusMessage("", "Average Final string length: " + averageStringLength);
     }
 
-    // Get number of concatenations and final string length when concatenating long strings.
-    public void testConcatLongStrings() {
+    /**
+     * Performs appending of a provided string, "NUMBER_TEST_RUNS" times.
+     * It then calculates and prints the average number of concatenations
+     * and the average final string length.
+     *
+     * @param string The string that is repeatedly concatenated.
+     */
+    private void testAppending(String string)
+    {
         double averageConcatCount = 0;
         double averageStringLength = 0;
 
-        System.out.println("STARTING TEST: Concatenating long strings");
-
         for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
-            String resultString = "";
+            StringBuilder sb = new StringBuilder();
             int concatCount = 0;
+            String resultString;
 
             stopwatch = new Stopwatch();
             stopwatch.start();
-            do {
-                resultString += LONG_STRING;
+
+            while (true) {
+                sb.append(string);
                 concatCount++;
-            } while (stopwatch.hasTimeLeft());
 
-            averageConcatCount += concatCount;
-            averageStringLength += resultString.length();
-        }
-
-        System.out.println("FINISHED TEST: Concatenating long strings");
-
-        averageConcatCount /= NUMBER_TEST_RUNS;
-        averageStringLength /= NUMBER_TEST_RUNS;
-        System.out.printf("Average Concatenations: %f%n", averageConcatCount );
-        System.out.printf("Average Final string length: %f%n", averageStringLength);
-    }
-
-    // Get number of concatenations and final string length when appending short strings.
-    public void testAppendShortStrings() {
-        System.out.println("STARTING TEST: Appending short strings");
-        StringBuilder sb = new StringBuilder();
-        int concatCount = 0;
-        String resultString;
-
-        stopwatch = new Stopwatch();
-        stopwatch.start();
-
-        while (true) {
-            sb.append(SHORT_STRING);
-            concatCount++;
-
-            if (!stopwatch.hasTimeLeft()) {
-                resultString = sb.toString();
-                break;
+                if (!stopwatch.hasTimeLeft()) {
+                    resultString = sb.toString();
+                    break;
+                }
             }
+
+            averageConcatCount += concatCount;
+            averageStringLength += resultString.length();
         }
 
-        System.out.println("FINISHED TEST: Appending short strings");
-        System.out.printf("Average Concatenations: %d%n", concatCount);
-        System.out.printf("Average Final string length: %d%n", resultString.length());
+        averageConcatCount /= NUMBER_TEST_RUNS;
+        averageStringLength /= NUMBER_TEST_RUNS;
+        printTestStatusMessage("", "Average Concatenations: " + averageConcatCount);
+        printTestStatusMessage("", "Average Final string length: " + averageStringLength);
+
     }
 
-    // TODO: Get number of concatenations and final string length when appending long strings.
+    /**
+     * Get number of concatenations and final string length when concatenating short strings.
+     */
+    public void testConcatShortStrings() {
+        printTestStatusMessage("STARTING TEST", "Concatenating short strings");
+        testConcatenation(SHORT_STRING);
+        printTestStatusMessage("FINISHED TEST", "Concatenating short strings");
+    }
 
+    /**
+     * Get number of concatenations and final string length when concatenating long strings.
+     */
+    public void testConcatLongStrings() {
+        printTestStatusMessage("STARTING TEST", "Concatenating long strings");
+        testConcatenation(LONG_STRING);
+        printTestStatusMessage("FINISHED TEST", "Concatenating long strings");
+    }
+
+    /**
+     * Get number of concatenations and final string length when appending short strings.
+     */
+    public void testAppendShortStrings() {
+        printTestStatusMessage("STARTING TEST", "Appending short strings");
+        testAppending(SHORT_STRING);
+        printTestStatusMessage("FINISHED TEST", "Appending short strings");
+    }
+
+    /**
+     * Get number of concatenations and final string length when appending long strings.
+     */
+    public void testAppendLongStrings() {
+        printTestStatusMessage("STARTING TEST", "Appending long strings");
+        testAppending(LONG_STRING);
+        printTestStatusMessage("FINISHED TEST", "Appending long strings");
+    }
+
+    /**
+     * Prints a timestamped status message.
+     *
+     * @param status Status "header" of sorts, uppercase and constant width.
+     * @param message The message to print.
+     */
     private void printTestStatusMessage(String status, String message)
     {
         final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        final String FMT = "[%s] %-15.15s: %s%n";
+        final String FMT = "[%s] %-15.15s %s%n";
 
         if (!status.isEmpty()) {
             status = status.toUpperCase();
