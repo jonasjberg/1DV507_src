@@ -43,27 +43,41 @@ public class StringConcatTest {
             averageStringLength += resultString.length();
         }
 
+        System.out.println("FINISHED TEST: Concatenating short strings");
         averageConcatCount /= NUMBER_TEST_RUNS;
         averageStringLength /= NUMBER_TEST_RUNS;
-        System.out.printf("FINISHED! # Concatenations: %d    Final string length: %d%n",
-                averageConcatCount, averageStringLength);
+        System.out.printf("Average Concatenations: %f%n", averageConcatCount);
+        System.out.printf("Average Final string length: %f%n", averageStringLength);
     }
 
     // Get number of concatenations and final string length when concatenating long strings.
     public void testConcatLongStrings() {
+        double averageConcatCount = 0;
+        double averageStringLength = 0;
+
         System.out.println("STARTING TEST: Concatenating long strings");
-        String resultString = "";
-        int concatCount = 0;
 
-        stopwatch = new Stopwatch();
-        stopwatch.start();
-        do {
-            resultString += LONG_STRING;
-            concatCount++;
-        } while (stopwatch.hasTimeLeft());
+        for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
+            String resultString = "";
+            int concatCount = 0;
 
-        System.out.printf("FINISHED! # Concatenations: %d    Final string length: %d%n",
-                          concatCount, resultString.length());
+            stopwatch = new Stopwatch();
+            stopwatch.start();
+            do {
+                resultString += LONG_STRING;
+                concatCount++;
+            } while (stopwatch.hasTimeLeft());
+
+            averageConcatCount += concatCount;
+            averageStringLength += resultString.length();
+        }
+
+        System.out.println("FINISHED TEST: Concatenating long strings");
+
+        averageConcatCount /= NUMBER_TEST_RUNS;
+        averageStringLength /= NUMBER_TEST_RUNS;
+        System.out.printf("Average Concatenations: %f%n", averageConcatCount );
+        System.out.printf("Average Final string length: %f%n", averageStringLength);
     }
 
     // Get number of concatenations and final string length when appending short strings.
@@ -86,8 +100,9 @@ public class StringConcatTest {
             }
         }
 
-        System.out.printf("FINISHED! # Concatenations: %d    Final string length: %d%n",
-                          concatCount, resultString.length());
+        System.out.println("FINISHED TEST: Appending short strings");
+        System.out.printf("Average Concatenations: %d%n", concatCount);
+        System.out.printf("Average Final string length: %d%n", resultString.length());
     }
 
     // TODO: Get number of concatenations and final string length when appending long strings.
