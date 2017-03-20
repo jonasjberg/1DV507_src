@@ -23,7 +23,8 @@ public class TestUtils
      */
     public static void printTestStatusMessage(String status, String message)
     {
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final DateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
         final String     FMT        = "[%s] %-15.15s %s%n";
 
         if (!status.isEmpty()) {
@@ -41,17 +42,18 @@ public class TestUtils
      * @param elementLength The length of each string contained in the array.
      * @return A randomized array of strings.
      */
-    public static String[] getRandomStringArray(int elementCount, int elementLength)
+    public static String[] getRandomStringArray(int elementCount,
+                                                int elementLength)
     {
         if (elementCount <= 0) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         }
         if (elementLength <= 0) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         }
 
-        Random   random = new Random();
         String[] result = new String[elementCount];
+        Random   random = new Random();
 
         for (int i = 0; i < elementCount; i++) {
             StringBuilder sb = new StringBuilder();
@@ -64,6 +66,34 @@ public class TestUtils
             }
 
             result[i] = sb.toString();
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns an array of random integers with a specified number of elements,
+     * "elementCount". Each element is randomized within zero and "elementRange".
+     *
+     * @param elementCount The length of the returned array of integers.
+     * @param elementRange The maximum value for each element.
+     * @return A randomized array of integers.
+     */
+    public static int[] getRandomIntegerArray(int elementCount,
+                                                  int elementRange)
+    {
+        if (elementCount <= 0) {
+            throw new IllegalArgumentException();
+        }
+        if (elementRange <= 0) {
+            throw new IllegalArgumentException();
+        }
+
+        int[] result = new int[elementCount];
+        Random random = new Random();
+
+        for (int i = 0; i < elementCount; i++) {
+            result[i] = random.nextInt(elementRange);
         }
 
         return result;
