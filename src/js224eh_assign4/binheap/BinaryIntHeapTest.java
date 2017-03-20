@@ -17,6 +17,7 @@ public class BinaryIntHeapTest
 {
     private BinaryIntHeap binaryIntHeap;
     private final int[] ARRAY_1 = new int[] { -1, -2, 2, 42, 13, -4, -2, 4 };
+    private final int[] ARRAY_2 = new int[] { 1, 2, 3 };
 
     @Before
     public void setUp() throws Exception
