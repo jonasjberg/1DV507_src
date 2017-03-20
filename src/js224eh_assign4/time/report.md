@@ -276,3 +276,27 @@ is used for each of these 5 runs.
 | 980                | 587490                    |
 | 990                | 576554                    |
 | 1000               | 569871                    |
+
+
+### `StringBuilder` vs "`+`-concatenation"
+After doing some non-exhaustive research, my theory is that
+the `StringBuilder`-approach is equivalent to simple String concatenation with `+`
+when it is performed outside of a looping structure.
+
+The Java compiler can detect the concatenation and substitute a routine similar
+to `StringBuilder`, if not `StringBuilder` itself.
+
+However, if the concatenation is performed in a loop, the Java compiler might 
+not be able to perform the optimization. In this case, the `StringBuilder` approach 
+is faster due to the number of objects created.
+
+When using `StringBuilder`, a single object is created.  When concatenation
+strings with `+`, a lot of string objects must be created as the String type is
+immutable.
+
+#### Sources:
+<http://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.18.1>
+<http://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java>
+
+
+
