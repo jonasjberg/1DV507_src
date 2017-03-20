@@ -33,29 +33,30 @@ public class SortingAlgorithmTest
          * strings where each string contains 10 randomly generated characters.
          */
 
-        double averageSortCount = 0;
-        printTestStatusMessage("STARTING TEST", "String Insertion Sort");
+        for (int e = 10; e <= 1000; e += 10) {
+            double averageSortCount = 0;
+            // printTestStatusMessage("STARTING TEST", "String Insertion Sort of " + e + " elements");
 
-        final int ELEMENT_COUNT = 5;
-        for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
-            int sortCount = 0;
+            for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
+                int sortCount = 0;
+                String[] randomArray = getRandomStringArray(e, STRING_CHAR_COUNT);
 
-            stopwatch = new Stopwatch();
-            stopwatch.start();
-            do {
-                String[] randomArray = getRandomStringArray(ELEMENT_COUNT,
-                                                            STRING_CHAR_COUNT);
-                String[] sorted = sortingAlgorithms.insertionSort(randomArray,
-                                                                  insComp);
-                sortCount++;
-            } while (stopwatch.hasTimeLeft());
+                stopwatch = new Stopwatch();
+                stopwatch.start();
+                do {
+                    String[] sorted = sortingAlgorithms.insertionSort(randomArray, insComp);
+                    sortCount++;
+                } while (stopwatch.hasTimeLeft());
 
-            averageSortCount += sortCount;
+                averageSortCount += sortCount;
+            }
+
+            averageSortCount /= NUMBER_TEST_RUNS;
+            System.out.printf("%d, %.0f%n", e, averageSortCount);
+            // printTestStatusMessage("", "Average number of completed sorts: " +
+            //                            averageSortCount);
+            //printTestStatusMessage("FINISHED TEST", "String Insertion Sort of " + e + " elements");
         }
-
-        averageSortCount /= NUMBER_TEST_RUNS;
-        printTestStatusMessage("", "Average number of completed sorts: " + averageSortCount);
-        printTestStatusMessage("FINISHED TEST", "String Insertion Sort");
     }
 
     public void testIntegerInsertionSort()
@@ -68,15 +69,13 @@ public class SortingAlgorithmTest
             double averageSortCount = 0;
             printTestStatusMessage("STARTING TEST", "Integer Insertion Sort of " + e + " elements");
 
-            final int elementCount = 10;
             for (int i = 0; i < NUMBER_TEST_RUNS; i++) {
                 int sortCount = 0;
+                int[] randomArray = getRandomIntegerArray(e, e * 2);
 
                 stopwatch = new Stopwatch();
                 stopwatch.start();
                 do {
-                    int[] randomArray = getRandomIntegerArray(elementCount,
-                                                              elementCount * 2);
                     int[] sorted = sortingAlgorithms.insertionSort(randomArray);
                     sortCount++;
                 } while (stopwatch.hasTimeLeft());

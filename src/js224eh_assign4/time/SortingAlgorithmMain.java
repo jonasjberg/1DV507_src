@@ -35,8 +35,8 @@ public class SortingAlgorithmMain
 
     public static void main(String[] args)
     {
-        //sortingAlgorithmTest.testStringInsertionSort();
+        sortingAlgorithmTest.testStringInsertionSort();
 
-        sortingAlgorithmTest.testIntegerInsertionSort();
+        // sortingAlgorithmTest.testIntegerInsertionSort();
     }
 }
