@@ -163,6 +163,8 @@ was recreated for each test run.
 | 990                | 4762172.6                 |
 | 1000               | 4768648.0                 |
 
+![Integer Insertion Sort Graph](integer-insertion-sort.png)
+
 
 ### String Insertion Sort
 These are the results for sorting a array of Strings with a varying number of
@@ -278,6 +280,9 @@ is used for each of these 5 runs.
 | 1000               | 569871                    |
 
 
+![String Insertion Sort Graph](string-insertion-sort.png)
+
+
 ### `StringBuilder` vs "`+`-concatenation"
 After doing some non-exhaustive research, my theory is that
 the `StringBuilder`-approach is equivalent to simple String concatenation with `+`
@@ -294,9 +299,10 @@ When using `StringBuilder`, a single object is created.  When concatenation
 strings with `+`, a lot of string objects must be created as the String type is
 immutable.
 
-#### Sources:
-<http://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.18.1>
-<http://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java>
+__Sources:__  
+
+* http://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.18.1
+* http://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java
 
 
 
