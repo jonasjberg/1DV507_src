@@ -33,13 +33,27 @@ public class BinaryIntHeapTest
     @Test
     public void testInsert() throws Exception
     {
+        binaryIntHeap.insert(1);
+        assertEquals(1, binaryIntHeap.pullHighest());
 
+        binaryIntHeap.insert(10);
+        assertEquals(10, binaryIntHeap.pullHighest());
+
+        binaryIntHeap.insert(5);
+        assertEquals(5, binaryIntHeap.pullHighest());
     }
 
     @Test
     public void testPullHighest() throws Exception
     {
+        binaryIntHeap.insert(1);
+        assertEquals(1, binaryIntHeap.pullHighest());
 
+        binaryIntHeap.insert(10);
+        assertEquals(10, binaryIntHeap.pullHighest());
+
+        binaryIntHeap.insert(5);
+        assertEquals(5, binaryIntHeap.pullHighest());
     }
 
     @Test
@@ -57,6 +71,6 @@ public class BinaryIntHeapTest
     @Test
     public void testIsEmpty() throws Exception
     {
-
+        assertTrue(binaryIntHeap.isEmpty());
     }
 }
