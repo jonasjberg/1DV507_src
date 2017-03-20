@@ -6,13 +6,10 @@
 
 package js224eh_assign4.time;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-/**
- * Created by jonas on 2017-03-16.
- */
+import static js224eh_assign4.time.TestUtils.printTestStatusMessage;
+
+
 public class StringConcatTest {
     final static int NUMBER_TEST_RUNS = 5;
     final static String SHORT_STRING = "a";
@@ -130,23 +127,5 @@ public class StringConcatTest {
         printTestStatusMessage("STARTING TEST", "Appending long strings");
         testAppending(LONG_STRING);
         printTestStatusMessage("FINISHED TEST", "Appending long strings");
-    }
-
-    /**
-     * Prints a timestamped status message.
-     *
-     * @param status Status "header" of sorts, uppercase and constant width.
-     * @param message The message to print.
-     */
-    private void printTestStatusMessage(String status, String message)
-    {
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        final String FMT = "[%s] %-15.15s %s%n";
-
-        if (!status.isEmpty()) {
-            status = status.toUpperCase();
-        }
-
-        System.out.printf(FMT, dateFormat.format(new Date()), status, message);
     }
 }
