@@ -70,9 +70,8 @@ public class SortTest {
 
     @Test
     public void testStringMergeSort() throws Exception {
-        final Comparator<String> c =  (s1, s2) -> s2.length() - s1.length();
-
-        String[] actual = sortingAlgorithms.mergeSort(unsortedStringArray, c);
+        String[] actual = sortingAlgorithms.mergeSort(unsortedStringArray,
+                                                      String::compareTo);
         assertArrayEquals(sortedStringArray, actual);
     }
 

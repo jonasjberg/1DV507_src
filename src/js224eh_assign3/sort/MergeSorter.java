@@ -96,45 +96,36 @@ public class MergeSorter {
     /**
      * Merges two sorted arrays into an array.
      *
-     * @param first  The first sorted array.
-     * @param second The second sorted array.
-     * @param a      The array into which to merge "first" and "second".
+     * @param left  The left sorted array.
+     * @param right The right sorted array.
+     * @param out   The array into which to merge "left" and "right".
      */
-    private static String[] merge(String[] first, String[] second, String[] a, Comparator<String> c) {
-        int iFirst = 0;  // Next element to consider in the first array.
-        int iSecond = 0; // Next element to consider in the second array.
-        int j = 0;       // Next open position in "a".
+    private static void merge(String[] out, String[] left, String[] right, Comparator<String> c) {
+        int i = 0;  // Next element to consider in the left array.
+        int j = 0; // Next element to consider in the right array.
+        int k = 0;       // Next open position in "out".
 
-        // As long as neither "iFirst" nor "iSecond" passed the end,
-        // move the smaller element into "a".
-        while (iFirst < first.length && iSecond < second.length) {
-            if (c.compare(first[iFirst], second[iSecond]) > 0) {
-                a[j] = first[iFirst];
-                iFirst++;
+        // As long as neither "i" nor "j" passed the end,
+        // move the smaller element into "out".
+        while (i < left.length && j < right.length) {
+            if (c.compare(left[i], right[j]) < 0) {
+                out[k++] = left[i++];
             } else {
-                a[j] = second[iSecond];
-                iSecond++;
-            }
-            j++;
-
-            // Note that only of of the two loops below copies entries (due to the
-            // fact that either "iFirst" or "iSecond" must have reached the end in
-            // order to get here)
-            while (iFirst < first.length) {
-                a[j] = first[iFirst];
-                iFirst++;
-                j++;
-            }
-
-            // Copy any remaining entries of the second half.
-            while (iSecond < second.length) {
-                a[j] = second[iSecond];
-                iSecond++;
-                j++;
+                out[k++] = right[j++];
             }
         }
 
-        return a;
+        // Note that only of of the two loops below copies entries (due to the
+        // fact that either "i" or "j" must have reached the end in
+        // order to get here)
+        while (i < left.length) {
+            out[k++] = left[i++];
+        }
+
+        // Copy any remaining entries of the right half.
+        while (j < right.length) {
+            out[k++] = right[j++];
+        }
     }
 
     /**
@@ -147,20 +138,22 @@ public class MergeSorter {
             return in;
         }
 
-        String[] first = new String[in.length / 2];
-        String[] second = new String[in.length - first.length];
+        /* Split input array "in" into two parts, "left" and "right". */
+        String[] left = new String[in.length / 2];
+        String[] right = new String[in.length - left.length];
 
-        for (int i = 0; i < first.length; i++) {
-            first[i] = in[i];
+        for (int i = 0; i < left.length; i++) {
+            left[i] = in[i];
+        }
+        for (int i = 0; i < right.length; i++) {
+            right[i] = in[left.length + i];
         }
 
-        for (int i = 0; i < second.length; i++) {
-            second[i] = in[first.length + i];
-        }
+        /* Perform recursive sorting. */
+        left = sort(left, c);
+        right = sort(right, c);
 
-        sort(first, c);
-        sort(second, c);
-        in = merge(first, second, in, c);
+        merge(in, left, right, c);
 
         return in;
     }
